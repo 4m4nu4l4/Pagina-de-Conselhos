@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+footer {
+  padding: 15px 20px;
+  margin: 15px;
+  background-color: #cb90c1;
+  color: #5D4037;
+  border-radius: 10px;
+}
+#title-footer {
+  text-align: center;
+  color: rgb(37, 37, 37);
+  font-weight: 600;
+}
+.dosis {
+    font-family: "Dosis", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
