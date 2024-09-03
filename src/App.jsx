@@ -2,10 +2,14 @@ import { useState } from 'react'
 import './App.css'
 // import Footer from './components/Footer'
 import Header from './components/Header'
-// import Home from './pages/Home'
-// import About from './pages/About'
 import {Routes, Route} from "react-router-dom"
-// import ApiRickAndMorty from './pages/ApiRickAndMorty'
+import CardDiario from './pages/Card-Diario'
+import CardCategoria from './pages/Card-Categoria'
+import CardAleatorio from './pages/Card-Aleatorio'
+import CardMensal from './pages/Card-Mensal'
+import Conselho from './pages/Conselho'
+import Sobre from './pages/Sobre'
+
 
 
 function App() {
@@ -13,11 +17,13 @@ function App() {
     <>
     <Header/>
     <Routes>
-      {/* <Route></Route> */}
-      {/* <Route path="/" element={<ApiRickAndMorty/>}></Route>
-      <Route path="/about" element={<About/>}></Route> */}
+      <Route path="/" element={<CardDiario/>}></Route>
+      <Route path="/categoria" element={<CardCategoria/>}></Route>
+      <Route path="/aleatorio" element={<CardAleatorio/>}></Route>
+      <Route path="/mensal" element={<CardMensal/>}></Route>
+      <Route path="/conselho" element={<Conselho/>}></Route>
+      <Route path="/sobre" element={<Sobre/>}></Route>
     </Routes>
-    {/* <Footer/> */}
     </>
   )
 }
