@@ -9,6 +9,7 @@ import CardAleatorio from './pages/Card-Aleatorio'
 import CardMensal from './pages/Card-Mensal'
 import Conselho from './pages/Conselho'
 import Sobre from './pages/Sobre'
+import Footer from './components/Footer'
 
 
 
@@ -24,6 +25,7 @@ function App() {
       <Route path="/conselho" element={<Conselho/>}></Route>
       <Route path="/sobre" element={<Sobre/>}></Route>
     </Routes>
+    <Footer/>
     </>
   )
 }
