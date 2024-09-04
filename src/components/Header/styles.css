@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 #title {
   text-align: center;
   font-size: 20px;
@@ -7,6 +8,7 @@
 }
 a {
   text-decoration: none;
+  font-family: "Lora", serif;
 }
 #header {
   background-color: #c78abd;
@@ -20,7 +22,8 @@ a {
 }
 #header #title {
   /* margin: 10px; */
-  font-size: 20px;
+  font-family: "Lora", serif;
+  font-size: 24px;
   font-weight: bold;
   margin-left: 25px;
 }
@@ -28,18 +31,34 @@ a {
   display: flex;
   gap: 15px;
   margin-right: 25px;
+  /* font-family: "Lora", serif; */
   /* margin: 25px; */
 }
 #header-pages a {
+  font-family: "Lora", serif;
   color: #5D4037;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 17px;
+  font-weight: 700;
+  font-size: 22px;
   transition: color 0.3s ease-in-out;
 }
+.pages {
+  font-family: "Lora", serif;
+  color: #5D4037;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 19px;
+  transition: color 0.3s ease-in-out;
+}
+.lora {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  /* font-weight: <weight>; */
+  font-style: normal;
+}
 .dosis {
-font-family: "Dosis", sans-serif;
-font-optical-sizing: auto;
-font-weight: 400;
-font-style: normal;
+  font-family: "Dosis", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }

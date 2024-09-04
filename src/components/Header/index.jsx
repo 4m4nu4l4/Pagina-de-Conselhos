@@ -7,32 +7,32 @@ export default function Header() {
       <div id="header">
         <div>
           <Link to="/">
-            <p id="title">Consumindo Api de Conselhos </p>
+            <p id="title">WishDaily </p>
           </Link>
         </div>
         <div id="header-pages">
           <Link to="/">
-            <p>Diário</p>
+            <p className="pages">Diário</p>
           </Link>
 
           <Link to="/categoria">
-            <p>Categoria</p>
+            <p  className="pages">Categoria</p>
           </Link>
 
           <Link to="/aleatorio">
-            <p>Aleatório</p>
+            <p  className="pages">Aleatório</p>
           </Link>
 
           <Link to="/mensal">
-            <p>Mensal</p>
+            <p  className="pages">Mensal</p>
           </Link>
 
           <Link to="/conselho">
-            <p>Deixe seu conselho</p>
+            <p  className="pages">Deixe seu conselho</p>
           </Link>
 
           <Link to="/sobre">
-            <p>Sobre</p>
+            <p  className="pages">Sobre</p>
           </Link>
         </div>
       </div>
