@@ -3,39 +3,43 @@
     font-size: 16px;
     line-height: 1.6;
     color: #333; 
+    /* width: 100%; */
 }
 strong {
     color: #542d4d;
 }
 .container {
     margin: 60px;
+    margin-left: 200px;
+    width: 100%;
+    max-width: 1050px;
 }
 #displaytext {
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-    max-width: 900px;
-    /* gap: 8px;  */
+    max-width: 1200px; /* Aumenta o max-width para telas maiores */
     align-items: center;
     padding: 20px;
     background-color: #f9f9f9; 
     border-radius: 20px; 
-    margin-left: 15%;
+    margin-left: auto;
+    margin-right: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 #displaytext img {
-    width: 80%;
-    /* border-radius: 15px; */
+    width: 100%; /* Ajuste para a imagem preencher a largura da coluna */
     height: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
+
 #info {
-    /* font-size: 1.1em; */
     line-height: 1.6;
     color: #333; 
-    /* padding: 5px; */
+    padding-left: 20px; /* Adiciona um espaçamento para o texto */
 }
+
 #display-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -54,4 +58,34 @@ strong {
     height: 200px; 
     object-fit: cover; 
     border-radius: 10px; 
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    #displaytext {
+        grid-template-columns: 1fr;
+        max-width: 100%; /* O texto e a imagem ocupam 100% da tela */
+    }
+
+    #info {
+        padding-left: 0; /* Remove padding no modo responsivo */
+    }
+
+    #displaytext img {
+        width: 100%;
+    }
+
+    #display-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    #display-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        width: 100%;
+    }
 }
