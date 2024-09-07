@@ -6,7 +6,7 @@ import card03 from "../../assets/imgs/plants.avif"
 
 export default function Sobre () {
   return (  
-    <div className="container">
+    <div id="container">
       <p>
       Em um mundo onde muitas pessoas enfrentam desafios diários sem ter a quem recorrer, A WishDaily surge como uma iniciativa altruísta voltada para o bem-estar e apoio mútuo. Este projeto, sem fins lucrativos, tem como objetivo criar uma plataforma acessível e gratuita onde qualquer pessoa pode buscar orientação e compartilhar conselhos sobre uma ampla gama de temas, como saúde mental, relacionamentos, carreira, finanças e bem-estar geral.
       </p>
