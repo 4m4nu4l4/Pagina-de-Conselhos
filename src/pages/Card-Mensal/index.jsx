@@ -1,26 +1,46 @@
-import React, { useEffect, useState } from "react";
 import "./styles.css";
+import React, { useEffect, useState } from "react";
+import wish from "../../assets/imgs/wish.png";
 
 export default function CardMensal() {
   const [conselhos, setConselhos] = useState([]);
   useEffect(() => {
     const fetchConselhos = async () => {
-      const fetchedConselhos = [];
+      const fetchedConselhos = new Set();
       const baseURL = "https://api.adviceslip.com/advice";
-      while (fetchedConselhos.length < 30) {
-        try {
-          const response = await fetch(baseURL);
-          const data = await response.json();
-          const conselho = data.slip.advice;
-          if (!fetchedConselhos.includes(conselho)) {
-            fetchedConselhos.push(conselho);
-          }
-        } catch (error) {
-          console.error("Erro ao buscar os conselhos:", error);
-          break; 
-        }
+      const requests = [];
+      for (let i = 0; i < 30; i++) {
+        requests.push(fetch(baseURL).then(response => response.json()));
       }
-      setConselhos(fetchedConselhos);
+      try {
+        const results = await Promise.all(requests);
+        results.forEach(result => {
+          if (result && result.slip && result.slip.advice) {
+            const conselho = result.slip.advice;
+            fetchedConselhos.add(conselho);
+          } else {
+            console.error("Estrutura da resposta inesperada:", result);
+          }
+        });
+        const uniqueConselhos = Array.from(fetchedConselhos);
+        while (uniqueConselhos.length < 30) {
+          const additionalResults = await Promise.all(
+            Array.from({ length: 30 - uniqueConselhos.length }, () => fetch(baseURL).then(response => response.json()))
+          );
+          additionalResults.forEach(result => {
+            if (result && result.slip && result.slip.advice) {
+              const conselho = result.slip.advice;
+              if (!uniqueConselhos.includes(conselho)) {
+                uniqueConselhos.push(conselho);
+              }
+            }
+          });
+        }
+        console.log(uniqueConselhos); 
+        setConselhos(uniqueConselhos);
+      } catch (error) {
+        console.error("Erro ao buscar os conselhos:", error);
+      }
     };
     fetchConselhos();
   }, []);
@@ -31,8 +51,9 @@ export default function CardMensal() {
       <div id="cards-container">
         {conselhos.length > 0 ? (
           conselhos.map((conselho, index) => (
-            <div id="card" key={index}>
-              <p id="title-notes">Dia {index + 1}</p>
+            <div className="card" key={index}>
+              <img src={wish} className="card-image" alt="wish"/>
+              <p className="title-notes">Dia {index + 1}</p>
               <p>{conselho}</p>
             </div>
           ))

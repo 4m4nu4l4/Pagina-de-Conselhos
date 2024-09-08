@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 // import Footer from './components/Footer'
 import Header from './components/Header'
@@ -10,8 +9,6 @@ import CardMensal from './pages/Card-Mensal'
 import Conselho from './pages/Conselho'
 import Sobre from './pages/Sobre'
 import Footer from './components/Footer'
-
-
 
 function App() {
   return (

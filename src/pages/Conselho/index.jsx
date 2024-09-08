@@ -7,13 +7,11 @@ export default function Conselho() {
   const [notesList, setNotesList] = useState([]);
 
   useEffect(() => {
-    // Carregar notas do localStorage ao montar o componente
     const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
     setNotesList(savedNotes);
   }, []);
 
   useEffect(() => {
-    // Salvar notas no localStorage sempre que notesList mudar
     localStorage.setItem("notes", JSON.stringify(notesList));
   }, [notesList]);
 
@@ -49,7 +47,7 @@ export default function Conselho() {
     <div className="container">
       <button id="button-add" onClick={toggleForm}>
         Coopere com um conselho
-        <img src={notes} alt="Ícone de notas" />
+        <img src={notes} />
       </button>
       {showForm && (
         <div id="hidden">
