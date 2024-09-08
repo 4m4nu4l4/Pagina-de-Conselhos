@@ -1,0 +1,54 @@
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.introducao {
+  font-size: 1.2em;
+  color: #000000;
+  margin-top: 18px;
+  margin-left: 10px;
+  line-height: 1.6;
+}
+
+.data {
+  color: #5D4037;
+}
+
+.card {
+  background: radial-gradient(circle, #bcf2fa, #ba7aaf);
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 100%;
+  margin: 35px auto;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+button {
+  background-color: #5D4037;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #bc7aaf;
+}
+
+p {
+  font-size: 1.5em;
+  color: #333;
+  margin: 20px 0;
+}
