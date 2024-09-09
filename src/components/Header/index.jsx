@@ -6,7 +6,7 @@ export default function Header() {
     <>
       <div id="header">
         <div>
-          <Link to="/">
+          <Link to="/sobre">
             <p id="title">WishDaily </p>
           </Link>
         </div>
@@ -15,9 +15,9 @@ export default function Header() {
             <p className="pages">Diário</p>
           </Link>
 
-          <Link to="/categoria">
+          {/* <Link to="/categoria">
             <p  className="pages">Categoria</p>
-          </Link>
+          </Link> */}
 
           <Link to="/aleatorio">
             <p  className="pages">Aleatório</p>
@@ -31,9 +31,9 @@ export default function Header() {
             <p  className="pages">Deixe seu conselho</p>
           </Link>
 
-          <Link to="/sobre">
+          {/* <Link to="/sobre">
             <p  className="pages">Sobre</p>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>
