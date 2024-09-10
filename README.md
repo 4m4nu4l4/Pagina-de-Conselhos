@@ -1,19 +1,5 @@
-# React + Vite
+## WishDaily ✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O WishDaily é uma aplicação web projetada para ajudar os usuários a registrar e acompanhar seus conselhos e desejos diários. Com uma interface amigável e recursos poderosos, o sistema permite leitura de conselhos mensais, diários, aleátorios e a criação dos seus próprios conselhos.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-
-Emanuele 
- -> Diário
- -> Categoria
- -> Aleatório
-  
-Maria 
- -> Mensal
- -> Deixe seu conselho
- -> Sobre
+Desenvolvido por Emanuele e Maria Edª
