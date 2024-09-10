@@ -11,6 +11,7 @@ a {
   font-family: "Lora", serif;
 }
 #header {
+  margin: 10px;
   background-color: #c78abd;
   color: #5D4037;
   display: flex;
