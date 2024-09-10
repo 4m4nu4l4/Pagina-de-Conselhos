@@ -20,14 +20,6 @@
 .data {
 color: #5D4037;
 }
-.card {
-  
-  /* color: #000000; */
-}
-/* 
-.card:hover {
-  transform: translateY(-10px);
-} */
 .card-image {
   z-index: 10;
   position: absolute;
