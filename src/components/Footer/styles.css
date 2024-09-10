@@ -2,8 +2,8 @@
 footer {
   background-color: #cb90c1;
   color: #5D4037;
-  position: absolute;
-  bottom: 0;
+  /* position: absolute; */
+  /* bottom: 0; */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   width: 100%;
 }
