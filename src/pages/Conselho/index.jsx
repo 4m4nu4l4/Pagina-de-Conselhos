@@ -44,7 +44,7 @@ export default function Conselho() {
   };
 
   return (
-    <div className="container">
+    <div id="container-conselho">
       <button id="button-add" onClick={toggleForm}>
         Coopere com um conselho
         <img src={notes} />

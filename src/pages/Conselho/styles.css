@@ -1,4 +1,4 @@
-.container {
+#container-conselho {
   width: 100%;
   max-width: 600px;
   margin: 20px auto;
@@ -26,7 +26,7 @@
   height: 20px;
 }
 #hidden {
-  display: block; 
+  display: block;
   text-align: left;
 }
 #title-conselho {
