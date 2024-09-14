@@ -28,4 +28,10 @@ color: #5D4037;
   width: 20px;
   height: auto;
 }
-
+#display-imgs {
+  display: flex;
+  justify-content: center;
+  /* border-radius: 10px; */
+  gap: 10px;
+  width: 100%;
+}
