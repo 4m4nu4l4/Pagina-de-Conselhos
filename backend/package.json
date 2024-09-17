@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend de uma aplicação web",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "test": "jest --coverage"
+  },
+  "author": "Emanuele e Maria Edª",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
