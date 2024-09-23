@@ -4,8 +4,8 @@ class UserApi {
     findUser(req, res){
         res.send('get')
     }
-    //(req,res) => { res.send('get')}
 
+    
     findUser(req, res) {
         try {
             const users = UserController.findAll()
