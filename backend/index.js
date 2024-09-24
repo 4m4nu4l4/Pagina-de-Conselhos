@@ -8,6 +8,9 @@ app.use(express.json());
 
 app.use("/api/v1/user", router)
 
+app.post("/api/v1/login", UserApi.login);
+app.post("/api/v1/user", UserApi.createUser);
+
 database.db
     .sync({ force: false })
     .then((_) => {
