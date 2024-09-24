@@ -1,9 +1,9 @@
 const UserControllerv= require('../controller/user')
 
 class UserApi {
-    findUser(req, res){
-        res.send('get')
-    }
+    // findUser(req, res){
+    //     res.send('get')
+    // }
 
     
     findUser(req, res) {
@@ -29,7 +29,7 @@ class UserApi {
         
     }
 
-    UpdateUser(req, res) {
+    updateUser(req, res) {
         try {
             res.send('update')
         } catch (e) {
@@ -39,7 +39,7 @@ class UserApi {
         
     }
 
-    DeleteUser(req, res) {
+    deleteUser(req, res) {
         try {
             //throw new Error("Deu ruim aqui")
             res.send('delete')
