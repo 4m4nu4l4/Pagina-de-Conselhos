@@ -6,17 +6,17 @@ const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 
 class UserController {
-  async createUser(nome, email, senha) {
-    if (!nome || !email || !senha) {
-      throw new Error("Nome, email e senha são obrigatórios.");
+  async createUser(nome, email, password) {
+    if (!nome || !email || !password) {
+      throw new Error("Nome, email e password são obrigatórios.");
     }
 
-    const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
+    const cypherpassword = await bcrypt.hash(String(password), SALT_VALUE);
 
     const userValue = await user.create({
       nome,
       email,
-      senha: cypherSenha,
+      password: cypherpassword,
       permissao: "user"
     });
 
@@ -37,7 +37,7 @@ class UserController {
     return userValue;
   }
 
-  async update(id, nome, email, senha) {
+  async update(id, nome, email, password) {
     const oldUser = await user.findByPk(id);
     if(email){
       const sameEmail = await user.findOne({ where: { email } });
@@ -47,9 +47,9 @@ class UserController {
     }
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
-    oldUser.senha = senha
-      ? await bcrypt.hash(String(senha), SALT_VALUE)
-      : oldUser.senha;
+    oldUser.password = password
+      ? await bcrypt.hash(String(password), SALT_VALUE)
+      : oldUser.password;
     oldUser.save();
 
     return oldUser;
@@ -69,20 +69,20 @@ class UserController {
     return user.findAll();
   }
 
-  async login(email, senha) {
-    if (email === undefined || senha === undefined) {
-      throw new Error("Email e senha são obrigatórios.");
+  async login(email, password) {
+    if (email === undefined || password === undefined) {
+      throw new Error("Email e password são obrigatórios.");
     }
 
     const userValue = await user.findOne({ where: { email } });
 
     if (!userValue) {
-      throw new Error("[1] Usuário e senha inválidos.");
+      throw new Error("[1] Usuário e password inválidos.");
     }
 
-    const senhaValida = bcrypt.compare(String(senha), userValue.senha);
-    if (!senhaValida) {
-      throw new Error("[2] Usuário e senha inválidos.");
+    const passwordValida = bcrypt.compare(String(password), userValue.password);
+    if (!passwordValida) {
+      throw new Error("[2] Usuário e password inválidos.");
     }
 
     return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
