@@ -1,9 +1,9 @@
 const express = require("express");
-
+// const authMiddleware = require("./src/middleware/auth");
 const UserApi = require("../api/user");
 const router = express.Router();
 
-router.post("/", authMiddleware, UserApi.createUser);
+router.post("/", UserApi.createUser);
 
 router.put("/:id", UserApi.updateUser);
 router.get("/:id", UserApi.findUser);

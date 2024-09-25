@@ -30,7 +30,7 @@ class UserModel {
             permissao: {
                 type: database.db.Sequelize.STRING,
                 validate: {
-                    isIn: [["adimn", "viewer"]]
+                    isIn: [["admin", "viewer"]]
                 },
             },
         });
