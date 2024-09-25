@@ -1,26 +1,39 @@
 const express = require("express");
-const router = require("./src/routes/user");
-const database = require('./src/config/database');
+const cors = require("cors");
+const database = require("./config/database");
 
+const UserApi = require("./api/user");
+const UserRouter = require("./routes/user");
+// const CharacterRouter = require("./routes/character");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(express.json());
 
-app.use("/api/v1/user", router)
+app.use(cors());
 
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "OK" });
+});
+
+// // Rotas sem token
 app.post("/api/v1/login", UserApi.login);
 app.post("/api/v1/user", UserApi.createUser);
 
+app.use("/api/v1/user", authMiddleware, UserRouter);
+// app.use("/api/v1/character", CharacterRouter);
+
 database.db
-    .sync({ force: false })
-    .then((_) => {
-        app.listen(3000, () => {
-            console.log("Servidor rodando na porta - 3000");
-        }); //ouvinte, recebe o valor da porta
-    })
-    .catch((e) => {
-        console.error("Erro ao conectar com o Banco", e)
-    })
+  .sync({ force: false })
+  .then((_) => {
+    if (!process.env.TEST) {
+      app.listen(3000, (_) => {
+        console.log("Server running on port 3000");
+      });
+    }
+  })
+  .catch((e) => {
+    console.error(`Erro ao inicializar o banco de dados ${e}`);
+  });
 
-
-
+module.exports = app;

@@ -27,8 +27,13 @@ class UserModel {
                 type: database.db.Sequelize.STRING,
                 allowNull: false
             },
-
-        })
+            permissao: {
+                type: database.db.Sequelize.STRING,
+                validate: {
+                    isIn: [["adimn", "viewer"]]
+                },
+            },
+        });
     }
 }
 
