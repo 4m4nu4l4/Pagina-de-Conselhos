@@ -17,6 +17,7 @@ class UserController {
       nome,
       email,
       senha: cypherSenha,
+      permissao: "user"
     });
 
     return userValue;

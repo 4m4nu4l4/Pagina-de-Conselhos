@@ -6,7 +6,7 @@ class UserApi {
     // }
 
     
-    findUser(req, res) {
+    async findUser(req, res) {
         try {
             const users = UserController.findAll()
 
@@ -18,7 +18,7 @@ class UserApi {
        
     }
 
-    createUser(req, res) {
+    async createUser(req, res) {
         
         try {
             res.send('post')
@@ -29,7 +29,7 @@ class UserApi {
         
     }
 
-    updateUser(req, res) {
+    async updateUser(req, res) {
         try {
             res.send('update')
         } catch (e) {
@@ -39,7 +39,7 @@ class UserApi {
         
     }
 
-    deleteUser(req, res) {
+    async deleteUser(req, res) {
         try {
             //throw new Error("Deu ruim aqui")
             res.send('delete')
@@ -50,7 +50,26 @@ class UserApi {
         
     }
 
+    async findContext(req, res) {
+        try {
+            const user = await UserController.findUser(req?.session?.id || 0)
+            return res.status(200).send(user)
+        } catch (e) {
+            return res.status(400).send({ error: `Erro ao listar usuário ${e.message}`})
+        }
+    }
 
+    async login(req, res) {
+        const { email, senha } = req.body
+        console.log(req.body)
+        try {
+            const token = await UserController.login(email, senha)
+
+            res.status(200).send({ token })
+        } catch (e) {
+            res.status(400).send({ error: e.message })
+        }
+    }
 
 
 }
