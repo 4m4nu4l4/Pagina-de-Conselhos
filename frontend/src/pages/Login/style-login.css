@@ -1,0 +1,22 @@
+#login {
+    background-color: #eeeeee;
+    width: 60%;
+    height: 500px;
+    border-radius: 15px;
+    margin-left: 300px;
+}
+#display-logo {
+    display: flex;
+    align-items: center; /* Alinha a logo e o subtítulo verticalmente */
+    justify-content: space-between; /* Espaça os elementos adequadamente */
+}
+
+#logo {
+    width: 150px;
+    height: 150px;
+}
+
+#subtitle {
+    font-size: 15px;
+    margin-left: 20px; /* Adiciona um espaçamento entre a logo e o subtítulo */
+}

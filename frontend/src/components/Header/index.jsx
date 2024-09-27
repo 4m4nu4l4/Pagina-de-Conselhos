@@ -31,6 +31,10 @@ export default function Header() {
             <p  className="pages">Deixe seu conselho</p>
           </Link>
 
+          <Link to="/login">
+            <p  className="pages">Login</p>
+          </Link>
+
           {/* <Link to="/sobre">
             <p  className="pages">Sobre</p>
           </Link> */}

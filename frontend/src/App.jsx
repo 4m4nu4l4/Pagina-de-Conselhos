@@ -9,6 +9,7 @@ import CardMensal from './pages/Card-Mensal'
 import Conselho from './pages/Conselho'
 import Sobre from './pages/Sobre'
 import Footer from './components/Footer'
+import Login from './pages/Login/login'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/mensal" element={<CardMensal/>}></Route>
       <Route path="/conselho" element={<Conselho/>}></Route>
       <Route path="/sobre" element={<Sobre/>}></Route>
+      <Route path='/login' element={<Login/>}></Route>
     </Routes>
     <Footer/>
     </>
