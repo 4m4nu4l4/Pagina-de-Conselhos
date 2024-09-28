@@ -1,22 +1,60 @@
 #login {
-    background-color: #eeeeee;
-    width: 60%;
-    height: 500px;
-    border-radius: 15px;
-    margin-left: 300px;
-}
-#display-logo {
-    display: flex;
-    align-items: center; /* Alinha a logo e o subtítulo verticalmente */
-    justify-content: space-between; /* Espaça os elementos adequadamente */
+    background-color: #FBFBFB;
+    width: 50%; /* Diminui um pouco a largura para um visual mais compacto */
+    height: auto; /* Permite altura flexível com base no conteúdo */
+    max-height: 600px; /* Define um limite para a altura */
+    border-radius: 20px; /* Aumenta o arredondamento para um efeito mais suave */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+    margin: 0 auto; /* Centraliza o container */
+    padding: 20px; /* Adiciona um espaçamento interno */
 }
 
 #logo {
-    width: 150px;
-    height: 150px;
+    width: 120px; /* Um pouco menor para um visual mais leve */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Centraliza o logo */
+    margin: 0 auto 20px auto; /* Margem inferior para dar espaçamento */
 }
 
 #subtitle {
-    font-size: 15px;
-    margin-left: 20px; /* Adiciona um espaçamento entre a logo e o subtítulo */
+    font-size: 16px;
+    color: #333; /* Um cinza escuro para legibilidade */
+    text-align: center; /* Centraliza o texto */
+    padding: 0 20px; /* Controla o espaçamento lateral */
+}
+#line {
+    width: 580px;
+    height: 1px;
+    color: #b0419e;
+    margin-left: 100px;
+}
+#componentes {
+    margin-left: 30px;
+}
+#email, #senha  {
+    margin-left: 15px;
+    width: 450px;
+    /* height: 30px; */
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+#email, ::placeholder {
+    font-size: 14px;
+    font-weight: lighter;
+    padding: 5px;
+}
+#senha, ::placeholder {
+    font-size: 14px;
+    font-weight: lighter;
+    padding: 5px;
+}
+#button-login {
+    background-color: #b0419e;
+    width: 340px;
+    height: 40px;
+    padding: 0;
+    text-align: center;
+    margin-top: 25px;
+    margin-left: 235px;
+    font-weight: 500;
 }

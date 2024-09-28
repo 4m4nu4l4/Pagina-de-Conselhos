@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 
+import carrinho from "../../assets/imgs/carrinho.png"
+
 export default function CardAleatorio() {
   const [frase, setFrase] = useState("");
 
@@ -19,10 +21,15 @@ export default function CardAleatorio() {
   }, []);
 
   return (
-    <div className="card">
-      <h1>Frase Aleatória</h1>
-      <p>{frase}</p>
-      <button onClick={buscarFrase}>Gerar Nova Frase</button>
+    <div id="display-aleatorio">
+      <div id="img">
+        <img src={carrinho} alt="" />
+      </div>
+      <div className="card">
+        <h1>Frase Aleatória</h1>
+        <p>{frase}</p>
+        <button onClick={buscarFrase}>Gerar Nova Frase</button>
+      </div>
     </div>
   );
 }

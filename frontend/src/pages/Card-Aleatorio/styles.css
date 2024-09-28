@@ -58,3 +58,17 @@ p {
   color: #333;
   margin: 20px 0;
 }
+#display-aleatorio {
+  display: grid;
+  grid-template-columns: 1fr 2fr; 
+  gap: 10px; 
+  align-items: center; 
+}
+#img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#img img {
+  width: 350px; 
+}
