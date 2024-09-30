@@ -1,0 +1,68 @@
+#cadastro {
+  background-color: #FBFBFB;
+  width: 50%;
+  height: auto;
+  max-height: 700px; /* Aumenta um pouco para acomodar os novos campos */
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+#logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+#subtitle {
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  padding: 0 20px;
+}
+
+#line {
+  width: 580px;
+  height: 1px;
+  color: #b0419e;
+  margin-left: 100px;
+}
+
+#componentes {
+  margin-left: 30px;
+}
+
+#nome, #email, #senha, #confirma-senha {
+  margin-left: 15px;
+  width: 450px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 5px;
+}
+
+#nome::placeholder, #email::placeholder, #senha::placeholder, #confirma-senha::placeholder {
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+#button-cadastro {
+  background-color: #b0419e;
+  width: 340px;
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  margin-top: 25px;
+  margin-left: 235px;
+  font-weight: 500;
+  color: white; /* Muda a cor do texto para branco */
+  border: none; /* Remove borda */
+  border-radius: 4px; /* Mantém consistência com os campos */
+  cursor: pointer;
+}
+
+#button-cadastro:hover {
+  background-color: #9a039e; /* Cor mais escura ao passar o mouse */
+}
