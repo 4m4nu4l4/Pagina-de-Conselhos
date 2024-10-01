@@ -10,6 +10,7 @@ import Conselho from './pages/Conselho'
 import Sobre from './pages/Sobre'
 import Footer from './components/Footer'
 import Login from './pages/Login/login'
+import Cadastro from './pages/Cadastro/cadastro'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Route path="/conselho" element={<Conselho/>}></Route>
       <Route path="/sobre" element={<Sobre/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
+      <Route path='/cadastro' element={<Cadastro/>}></Route>
     </Routes>
     <Footer/>
     </>

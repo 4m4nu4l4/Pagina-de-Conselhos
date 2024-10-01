@@ -35,6 +35,10 @@ export default function Header() {
             <p  className="pages">Login</p>
           </Link>
 
+          <Link to="/cadastro">
+            <p  className="pages">Cadastro</p>
+          </Link>
+
           {/* <Link to="/sobre">
             <p  className="pages">Sobre</p>
           </Link> */}
