@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.css";
+import translate from 'translate';
 import wish from "../../assets/imgs/wish.png";
 import img01 from "../../assets/random-img/card-inicial/verde.jpg"
 import img02 from "../../assets/random-img/card-inicial/green.jpg"
@@ -23,6 +24,7 @@ const random_img = [
   img08,
   img09
 ]
+
 export default function CardDiario() {
   const [conselho, setConselho] = useState("");
   const [dataAtual, setDataAtual] = useState("");
@@ -43,13 +45,20 @@ export default function CardDiario() {
       try {
         const response = await fetch("https://api.adviceslip.com/advice");
         const data = await response.json();
-        setConselho(data.slip.advice);
+        
+        // Verifique se o campo 'slip' existe antes de acessar 'advice'
+        if (data.slip && data.slip.advice) {
+          const traduzido = await translate(data.slip.advice, 'pt');
+          setConselho(traduzido);
+        } else {
+          throw new Error("Formato inesperado de resposta da API");
+        }
       } catch (error) {
         console.error("Erro ao buscar o conselho:", error);
       }
     };
     
-    fetchConselho();
+    fetchConselho();    
     
     const data = new Date();
     const dataFormatada = data.toLocaleDateString("pt-BR", {

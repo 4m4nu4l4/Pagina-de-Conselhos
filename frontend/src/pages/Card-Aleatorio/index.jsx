@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
-
+import translate from 'translate';
 import carrinho from "../../assets/imgs/carrinho.png"
 
 export default function CardAleatorio() {
@@ -10,7 +10,13 @@ export default function CardAleatorio() {
     try {
       const response = await fetch("https://api.adviceslip.com/advice"); 
       const data = await response.json();
-      setFrase(data.slip.advice); 
+      // setFrase(data.slip.advice); 
+      if (data.slip && data.slip.advice) {
+        const traduzido = await translate(data.slip.advice, 'pt');
+        setFrase(traduzido);
+      } else {
+        throw new Error("Formato inesperado de resposta da API");
+      }
     } catch (error) {
       console.error("Erro ao buscar a frase", error);
     }
