@@ -1,34 +1,29 @@
-const database = require('../config/database')
-
-
-// const usersMock = new Array({
-//     email: "Maria@maria.com.br",
-//     password: "123456"
-// })
+const database = require('../config/database');
+const { Sequelize } = require('sequelize'); // Importação do Sequelize diretamente se necessário
 
 class UserModel {
     constructor() {
         this.model = database.db.define("users", {
             id: {
-                type: database.db.Sequelize.INTEGER,
+                type: Sequelize.INTEGER,
                 autoIncrement: true,
                 primaryKey: true
             },
             nome: {
-                type: database.db.Sequelize.STRING,
+                type: Sequelize.STRING,
                 allowNull: false
             },
             email: {
-                type: database.db.Sequelize.STRING,
+                type: Sequelize.STRING,
                 allowNull: false,
                 unique: true
             },
             password: {
-                type: database.db.Sequelize.STRING,
+                type: Sequelize.STRING,
                 allowNull: false
             },
             permissao: {
-                type: database.db.Sequelize.STRING,
+                type: Sequelize.STRING,
                 validate: {
                     isIn: [["admin", "viewer"]]
                 },
@@ -37,4 +32,4 @@ class UserModel {
     }
 }
 
-module.exports = new UserModel()
+module.exports = new UserModel().model;
