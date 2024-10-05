@@ -6,21 +6,49 @@ const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 
 class UserController {
-  async createUser(nome, email, password) {
-    if (!nome || !email || !password) {
-      throw new Error("Nome, email e password são obrigatórios.");
+  // async createUser(nome, email, password) {
+  //   if (!nome || !email || !password) {
+  //     throw new Error("Nome, email e password são obrigatórios.");
+  //   }
+
+  //   const cypherpassword = await bcrypt.hash(String(password), SALT_VALUE);
+
+  //   const userValue = await user.create({
+  //     nome,
+  //     email,
+  //     password: cypherpassword,
+  //     permissao: "user"
+  //   });
+
+  //   return userValue;
+  // }
+
+
+  async createUser(email, senha) {
+    if (!email || !senha) {
+      throw new Error("Os campos são obrigatório!");
     }
-
-    const cypherpassword = await bcrypt.hash(String(password), SALT_VALUE);
-
-    const userValue = await user.create({
-      nome,
-      email,
-      password: cypherpassword,
-      permissao: "user"
-    });
-
-    return userValue;
+    if (!validando(email)) {
+      throw new Error("O e-mail deve ser de admin");
+    } else {
+      if (email === "admin@gmail.com" || email === "emanuele@gmail.com" || email === "Maria@gmail.com" ) {
+        const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
+        const userValue = await user.create({
+          email,
+          senha: cypherSenha,
+          permissao: "admin"
+        });
+        return userValue;
+      } else {
+        const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
+        const userValue = await user.create({
+          email,
+          senha: cypherSenha,
+          permissao: "user"
+        });
+        return userValue;
+      }
+    }
   }
 
   async findUser(id) {
@@ -39,7 +67,7 @@ class UserController {
 
   async update(id, nome, email, password) {
     const oldUser = await user.findByPk(id);
-    if(email){
+    if (email) {
       const sameEmail = await user.findOne({ where: { email } });
       if (sameEmail && sameEmail.id !== id) {
         throw new Error("Email já cadastrado.");
