@@ -5,46 +5,35 @@ const jwt = require("jsonwebtoken");
 const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 
+const validando = (email) => {
+  return email.endsWith('@alunos.sc.senac.br');
+};
+
 class UserController {
-  // async createUser(nome, email, password) {
-  //   if (!nome || !email || !password) {
-  //     throw new Error("Nome, email e password são obrigatórios.");
-  //   }
 
-  //   const cypherpassword = await bcrypt.hash(String(password), SALT_VALUE);
-
-  //   const userValue = await user.create({
-  //     nome,
-  //     email,
-  //     password: cypherpassword,
-  //     permissao: "user"
-  //   });
-
-  //   return userValue;
-  // }
-
-
-  async createUser(email, senha) {
-    if (!email || !senha) {
+  async createUser(nome, email, password) {
+    if (!nome || !email || !password) {
       throw new Error("Os campos são obrigatório!");
     }
     if (!validando(email)) {
       throw new Error("O e-mail deve ser de admin");
     } else {
-      if (email === "admin@gmail.com" || email === "emanuele@gmail.com" || email === "Maria@gmail.com" ) {
-        const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
+      if (email === "admin@alunos.sc.senac.br" || email === "emanuele.pries@alunos.sc.senac.br" || email === "maria.benevenutti@alunos.sc.senac.br" ) {
+        const cypherSenha = await bcrypt.hash(String(password), SALT_VALUE);
         const userValue = await user.create({
+          nome,
           email,
-          senha: cypherSenha,
+          password: cypherSenha,
           permissao: "admin"
         });
         return userValue;
       } else {
-        const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
+        const cypherSenha = await bcrypt.hash(String(password), SALT_VALUE);
         const userValue = await user.create({
+          nome,
           email,
-          senha: cypherSenha,
-          permissao: "user"
+          password: cypherSenha,
+          permissao: "viewer"
         });
         return userValue;
       }
