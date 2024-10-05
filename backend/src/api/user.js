@@ -5,10 +5,10 @@ class UserApi {
         const { nome, email, password } = req.body
 
         try {
-            const user = await UserController.createUser(nome, email, password)
+            const user = await UserController.createUser( nome, email, password)
             return res.status(201).send(user)
         } catch (e) {
-            return res.status(400).send({ error: `Erro ao criar usuário ${e.message}`})
+            res.status(400).send({ error: e.message })
         }
     }
 
@@ -31,7 +31,7 @@ class UserApi {
             await UserController.delete(Number(id))
             return res.status(204).send()
         } catch (e) {
-            return res.status(400).send({ error: `Erro ao deletar usuário ${e.message}`})
+            res.status(400).send({ error: e.message })
         }
     }
 
@@ -44,22 +44,24 @@ class UserApi {
         }
     }
 
-    async findContext(req, res) {
-        try {
-            const user = await UserController.findUser(req?.session?.id || 0)
-            return res.status(200).send(user)
-        } catch (e) {
-            return res.status(400).send({ error: `Erro ao listar usuário ${e.message}`})
-        }
-    }
-
     async login(req, res) {
         const { email, password } = req.body
         console.log(req.body)
         try {
             const token = await UserController.login(email, password)
 
+            req.session.id = token.id;
             res.status(200).send({ token })
+        } catch (e) {
+            res.status(400).send({ error: e.message })
+        }
+    }
+
+    async findContext(req, res) {
+        try {
+            console.log("ID da sessão: ", req?.session?.id);
+            const user = await UserController.findUser(req?.session?.id || 0);
+            return res.status(200).send(user);
         } catch (e) {
             res.status(400).send({ error: e.message })
         }
