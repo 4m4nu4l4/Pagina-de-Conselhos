@@ -1,35 +1,17 @@
 const advice = require("../model/advice");
 
-
 class AdviceController {
     
-    static async createFetch() {
+    static async createAdvice(advice, userId) {
         try {
-            return new Promise(async (resolve) => {
-                setTimeout(async () => {
-                    const randomAdvice = mockAdviceList[Math.floor(Math.random() * mockAdviceList.length)];
-                    const adviceValue = await advice.create({
-                        advice: randomAdvice.slip.advice
-                    });
-                    resolve(adviceValue);
-                }, 100);
-            });
-        } catch (error) {
-            throw new Error('Erro ao criar o conselho: ' + error.message);
-        }
-    }
-
-    
-    static async createAdvice(title, content, userId) {
-        try {
-            const newAdvice = await advice.create({ title, content, userId });
+            const newAdvice = await advice.create({ advice, userId });
             return newAdvice;
         } catch (error) {
             throw new Error('Erro ao criar o conselho: ' + error.message);
         }
     }
 
-    static async getAllAdvices(userId) {
+    static async getAllUserAdvice(userId) {
         try {
             const userAdvices = await advice.findAll({ where: { userId } });
             return userAdvices;
@@ -38,14 +20,22 @@ class AdviceController {
         }
     }
 
-    static async updateAdvice(id, title, content) {
+    static async getAllAdvices() {
+        try {
+            const allAdvices = await advice.findAll();
+            return allAdvices;
+        } catch (error) {
+            throw new Error('Erro ao listar os conselhos: ' + error.message);
+        }
+    }
+
+    static async updateAdvice(id, advice) {
         try {
             const adviceToUpdate = await advice.findByPk(id);
             if (!adviceToUpdate) {
                 throw new Error('Conselho não encontrado.');
             }
-            adviceToUpdate.title = title;
-            adviceToUpdate.content = content;
+            adviceToUpdate.advice = advice;
             await adviceToUpdate.save();
             return adviceToUpdate;
         } catch (error) {
