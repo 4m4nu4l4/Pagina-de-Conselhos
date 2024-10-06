@@ -18,7 +18,7 @@ class UserController {
     if (!validando(email)) {
       throw new Error("O e-mail deve ser de admin");
     } else {
-      if (email === "admin@alunos.sc.senac.br" || email === "emanuele.pries@alunos.sc.senac.br" || email === "maria.benevenutti@alunos.sc.senac.br" ) {
+      if (email === "admin@alunos.sc.senac.br" || email === "emanuele.pries@alunos.sc.senac.br" || email === "maria.benevenutti@alunos.sc.senac.br") {
         const cypherSenha = await bcrypt.hash(String(password), SALT_VALUE);
         const userValue = await user.create({
           nome,
@@ -104,6 +104,35 @@ class UserController {
 
     return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
   }
+
+  static async blockUser(id) {
+    try {
+      const userToBlock = await user.findByPk(id);
+      if (!userToBlock) {
+        throw new Error('Usuário não encontrado.');
+      }
+      userToBlock.isBlocked = true;
+      await userToBlock.save();
+      return { message: 'Usuário bloqueado com sucesso.' };
+    } catch (error) {
+      throw new Error('Erro ao bloquear o usuário: ' + error.message);
+    }
+  }
+
+  static async unblockUser(id) {
+    try {
+      const userToUnblock = await user.findByPk(id);
+      if (!userToUnblock) {
+        throw new Error('Usuário não encontrado.');
+      }
+      userToUnblock.isBlocked = false;
+      await userToUnblock.save();
+      return { message: 'Usuário desbloqueado com sucesso.' };
+    } catch (error) {
+      throw new Error('Erro ao desbloquear o usuário: ' + error.message);
+    }
+  }
 }
 
 module.exports = new UserController();
+

@@ -66,6 +66,28 @@ class UserApi {
             res.status(400).send({ error: e.message })
         }
     }
+
+    async blockUser(req, res) {
+        try {
+            const { id } = req.params;
+            const result = await UserController.blockUser(id);
+            return res.status(200).send(result);
+        } catch (e) {
+            res.status(400).send({ error: e.message });
+        }
+    }
+
+    async unblockUser(req, res) {
+        try {
+            const { id } = req.params;
+            const result = await UserController.unblockUser(id);
+            return res.status(200).send(result);
+        } catch (e) {
+            res.status(400).send({ error: e.message });
+        }
+    }
 }
 
 module.exports = new UserApi()
+
+
