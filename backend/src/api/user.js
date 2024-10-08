@@ -50,7 +50,7 @@ class UserApi {
         try {
             const token = await UserController.login(email, password)
 
-            req.session.id = token.id;
+            // req.session.id = token.id;
             res.status(200).send({ token })
         } catch (e) {
             res.status(400).send({ error: e.message })

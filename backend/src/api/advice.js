@@ -1,6 +1,15 @@
 const AdviceController = require('../controller/advice');
 
 class AdviceApi {
+
+    async createFetch(req, res) {
+        try {
+            const fetch = await AdviceController.createFetch();
+            return res.status(201).send(fetch);
+        } catch (e) {
+            res.status(400).send({ error: e.message });
+        }
+    }
     
     async createAdvice(req, res) {
         try {
@@ -22,7 +31,6 @@ class AdviceApi {
         }
     }
 
-    // Obter todos os conselhos (acesso para viewer e admin)
     async getAllAdvices(req, res) {
         try {
             const advices = await AdviceController.getAllAdvices(); // Removido `userId` pois não é necessário
@@ -32,7 +40,6 @@ class AdviceApi {
         }
     }
 
-    // Atualizar um conselho (apenas admin)
     async updateAdvice(req, res) {
         try {
             const { id } = req.params;
@@ -44,7 +51,6 @@ class AdviceApi {
         }
     }
 
-    // Deletar um conselho (apenas admin)
     async deleteAdvice(req, res) {
         try {
             const { id } = req.params;

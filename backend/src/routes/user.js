@@ -13,12 +13,12 @@ router.use(session({
 
 // router.post("/", UserApi.createUser);
 
-router.put("/:id", UserApi.updateUser);
-router.get("/", UserApi.findUsers);
 router.get("/context", UserApi.findContext);
-router.delete("/:id", UserApi.deleteUser);
-router.put("/:id/block", UserApi.blockUser);
-router.put("/:id/unblock", UserApi.unblockUser);
+router.put("/:id", authMiddleware(['viewer', 'admin']), UserApi.updateUser);
+router.get("/", authMiddleware(['admin']), UserApi.findUsers);
+router.delete("/:id", authMiddleware(['viewer', 'admin']), UserApi.deleteUser);
+router.put("/:id/block", authMiddleware(['admin']), UserApi.blockUser);
+router.put("/:id/unblock", authMiddleware(['admin']), UserApi.unblockUser);
 
 module.exports = router;
 
