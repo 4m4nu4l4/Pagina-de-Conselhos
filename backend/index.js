@@ -21,7 +21,7 @@ app.use("/api/v1/advice", AdviceRouter);
 
 // Rota para criar conselho (usuário - fetch)
 app.post("/api/v1/advice", AdviceApi.createAdvice) 
-app.post("/api/v1/fetch", AdviceApi.createFetch)
+app.post("/api/v1/fetch", AdviceApi.createFetch) // rota para criar conselhos com fetch na API
 
 // Rotas sem token
 app.post("/api/v1/login", UserApi.login);

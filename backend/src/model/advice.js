@@ -1,6 +1,6 @@
-const database = require("../config/database")
-const { Sequelize } = require("sequelize")
-const userID = require('../model/advice');
+const database = require('../config/database');
+const { Sequelize } = require('sequelize')
+const userId = require('../model/advice');
 
 class AdviceModel {
     constructor() {
@@ -13,7 +13,7 @@ class AdviceModel {
             advice: {
                 type: Sequelize.STRING,
             },
-            userID: {
+            userId: {
                 type: database.db.Sequelize.INTEGER,
                 references: {
                     model: 'users',

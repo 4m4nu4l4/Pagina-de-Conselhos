@@ -16,7 +16,7 @@ class UserController {
       throw new Error("Os campos são obrigatório!");
     }
     if (!validando(email)) {
-      throw new Error("O e-mail deve ser de admin");
+      throw new Error("O e-mail deve ser do senac");
     } else {
       if (email === "admin@alunos.sc.senac.br" || email === "emanuele.pries@alunos.sc.senac.br" || email === "maria.benevenutti@alunos.sc.senac.br") {
         const cypherSenha = await bcrypt.hash(String(password), SALT_VALUE);
@@ -44,13 +44,10 @@ class UserController {
     if (id === undefined) {
       throw new Error("Id é obrigatório.");
     }
-
     const userValue = await user.findByPk(id);
-
     if (!userValue) {
       throw new Error("Usuário não encontrado.");
     }
-
     return userValue;
   }
 
@@ -68,7 +65,6 @@ class UserController {
       ? await bcrypt.hash(String(password), SALT_VALUE)
       : oldUser.password;
     oldUser.save();
-
     return oldUser;
   }
 
@@ -90,22 +86,18 @@ class UserController {
     if (email === undefined || password === undefined) {
       throw new Error("Email e password são obrigatórios.");
     }
-
     const userValue = await user.findOne({ where: { email } });
-
     if (!userValue) {
       throw new Error("[1] Usuário e password inválidos.");
     }
-
     const passwordValida = bcrypt.compare(String(password), userValue.password);
     if (!passwordValida) {
       throw new Error("[2] Usuário e password inválidos.");
     }
-
-    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
+    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 120 * 120 });
   }
 
-  static async blockUser(id) {
+  async blockUser(id) {
     try {
       const userToBlock = await user.findByPk(id);
       if (!userToBlock) {
@@ -119,7 +111,7 @@ class UserController {
     }
   }
 
-  static async unblockUser(id) {
+  async unblockUser(id) {
     try {
       const userToUnblock = await user.findByPk(id);
       if (!userToUnblock) {
