@@ -24,9 +24,23 @@ const getRole = (token) => {
 
 export const AuthContext = createContext()
 
-export const AuthProvider = () => {
-    const { token, setToken } = useState(null)
-    const { role, setRole } = useState(null)
+export const AuthProvider = ({children}) => {
+    const [ token, setToken ]   = useState(null)
+    const [ role, setRole ] = useState(null)
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken && isValidToken(storedToken)) {
+          setToken(storedToken);
+          setRole(getRole(storedToken));
+        } else {
+          setToken(null);
+          setRole(null);
+          localStorage.removeItem('token');
+        }
+        setLoading(false);
+    }, []);
 
     const login = (newToken) => {
         setToken(newToken)
@@ -38,24 +52,13 @@ export const AuthProvider = () => {
         setRole(null) 
         localStorage.removeItem('token')
     }
-
-    useEffect(() => {
-        // validar o token -- evita que dê merda quando o usuário dá F5 na página
-        const storage = localStorage.getItem('token')
-        if (storage && isValidToken(storage)) {
-            setToken(storage)
-            setRole(getRole(storage))
-        } else {
-            // caso o token não seja válido
-            setToken(null)
-            setRole(null) 
-            localStorage.removeItem('token')
-        }
-    }, [])
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <AuthContext.Provider value={{ token, role, login, logout }}>
-            { children }
+        <AuthContext.Provider value={{ token, login, logout, role }}>
+        {children}
         </AuthContext.Provider>
     )
 } 

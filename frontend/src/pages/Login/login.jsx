@@ -1,8 +1,10 @@
 import "./style-login.css"
 import wish from "../../assets/imgs/WishDaily.png";
-import { useContext } from "react";
-import { AuthContext } from "../../auth/Context";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../auth/Context';
+import { login } from '../../api/user';
+import { toast } from 'react-toastify';
 
 export default function Login () {
   const { login } = useContext(AuthContext)
@@ -18,13 +20,13 @@ export default function Login () {
     e.preventDefault();
 
     if (!email || !password) {
-        return toast('Informe o e-mail e a senha para continuar!');
+      return toast('Informe o e-mail e a senha para continuar!');
     }
 
     try {
-        // 7 - Usar Axios para fazer a requisição de login
-        const response = await loginUser(email, password);
-        if (response.token) {
+      // 7 - Usar Axios para fazer a requisição de login
+      const response = await login(email, password);
+      if (response.token) {
             // 8 - Adicionar login ao AuthContext
             login(response.token);
             return navigate('/');
@@ -55,7 +57,7 @@ export default function Login () {
           </div>
           <div>
             <p className="campos">Informe a sua senha</p>
-            <input type="text" name="" required value={senha} onChange={(e) => setSenha(e.target.value)} id="senha" placeholder="digite a senha"/>
+            <input type="text" name="" required value={password} onChange={(e) => setPassword(e.target.value)} id="senha" placeholder="digite a senha"/>
           </div>
         </div>
         <button id="button-login" type="submit" onClick={handleSubmit}>Acesse a sua conta</button>
