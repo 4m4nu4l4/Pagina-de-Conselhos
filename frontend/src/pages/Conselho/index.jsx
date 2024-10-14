@@ -52,7 +52,7 @@ export default function Conselho() {
       {showForm && (
         <div id="hidden">
           <p id="title-conselho">Contribua com um conselho para nossa rede:</p>
-          <div id="line"></div>
+          <div id="line-addAdvice"></div>
           <input
             type="text"
             name="notes"
