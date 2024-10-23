@@ -21,7 +21,7 @@ export default function Header() {
         <div id="header-pages">
         <div>
             {
-              token &&<Link to="/" className="menu-link" style={{textDecoration: 'none'}}>Diário</Link>
+              token &&<Link to="/" className="menu-link" style={{textDecoration: 'none'}}><p id="cadastrar-regra">Diário</p></Link>
             }
           </div>
 
@@ -32,20 +32,20 @@ export default function Header() {
           <div>
             {
               
-              token && <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}>Aleatório</Link>
+              token && <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}><p id="cadastrar-regra">Aleatório</p></Link>
             }
           </div>
 
           <div>
             {
-              token && <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}>Mensal</Link>
+              token && <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}><p id="cadastrar-regra">Mensal</p></Link>
             }
           </div>
 
           <div>
             {
               !isLoginRoute && !token
-                ? <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}><p>Deixe seu conselho</p> </Link>
+                ? <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}><p id="cadastrar-regra">Deixe seu conselho</p> </Link>
                 : null
             }
           </div>
