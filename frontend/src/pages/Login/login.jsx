@@ -3,18 +3,19 @@ import wish from "../../assets/imgs/WishDaily.png";
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/Context';
-import { login } from '../../api/user';
 import { toast } from 'react-toastify';
+import axios from "axios";
+import { Link } from 'react-router-dom';
+import { loginUser } from "../../api/user";
 
 export default function Login () {
   const { login } = useContext(AuthContext)
   const navigate = useNavigate()
 
-  // const handleBackClick = () => {
-  //   navigate('/')
-  // }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [show, setShow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,21 +25,22 @@ export default function Login () {
     }
 
     try {
-      // 7 - Usar Axios para fazer a requisição de login
-      const response = await login(email, password);
+      const response = await loginUser(email, password);
       if (response.token) {
-            // 8 - Adicionar login ao AuthContext
-            login(response.token);
-            return navigate('/');
-        }
+        login(response.token);
+        return navigate('/sobre');
+      } else {
+        setError('Erro ao fazer login, tente novamente.');
+        toast.error('Erro ao fazer login, tente novamente.');
+      }
     } catch (error) {
-        if (error.response.status === 403) {
-          return toast("Sem permissão.");
-        }
-        if (error.response.status === 401 || error.response.status === 404) {
-          return toast('Email ou senha inválido, tente novamente!');
-        }
-        return toast('Erro inesperado, tente novamente mais tarde!');
+      if (error.response && error.response.status === 403) {
+        toast.error("Sem permissão.");
+      } else if (error.response && (error.response.status === 401 || error.response.status === 404)) {
+          toast.error('Email ou senha inválido, tente novamente!');
+      } else {
+          toast.error('Erro inesperado, tente novamente mais tarde!');
+      }
     }
   };
 
@@ -61,10 +63,8 @@ export default function Login () {
           </div>
         </div>
         <button id="button-login" type="submit" onClick={handleSubmit}>Acesse a sua conta</button>
-        {/* <p id="cadastro-text">Ainda não tem uma conta? Cadastre-se agora.</p> */}
+        <p id="cadastro-link">Ainda não tem uma conta? <Link to='/cadastro' style={{color: '#0081B8'}}>Cadastre-se agora.</Link></p>
     </div>
     </>
-  
  )
-
 }

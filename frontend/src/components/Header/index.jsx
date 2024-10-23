@@ -1,47 +1,68 @@
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../auth/Context';
 
 export default function Header() {
+
+  const { token, role } = useContext(AuthContext);
+  const location = useLocation();
+
+  const isLoginRoute = location.pathname === '/login';
+
   return (
     <>
       <div id="header">
         <div>
-          <Link to="/sobre">
-            <p id="title">WishDaily </p>
-          </Link>
+        {
+          token &&<Link to="/login" className="menu-link" style={{textDecoration: 'none'}}><p id="title">Wish Daily</p></Link>
+        }
         </div>
         <div id="header-pages">
-          <Link to="/">
-            <p className="pages">Diário</p>
-          </Link>
+        <div>
+            {
+              token &&<Link to="/" className="menu-link" style={{textDecoration: 'none'}}>Diário</Link>
+            }
+          </div>
 
           {/* <Link to="/categoria">
             <p  className="pages">Categoria</p>
           </Link> */}
 
-          <Link to="/aleatorio">
-            <p  className="pages">Aleatório</p>
-          </Link>
+          <div>
+            {
+              
+              token && <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}>Aleatório</Link>
+            }
+          </div>
 
-          <Link to="/mensal">
-            <p  className="pages">Mensal</p>
-          </Link>
+          <div>
+            {
+              token && <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}>Mensal</Link>
+            }
+          </div>
 
-          <Link to="/conselho">
-            <p  className="pages">Deixe seu conselho</p>
-          </Link>
+          <div>
+            {
+              !isLoginRoute && !token
+                ? <Link to="/conselho" className="menu-link" style={{textDecoration: 'none'}}><p>Deixe seu conselho</p> </Link>
+                : null
+            }
+          </div>
 
-          <Link to="/login">
-            <p  className="pages">Login</p>
-          </Link>
+          <div>
+            {
+              !isLoginRoute && !token
+                ? <Link to="/login" className="menu-link" style={{textDecoration: 'none'}}></Link>
+                : null
+            }
+          </div>
 
-          <Link to="/cadastro">
-            <p  className="pages">Cadastro</p>
-          </Link>
-
-          {/* <Link to="/sobre">
-            <p  className="pages">Sobre</p>
-          </Link> */}
+          <div>
+            {
+              token && <Link to="/sobre" className="menu-link" style={{textDecoration: 'none'}}> <p id="cadastrar-regra">Sobre o projeto</p> </Link>
+            }
+          </div>
         </div>
       </div>
     </>

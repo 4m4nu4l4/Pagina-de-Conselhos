@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../api/user";
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -11,27 +12,29 @@ export default function Cadastro() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
-
       const responseApi = await createUser({nome, email, password})
       console.log(responseApi)
       if(responseApi.id) {
-        navigate('/login')
+        toast.success("Cadastro realizado com sucesso!"); 
+        navigate('/login');
       } else { 
-        console.log(responseApi)
+        setError('Ocorreu um erro inesperado, tente novamente.');
+        toast.error('Erro ao realizar o cadastro, tente novamente.'); 
       }
     } catch (error) {
       console.log(error)
       if (error.status === 403) {
-        return toast('Sem permissão');
+        toast.error("Sem permissão.");
+      } else if (error.status === 401 || error.status === 404) {
+          toast.error('Email ou senha inválidos, tente novamente!');
+      } else {
+          toast.error('Erro inesperado, tente novamente mais tarde!');
       }
-      if (error.status === 401 || error.status === 404) {
-        return toast('Email ou senha são inválidos, tente novamente!');
-      }
-      toast('Erro inesperado, tente novamente mais tarde!');
     }
   };
 
@@ -46,6 +49,7 @@ export default function Cadastro() {
         </div>
         <div id="line"></div>
         <div id="componentes">
+        <form className="signup-form" onSubmit={handleSubmit}>
           <div>
             <p className="campos">Informe o seu nome</p>
             <input type="text" id="nome" required value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Digite o seu nome" />
@@ -57,9 +61,12 @@ export default function Cadastro() {
           <div>
             <p className="campos">Crie uma senha</p>
             <input type="password" id="senha" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Digite a sua senha" />
+            {error && <p>{error}</p>}
           </div>
-        </div>
-        <button id="button-cadastro">Cadastre-se</button>
+        <button id="button-cadastro" type="submit">Cadastre-se</button>
+        <p id="login-link">Se você já está cadastrado, não se preocupe!Você pode acessar sua conta <Link to='/login' style={{color: '#0081B8'}}>clicando aqui.</Link></p>
+      </form>
+      </div>
       </div>
     </>
   );
