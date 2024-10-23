@@ -8,6 +8,7 @@ class UserApi {
             const user = await UserController.createUser( nome, email, password)
             return res.status(201).send(user)
         } catch (e) {
+            console.log(e)
             res.status(400).send({ error: e.message })
         }
     }
@@ -20,6 +21,7 @@ class UserApi {
             const user = await UserController.update(Number(id), nome, email, password)
             return res.status(200).send(user)
         } catch (e) {
+            console.log(e)
             return res.status(400).send({ error: `Erro ao alterar usuário ${e.message}`})
         }
     }
@@ -31,6 +33,7 @@ class UserApi {
             await UserController.delete(Number(id))
             return res.status(204).send()
         } catch (e) {
+            console.log(e)
             res.status(400).send({ error: e.message })
         }
     }
@@ -40,6 +43,7 @@ class UserApi {
             const users = await UserController.find()
             return res.status(200).send(users)
         } catch (e) {
+            console.log(e)
             return res.status(400).send({ error: `Erro ao listar usuário ${e.message}`})
         }
     }
@@ -53,6 +57,7 @@ class UserApi {
             // req.session.id = token.id;
             res.status(200).send({ token })
         } catch (e) {
+            console.log(e)
             res.status(400).send({ error: e.message })
         }
     }
@@ -63,6 +68,7 @@ class UserApi {
             const user = await UserController.findUser(req?.session?.id || 0);
             return res.status(200).send(user);
         } catch (e) {
+            console.log(e)
             res.status(400).send({ error: e.message })
         }
     }
@@ -73,6 +79,7 @@ class UserApi {
             const result = await UserController.blockUser(id);
             return res.status(200).send(result);
         } catch (e) {
+            console.log(e)
             res.status(400).send({ error: e.message });
         }
     }
@@ -83,6 +90,7 @@ class UserApi {
             const result = await UserController.unblockUser(id);
             return res.status(200).send(result);
         } catch (e) {
+            console.log(e)
             res.status(400).send({ error: e.message });
         }
     }

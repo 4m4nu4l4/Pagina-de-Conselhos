@@ -36,7 +36,7 @@ export const findUsers = async () => {
     const response = await api.post('/api/v1/user')
     return response.data
 }
-export const login = async (email, password) => {
+export const loginUser = async (email, password) => {
     const body = { email, password }
     const response = await api.post('/api/v1/login', body)
     return response.data
