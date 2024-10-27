@@ -101,13 +101,23 @@ class AdviceController {
 
     async getMonthAdvice() {
         try {
-            const allMonthAdvices = await adviceModel.findAll({ limit: 30 });
+            const allMonthAdvices = await adviceModel.findAll({ limit: 7 });
             console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
             return allMonthAdvices;
         } catch (error) {
             throw new Error('Erro ao listar os conselhos: ' + error.message);
         }
     }    
+
+    async getOneAdvice() {
+        try {
+            const oneAdvice = await adviceModel.findAll({ limit: 1 });
+            console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
+            return oneAdvice;
+        } catch (error) {
+            throw new Error('Erro ao listar os conselhos: ' + error.message);
+        }
+    }  
 
     async updateAdvice(id, advice) {
         try {

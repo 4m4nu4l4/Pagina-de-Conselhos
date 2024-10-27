@@ -29,3 +29,8 @@ export const getMonthAdvice = async () => {
     const response = await api.get(`/api/v1/advice/month`)
     return response.data
 }
+
+export const getOneAdvice = async () => {
+    const response = await api.get('/api/v1/advice/one')
+    return response.data
+}

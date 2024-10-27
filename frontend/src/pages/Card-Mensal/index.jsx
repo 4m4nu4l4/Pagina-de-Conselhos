@@ -5,31 +5,28 @@ import { toast } from "react-toastify";
 import { getMonthAdvice } from "../../api/advice";
 
 export default function CardMensal() {
-  const [advices, setAdvices] = useState([]); // Estado para armazenar conselhos
-  const [loading, setLoading] = useState(false); // Estado de carregamento
+  const [advices, setAdvices] = useState([]); 
+  const [loading, setLoading] = useState(false); 
 
-  // Função para buscar conselhos
-  const getAllAdvice = async () => {
-    setLoading(true); // Inicia o estado de carregamento
+  const getAllMonthAdvice = async () => {
+    setLoading(true);
     try {
-      const response = await getMonthAdvice()
-      if (!response.ok) throw new Error("Erro ao buscar conselhos"); // Tratamento de erro
-      const data = await response.json();
-      setAdvices(data.slice(0, 30)); // Limita a 30 conselhos
-      toast.success("Conselhos carregados com sucesso!"); // Notificação de sucesso
+      const data = await getMonthAdvice();
+      if (!data) {
+        throw new Error("Erro ao buscar conselhos");
+      }
+      setAdvices(data.slice(0, 7));
+      toast.success("Conselhos carregados com sucesso!");
     } catch (error) {
-      console.error('Erro na requisição:', error);
-      toast.error("Erro ao carregar os conselhos. Tente novamente!"); // Notificação de erro
+      console.error("Erro na requisição:", error);
+      toast.error("Erro ao carregar os conselhos. Tente novamente!");
     } finally {
-      setLoading(false); // Finaliza o carregamento
+      setLoading(false);
     }
   };
-
-  // useEffect para carregar conselhos ao montar o componente
   useEffect(() => {
-    getAllAdvice();
+    getAllMonthAdvice();
   }, []);
-
   return (
     <div id="container">
       <p id="title">
@@ -37,11 +34,11 @@ export default function CardMensal() {
       </p>
       <div id="cards-container">
         {loading ? (
-          <p>Carregando conselhos...</p>
+          <p>Carregando conselhos...</p> 
         ) : advices.length > 0 ? (
           advices.map((conselho, index) => (
             <div className="card" key={index}>
-              <img src={wish} className="card-image" alt="Ilustração de desejos" />
+              <img src={wish} className="card-image" alt="Ilustração de desejos" loading="lazy" />
               <p className="title-notes">Dia {index + 1}</p>
               <p>{conselho}</p>
             </div>
