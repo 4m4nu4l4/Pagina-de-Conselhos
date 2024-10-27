@@ -1,51 +1,62 @@
 #cadastro {
   background-color: #FBFBFB;
-  width: 50%;
-  height: auto;
-  max-height: 700px; /* Aumenta um pouco para acomodar os novos campos */
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  padding: 20px;
-  margin-bottom: 25px;
+  width: 50%; /* Diminui um pouco a largura para um visual mais compacto */
+  height: 90vh; /* Permite altura flexível com base no conteúdo */
+  /*max-height: 600px;  Define um limite para a altura */
+  border-radius: 20px; /* Aumenta o arredondamento para um efeito mais suave */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
+  margin: 20px; /* Centraliza o container */
+
+  padding: 20px; /* Adiciona um espaçamento interno */
+}
+
+#cadastro-container {
+  background-color: #9a6c92;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #logo {
-  width: 120px;
-  height: auto;
-  display: block;
-  margin: 0 auto 20px auto;
+  width: 120px; /* Um pouco menor para um visual mais leve */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Centraliza o logo */
+  margin: 0 auto 20px auto; /* Margem inferior para dar espaçamento */
 }
 
 #subtitle {
   font-size: 16px;
-  color: #333;
-  text-align: center;
-  padding: 0 20px;
+  color: #333; /* Um cinza escuro para legibilidade */
+  text-align: center; /* Centraliza o texto */
+  padding: 0 20px; /* Controla o espaçamento lateral */
 }
-
 #line {
   width: 580px;
   height: 1px;
   color: #b0419e;
-  margin-left: 100px;
+  /* margin-left: 100px; */
 }
-
-#componentes {
-  margin-left: 30px;
+#componentes form {
+  margin: 0 !important; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
-#nome, #email, #senha, #confirma-senha {
-  margin-left: 15px;
+#email, #senha, #nome {
+  margin-left: 0 !important; 
   width: 450px;
+  /* height: 30px; */
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  padding: 5px;
 }
-
-#nome::placeholder, #email::placeholder, #senha::placeholder, #confirma-senha::placeholder {
+#email, ::placeholder, #senha, ::placeholder, #nome, ::placeholder {
   font-size: 14px;
   font-weight: lighter;
+  padding: 5px;
 }
 
 #button-cadastro {
@@ -54,15 +65,7 @@
   height: 40px;
   padding: 0;
   text-align: center;
-  margin-top: 25px;
-  margin-left: 235px;
+  margin-top: 35px;
+  /* margin-left: 235px; */
   font-weight: 500;
-  color: white; /* Muda a cor do texto para branco */
-  border: none; /* Remove borda */
-  border-radius: 4px; /* Mantém consistência com os campos */
-  cursor: pointer;
-}
-
-#button-cadastro:hover {
-  background-color: #9a039e; /* Cor mais escura ao passar o mouse */
 }
