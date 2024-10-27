@@ -6,9 +6,16 @@
   padding: 20px;
   max-width: 600px;
   text-align: center;
+  
 }
 
 .introducao {
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 78vh;
   font-family: "Lora", serif;
   text-align: center;
   font-size: 1.2em;
@@ -20,6 +27,12 @@
 .data {
 color: #5D4037;
 }
+
+.card {
+  /* width: 500px; */
+  width: 100%;
+}
+
 .card-image {
   z-index: 10;
   position: absolute;

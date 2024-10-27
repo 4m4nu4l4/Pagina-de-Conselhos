@@ -30,7 +30,7 @@ a {
 }
 #header-pages {
   display: flex;
-  gap: 15px;
+  gap: 10px;
   margin-right: 25px;
   /* font-family: "Lora", serif; */
   /* margin: 25px; */
