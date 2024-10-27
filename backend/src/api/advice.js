@@ -51,8 +51,8 @@ class AdviceApi {
 
     async getOneAdvice(req, res) {
         try {
-            const advices = await AdviceController.getOneAdvice(); // Removido `userId` pois não é necessário
-            return res.status(200).send(advices);
+            const oneAdvice = await AdviceController.getOneAdvice(); // Removido `userId` pois não é necessário
+            return res.status(200).send(oneAdvice);
         } catch (e) {
             res.status(400).send({ error: e.message });
         }

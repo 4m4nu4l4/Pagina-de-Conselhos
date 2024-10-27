@@ -101,7 +101,10 @@ class AdviceController {
 
     async getMonthAdvice() {
         try {
-            const allMonthAdvices = await adviceModel.findAll({ limit: 7 });
+            const allMonthAdvices = await adviceModel.findAll({ 
+                attributes: ['id', 'advice'],
+                limit: 7 
+            });
             console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
             return allMonthAdvices;
         } catch (error) {
@@ -111,13 +114,23 @@ class AdviceController {
 
     async getOneAdvice() {
         try {
-            const oneAdvice = await adviceModel.findAll({ limit: 1 });
-            console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
-            return oneAdvice;
+            // Busca apenas um conselho com os atributos `id` e `advice`
+            const oneAdvice = await adviceModel.findOne({
+                attributes: ["id", "advice"]
+            });
+            
+            console.log("Conselho retornado:", oneAdvice);
+    
+            if (oneAdvice) {
+                return oneAdvice.get({ plain: true }); // Retorna `dataValues` diretamente, se existir
+            } else {
+                throw new Error('Nenhum dado encontrado');
+            }
         } catch (error) {
+            console.error('Erro ao listar os conselhos:', error);
             throw new Error('Erro ao listar os conselhos: ' + error.message);
         }
-    }  
+    }      
 
     async updateAdvice(id, advice) {
         try {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 import notes from "../../assets/svg/notes.svg";
+import { createADvice, updateAdvice, deleteAdvice } from "../../api/advice";
 
-export default function Conselho() {
+export default function Conselho({ userId, isAdmin }) {
   const [showForm, setShowForm] = useState(false);
   const [notesList, setNotesList] = useState([]);
 
@@ -19,11 +20,18 @@ export default function Conselho() {
     setShowForm(!showForm);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     const addText = document.getElementById("add-notes-input").value.trim();
     if (addText !== "") {
-      setNotesList([...notesList, { text: addText, isEditing: false }]);
-      document.getElementById("add-notes-input").value = "";
+      try {
+        const createNewAdvice = await createADvice(addText, userId); // Corrigido para usar addText
+        setNotesList([...notesList, createNewAdvice]);
+        document.getElementById("add-notes-input").value = "";
+      } catch (error) {
+        console.error("Erro ao criar -> ", error); // Corrigido para 'error'
+      }
+    } else {
+      console.warn("O texto do conselho não pode ser vazio.");
     }
   };
 
@@ -33,21 +41,34 @@ export default function Conselho() {
     setNotesList(updatedNotes);
   };
 
-  const handleConfirmUpdate = (index) => {
+  const handleConfirmUpdate = async (index) => {
     const updatedNotes = [...notesList];
     const newText = document.getElementById(`edit-note-${index}`).value.trim();
     if (newText !== "") {
-      updatedNotes[index].text = newText;
-      updatedNotes[index].isEditing = false;
-      setNotesList(updatedNotes);
+      try {
+        await updateAdvice(updatedNotes[index].id, newText); // Atualizando com o novo texto
+        updatedNotes[index].text = newText;
+        updatedNotes[index].isEditing = false;
+        setNotesList(updatedNotes);
+      } catch (error) {
+        console.error("Erro ao atualizar conselho:", error);
+      }
     }
   };
 
+  const handleDeleteClick = async (id) => {
+    try {
+      await deleteAdvice(id); // Chamando a função para deletar conselho
+      setNotesList(notesList.filter((note) => note.id !== id)); // Remove o conselho da lista
+    } catch (error) {
+      console.error("Erro ao deletar conselho:", error);
+    }
+  };
   return (
     <div id="container-conselho">
       <button id="button-add" onClick={toggleForm}>
         Coopere com um conselho
-        <img src={notes} />
+        <img src={notes} alt="notes" />
       </button>
       {showForm && (
         <div id="hidden">
@@ -66,7 +87,8 @@ export default function Conselho() {
       )}
       <div id="list-notes">
         {notesList.map((note, index) => (
-          <p key={index}>
+          <div key={note.id}>
+            <strong>{note.userName}</strong>: {note.text} {/* Mostrando o nome do usuário */}
             {note.isEditing ? (
               <>
                 <input
@@ -78,16 +100,18 @@ export default function Conselho() {
                 <button onClick={() => handleConfirmUpdate(index)}>Confirmar</button>
               </>
             ) : (
-              <>
-                {note.text}
-                <div className="buttons">
-                  <button onClick={() => handleUpdateClick(index)}>Atualizar Publicação</button>
-                </div>
-              </>
+              <div className="buttons">
+                {isAdmin && (
+                  <>
+                    <button onClick={() => handleUpdateClick(index)}>Atualizar Publicação</button>
+                    <button onClick={() => handleDeleteClick(note.id)}>Deletar Publicação</button>
+                  </>
+                )}
+              </div>
             )}
-          </p>
+          </div>
         ))}
       </div>
     </div>
-  );
+  );  
 }

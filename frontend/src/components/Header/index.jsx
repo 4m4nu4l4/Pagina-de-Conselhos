@@ -57,7 +57,7 @@ export default function Header() {
             </Link>
           )}
 
-          {!isLoginRoute && !token ? (
+          {token && (
             <Link
               to="/conselho"
               className="menu-link"
@@ -65,7 +65,7 @@ export default function Header() {
             >
               <p id="cadastrar-regra">Deixe seu conselho</p>{" "}
             </Link>
-          ) : null}
+          )}
 
           {!isLoginRoute && !token ? (
             <Link
