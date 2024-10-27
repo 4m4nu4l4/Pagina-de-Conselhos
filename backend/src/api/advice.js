@@ -42,7 +42,7 @@ class AdviceApi {
 
     async getMonthAdvice(req, res) {
         try {
-            const advices = await AdviceController.getAllAdvices(); // Removido `userId` pois não é necessário
+            const advices = await AdviceController.getMonthAdvice(); // Removido `userId` pois não é necessário
             return res.status(200).send(advices);
         } catch (e) {
             res.status(400).send({ error: e.message });

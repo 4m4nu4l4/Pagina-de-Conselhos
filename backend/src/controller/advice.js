@@ -101,12 +101,13 @@ class AdviceController {
 
     async getMonthAdvice() {
         try {
-            const allAdvices = await adviceModel.findAll({limit: 30});
-            return allAdvices;
+            const allMonthAdvices = await adviceModel.findAll({ limit: 30 });
+            console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
+            return allMonthAdvices;
         } catch (error) {
             throw new Error('Erro ao listar os conselhos: ' + error.message);
         }
-    }
+    }    
 
     async updateAdvice(id, advice) {
         try {
