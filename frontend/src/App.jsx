@@ -30,6 +30,7 @@ function App() {
               <Route path="/cadastro" element={<Cadastro />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/categoria" element={<CardCategoria/>}></Route>
+                <Route path="/diario" element={<CardDiario/>}></Route>
                 <Route path="/aleatorio" element={<CardAleatorio/>}></Route>
                 <Route path="/mensal" element={<CardMensal/>}></Route>
                 <Route path="/conselho" element={<Conselho/>}></Route>
