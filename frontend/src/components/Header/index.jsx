@@ -21,7 +21,7 @@ export default function Header() {
         <div id="header-pages">
         <div>
             {
-              token &&<Link to="/" className="menu-link" style={{textDecoration: 'none'}}><p id="cadastrar-regra">Diário</p></Link>
+              token &&<Link to="/diario" className="menu-link" style={{textDecoration: 'none'}}><p id="cadastrar-regra">Diário</p></Link>
             }
           </div>
 
@@ -60,7 +60,7 @@ export default function Header() {
 
           <div>
             {
-              token && <Link to="/sobre" className="menu-link" style={{textDecoration: 'none'}}> <p id="cadastrar-regra">Sobre o projeto</p> </Link>
+              token && <Link to="/" className="menu-link" style={{textDecoration: 'none'}}> <p id="cadastrar-regra">Sobre o projeto</p> </Link>
             }
           </div>
         </div>

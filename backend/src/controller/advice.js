@@ -99,6 +99,15 @@ class AdviceController {
         }
     }
 
+    async getMonthAdvice() {
+        try {
+            const allAdvices = await adviceModel.findAll({limit: 30});
+            return allAdvices;
+        } catch (error) {
+            throw new Error('Erro ao listar os conselhos: ' + error.message);
+        }
+    }
+
     async updateAdvice(id, advice) {
         try {
             const adviceToUpdate = await adviceModel.findByPk(id);

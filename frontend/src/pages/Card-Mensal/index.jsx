@@ -1,63 +1,33 @@
 import "./styles.css";
 import React, { useEffect, useState } from "react";
 import wish from "../../assets/imgs/wish.png";
-import translate from 'translate';
+import { toast } from "react-toastify";
+import { getMonthAdvice } from "../../api/advice";
 
 export default function CardMensal() {
-  const [conselhos, setConselhos] = useState([]);
-  
+  const [advices, setAdvices] = useState([]); // Estado para armazenar conselhos
+  const [loading, setLoading] = useState(false); // Estado de carregamento
+
+  // Função para buscar conselhos
+  const getAllAdvice = async () => {
+    setLoading(true); // Inicia o estado de carregamento
+    try {
+      const response = await getMonthAdvice()
+      if (!response.ok) throw new Error("Erro ao buscar conselhos"); // Tratamento de erro
+      const data = await response.json();
+      setAdvices(data.slice(0, 30)); // Limita a 30 conselhos
+      toast.success("Conselhos carregados com sucesso!"); // Notificação de sucesso
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      toast.error("Erro ao carregar os conselhos. Tente novamente!"); // Notificação de erro
+    } finally {
+      setLoading(false); // Finaliza o carregamento
+    }
+  };
+
+  // useEffect para carregar conselhos ao montar o componente
   useEffect(() => {
-    const fetchConselhos = async () => {
-      const fetchedConselhos = new Set();
-      const baseURL = "https://api.adviceslip.com/advice";
-      const requests = [];
-      
-      // Criando múltiplas requisições
-      for (let i = 0; i < 30; i++) {
-        requests.push(fetch(baseURL).then(response => response.json()));
-      }
-
-      try {
-        const results = await Promise.all(requests);
-        results.forEach(result => {
-          if (result && result.slip && result.slip.advice) {
-            fetchedConselhos.add(result.slip.advice);
-          } else {
-            console.error("Estrutura da resposta inesperada:", result);
-          }
-        });
-
-        // Garantindo que tenhamos 30 conselhos únicos
-        while (fetchedConselhos.size < 30) {
-          const additionalResults = await Promise.all(
-            Array.from({ length: 30 - fetchedConselhos.size }, () =>
-              fetch(baseURL).then(response => response.json())
-            )
-          );
-
-          additionalResults.forEach(result => {
-            if (result && result.slip && result.slip.advice) {
-              fetchedConselhos.add(result.slip.advice);
-            }
-          });
-        }
-
-        // Convertendo o Set em Array e traduzindo os conselhos
-        const translatedConselhos = await Promise.all(
-          Array.from(fetchedConselhos).map(async (conselho) => {
-            const traducao = await translate(conselho, { to: 'pt' });
-            return traducao;
-          })
-        );
-
-        setConselhos(translatedConselhos);
-      } catch (error) {
-        console.error("Erro ao buscar os conselhos:", error);
-        setConselhos([]); // Resetando o estado dos conselhos em caso de erro
-      }
-    };
-
-    fetchConselhos();
+    getAllAdvice();
   }, []);
 
   return (
@@ -66,8 +36,10 @@ export default function CardMensal() {
         Com 30 dias à sua frente, você tem 30 novas oportunidades de se tornar a melhor versão de si mesmo. Descubra o que a Wish Daily preparou para você neste mês!
       </p>
       <div id="cards-container">
-        {conselhos.length > 0 ? (
-          conselhos.map((conselho, index) => (
+        {loading ? (
+          <p>Carregando conselhos...</p>
+        ) : advices.length > 0 ? (
+          advices.map((conselho, index) => (
             <div className="card" key={index}>
               <img src={wish} className="card-image" alt="Ilustração de desejos" />
               <p className="title-notes">Dia {index + 1}</p>
