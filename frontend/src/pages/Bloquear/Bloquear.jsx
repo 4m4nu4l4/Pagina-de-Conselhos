@@ -14,10 +14,10 @@ export default function Bloquear() {
 
             try {
                 const data = await findUsers();
-                setUsers(data);
+                return setUsers(data);
             } catch (error) {
                 console.error("Erro ao buscar usuários:", error.response?.data || error.message);
-                alert("Não foi possível carregar os usuários. Verifique a conexão ou entre em contato com o suporte.");
+                return alert("Não foi possível carregar os usuários. Verifique a conexão ou entre em contato com o suporte.");
             }
         };
 
@@ -47,7 +47,7 @@ export default function Bloquear() {
                 </ul>
             </div>
             <div id="imageContainer">
-                <img src={usersIcon} alt="Ícone de usuários" className="users-icon" />
+                <img id="userIcons" src={usersIcon} alt="Ícone de usuários" className="users-icon" />
             </div>
         </div>
     );

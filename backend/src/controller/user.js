@@ -87,6 +87,7 @@ class UserController {
       throw new Error("Email e password são obrigatórios.");
     }
     const userValue = await user.findOne({ where: { email } });
+    console.log(userValue)
     if (!userValue) {
       throw new Error("[1] Usuário e password inválidos.");
     }

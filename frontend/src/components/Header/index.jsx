@@ -1,18 +1,19 @@
 import "./styles.css";
-import { Link, useLocation } from "react-router-dom"; // Remova useHistory
+import { Link, useLocation } from "react-router-dom"; 
 import { useContext } from "react";
 import { AuthContext } from "../../auth/Context";
-import { useNavigate } from 'react-router-dom'; // Importe useNavigate
+import { useNavigate } from 'react-router-dom'; 
+import logoutIcon from "../../assets/svg/logout.svg"
 
 export default function Header() {
   const { token, role, logout } = useContext(AuthContext);
   const location = useLocation();
-  const navigate = useNavigate(); // Use useNavigate em vez de useHistory
+  const navigate = useNavigate(); 
 
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/login'); // Use navigate para redirecionar
+      navigate('/login'); 
     } catch (e) {
       console.log('Erro ao desconectar usuário -> ', e);
     }
@@ -107,7 +108,7 @@ export default function Header() {
 
           {token && (
             <Link onClick={handleLogout} className="menu-link" style={{ textDecoration: "none" }}>
-              <p id="cadastrar-regra">Sair</p>
+              <img id="logout" src={logoutIcon} alt="" />
             </Link>
           )}
         </div>
