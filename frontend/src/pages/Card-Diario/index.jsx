@@ -78,8 +78,8 @@ export default function CardDiario() {
         Bem-vindo(a)! Todos os dias, você encontrará aqui uma mensagem especial
         para inspirar e motivar o seu dia. Aproveite a mensagem de hoje:
       </b>
-      <div className="card"> 
-        <img src={wish} className="card-image" alt="wish"/> 
+      <div className="cardDiario"> 
+        {/* <img src={wish} className="card-image" alt="wish"/>  */}
         <strong>
           <p className="data">{dataAtual}</p>
         </strong>

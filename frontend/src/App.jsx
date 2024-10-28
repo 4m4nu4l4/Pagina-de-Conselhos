@@ -15,6 +15,7 @@ import { AuthProvider } from './auth/Context'
 import PrivateRoute from './routes/PrivateRoute'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import Bloquear from './pages/Bloquear/Bloquear'
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/aleatorio" element={<CardAleatorio/>}></Route>
                 <Route path="/mensal" element={<CardMensal/>}></Route>
                 <Route path="/conselho" element={<Conselho/>}></Route>
+                <Route path='/bloquear' element={<Bloquear/>}></Route>
                 <Route path="/sobre" element={<Sobre />} />
               </Route>
           </Routes>

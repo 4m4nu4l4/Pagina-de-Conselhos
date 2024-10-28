@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../api/user";
+import open from '../../assets/svg/open.svg'
+import close from "../../assets/svg/close.svg"
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -47,6 +49,10 @@ export default function Login() {
     }
   };
 
+  const toggleVisibility = () => {
+    setShow(!show);
+  };
+
   return (
     <div id="login-container">
     
@@ -71,24 +77,26 @@ export default function Login() {
             id="email"
             placeholder="digite o e-mail"
           />
-
           <p className="campos">Informe a sua senha</p>
-          <input
-            type="text"
-            name=""
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            id="senha"
-            placeholder="digite a senha"
-          />
-
+          <div id="password-container">
+            <input
+              type={show ? "text" : "password"}
+              name=""
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              id="senha"
+              placeholder="digite a senha"
+            />
+            <img src={show? open : close} onClick={toggleVisibility} style={{cursor: 'pointer'}} alt="" />
+          </div>
           <button id="button-login" type="submit" onClick={handleSubmit}>
             Acesse a sua conta
           </button>
+          {error && <p id="error-text">{error}</p>} 
           <p id="cadastro-link">
             Ainda não tem uma conta?{" "}
-            <Link to="/cadastro" style={{ color: "#0081B8" }}>
+            <Link to="/cadastro" style={{ color: "#0081B8", fontFamily: "Jost" }}>
               Cadastre-se agora.
             </Link>
           </p>

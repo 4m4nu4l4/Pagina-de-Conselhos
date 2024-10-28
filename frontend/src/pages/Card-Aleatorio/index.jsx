@@ -38,7 +38,7 @@ export default function CardAleatorio() {
       <div id="img">
         <img src={carrinho} alt="Carrinho de compras" />
       </div>
-      <div className="card">
+      <div id="card">
         <h1>Frase Aleatória</h1>
         {loading ? (
           <p>Carregando...</p>

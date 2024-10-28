@@ -1,11 +1,22 @@
 import "./styles.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Remova useHistory
 import { useContext } from "react";
 import { AuthContext } from "../../auth/Context";
+import { useNavigate } from 'react-router-dom'; // Importe useNavigate
 
 export default function Header() {
-  const { token, role } = useContext(AuthContext);
+  const { token, role, logout } = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate(); // Use useNavigate em vez de useHistory
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login'); // Use navigate para redirecionar
+    } catch (e) {
+      console.log('Erro ao desconectar usuário -> ', e);
+    }
+  };
 
   const isLoginRoute = location.pathname === "/login";
 
@@ -33,9 +44,6 @@ export default function Header() {
               <p id="cadastrar-regra">Diário</p>
             </Link>
           )}
-          {/* <Link to="/categoria">
-            <p  className="pages">Categoria</p>
-          </Link> */}
 
           {token && (
             <Link
@@ -72,16 +80,34 @@ export default function Header() {
               to="/login"
               className="menu-link"
               style={{ textDecoration: "none" }}
-            ></Link>
+            >
+              {/* O link está vazio, talvez você queira adicionar um texto ou ícone aqui */}
+            </Link>
           ) : null}
+
           {token && (
             <Link
               to="/sobre"
               className="menu-link"
               style={{ textDecoration: "none" }}
             >
-              {" "}
-              <p id="cadastrar-regra">Sobre o projeto</p>{" "}
+              <p id="cadastrar-regra">Sobre o projeto</p>
+            </Link>
+          )}
+
+          {token && role === 'admin' && (
+            <Link
+              to="/bloquear"
+              className="menu-link"
+              style={{ textDecoration: "none" }}
+            >
+              <p id="cadastrar-regra">Gestão de Usuários</p>
+            </Link>
+          )}
+
+          {token && (
+            <Link onClick={handleLogout} className="menu-link" style={{ textDecoration: "none" }}>
+              <p id="cadastrar-regra">Sair</p>
             </Link>
           )}
         </div>

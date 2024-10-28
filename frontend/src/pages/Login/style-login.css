@@ -29,9 +29,9 @@
 
 #subtitle {
     font-size: 16px;
-    color: #333; /* Um cinza escuro para legibilidade */
-    text-align: center; /* Centraliza o texto */
-    padding: 0 20px; /* Controla o espaçamento lateral */
+    color: #333; 
+    text-align: center; 
+    padding: 0 20px; 
 }
 #line {
     width: 580px;
@@ -46,7 +46,7 @@
     justify-content: center;
     align-items: center;
 }
-#email, #senha  {
+#email  {
     margin-left: 0 !important; 
     width: 450px;
     /* height: 30px; */
@@ -72,4 +72,31 @@
     margin-top: 35px;
     /* margin-left: 235px; */
     font-weight: 500;
+}
+Link {
+    font-family: 'Jost';
+}
+#password-container {
+    display: flex;
+    align-items: center; /* Alinha verticalmente os itens */
+    margin-bottom: 20px; /* Espaço abaixo do campo de senha */
+    margin-left: 25px;
+}
+#senha {
+  flex: 1; /* O campo de senha ocupará todo o espaço disponível */
+  padding: 10px; /* Espaçamento interno */
+  border: 1px solid #ccc; /* Borda leve */
+  border-radius: 5px; /* Bordas arredondadas */
+  /* margin-left: 10px; */
+}
+
+#senha:focus {
+  border-color: #0081B8; /* Cor da borda ao focar */
+  outline: none; /* Remove a borda padrão do foco */
+}
+
+img {
+  width: 20px; /* Ajuste o tamanho do ícone */
+  height: 20px; /* Ajuste o tamanho do ícone */
+  margin-left: 5px;
 }

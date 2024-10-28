@@ -13,7 +13,8 @@ class AdviceApi {
     
     async createAdvice(req, res) {
         try {
-            const { advice, userId } = req.body;
+            const { advice } = req.body;
+            const { userId } = req.user.id;
             const newAdvice = await AdviceController.createAdvice(advice, userId);
             return res.status(201).send(newAdvice);
         } catch (e) {
@@ -32,10 +33,13 @@ class AdviceApi {
     }
 
     async getAllAdvices(req, res) {
+        console.log(req.headers);
         try {
             const advices = await AdviceController.getAllAdvices(); // Removido `userId` pois não é necessário
+            console.log(advices);
             return res.status(200).send(advices);
         } catch (e) {
+            console.error("Erro ao buscar conselhos:", e.message);
             res.status(400).send({ error: e.message });
         }
     }
@@ -51,10 +55,11 @@ class AdviceApi {
 
     async getOneAdvice(req, res) {
         try {
-            const oneAdvice = await AdviceController.getOneAdvice(); // Removido `userId` pois não é necessário
+            const oneAdvice = await AdviceController.getOneAdvice(); // Obtém um conselho
             return res.status(200).send(oneAdvice);
-        } catch (e) {
-            res.status(400).send({ error: e.message });
+        } catch (error) {
+            console.error(error.message);
+            res.status(400).send({ error: error.message }); // Retorna erro em caso de falha
         }
     }
 
