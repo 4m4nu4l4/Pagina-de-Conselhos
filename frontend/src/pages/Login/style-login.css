@@ -1,13 +1,12 @@
 #login {
     background-color: #FBFBFB;
-    width: 50%; /* Diminui um pouco a largura para um visual mais compacto */
-    height: auto; /* Permite altura flexível com base no conteúdo */
-    max-height: 600px; /* Define um limite para a altura */
-    border-radius: 20px; /* Aumenta o arredondamento para um efeito mais suave */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
-    margin: 20px; /* Centraliza o container */
-
-    padding: 20px; /* Adiciona um espaçamento interno */
+    width: 50%;
+    height: auto;
+    max-height: 600px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    padding: 20px;
 }
 
 #login-container {
@@ -21,48 +20,52 @@
 }
 
 #logo {
-    width: 120px; /* Um pouco menor para um visual mais leve */
-    height: auto; /* Mantém a proporção da imagem */
-    display: block; /* Centraliza o logo */
-    margin: 0 auto 20px auto; /* Margem inferior para dar espaçamento */
+    width: 120px;
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto;
 }
 
 #subtitle {
     font-size: 16px;
-    color: #333; 
-    text-align: center; 
-    padding: 0 20px; 
+    color: #333;
+    text-align: center;
+    padding: 0 20px;
 }
+
 #line {
     width: 580px;
     height: 1px;
     color: #b0419e;
-    /* margin-left: 100px; */
 }
+
 #componentes {
-    margin: 0 !important; 
+    margin: 0 !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-#email  {
-    margin-left: 0 !important; 
+
+#email {
+    margin-left: 0 !important;
     width: 450px;
-    /* height: 30px; */
     border-radius: 4px;
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
+
 #email, ::placeholder {
     font-size: 14px;
     font-weight: lighter;
     padding: 5px;
 }
+
 #senha, ::placeholder {
     font-size: 14px;
     font-weight: lighter;
     padding: 5px;
 }
+
 #button-login {
     background-color: #b0419e;
     width: 340px;
@@ -70,33 +73,29 @@
     padding: 0;
     text-align: center;
     margin-top: 35px;
-    /* margin-left: 235px; */
     font-weight: 500;
 }
+
 Link {
     font-family: 'Jost';
 }
+
 #password-container {
     display: flex;
-    align-items: center; /* Alinha verticalmente os itens */
-    margin-bottom: 20px; /* Espaço abaixo do campo de senha */
+    align-items: center;
+    margin-bottom: 20px;
     margin-left: 25px;
 }
-#senha {
-  flex: 1; /* O campo de senha ocupará todo o espaço disponível */
-  padding: 10px; /* Espaçamento interno */
-  border: 1px solid #ccc; /* Borda leve */
-  border-radius: 5px; /* Bordas arredondadas */
-  /* margin-left: 10px; */
-}
 
-#senha:focus {
-  border-color: #0081B8; /* Cor da borda ao focar */
-  outline: none; /* Remove a borda padrão do foco */
+#senha {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 img {
-  width: 20px; /* Ajuste o tamanho do ícone */
-  height: 20px; /* Ajuste o tamanho do ícone */
-  margin-left: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
 }

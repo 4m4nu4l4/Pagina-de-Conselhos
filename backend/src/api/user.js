@@ -38,7 +38,7 @@ class UserApi {
         }
     }
 
-    async findUsers(req, res) {
+    async find(req, res) {
         try {
             const users = await UserController.find()
             return res.status(200).send(users)

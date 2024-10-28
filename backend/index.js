@@ -6,10 +6,13 @@ const UserRouter = require("./src/routes/user");
 const AdviceApi = require("./src/api/advice");
 const AdviceRouter = require('./src/routes/advice');
 const authMiddleware = require("./src/middleware/auth");
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const {session}
 
 const app = express();
 app.use(express.json());
 app.use(cors()); //podemos informar métodos, urls que deveram ser aceitos
+
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "OK" });

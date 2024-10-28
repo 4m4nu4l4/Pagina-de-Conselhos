@@ -1,13 +1,11 @@
 #cadastro {
   background-color: #FBFBFB;
-  width: 50%; /* Diminui um pouco a largura para um visual mais compacto */
-  height: 90vh; /* Permite altura flexível com base no conteúdo */
-  /*max-height: 600px;  Define um limite para a altura */
-  border-radius: 20px; /* Aumenta o arredondamento para um efeito mais suave */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra suave */
-  margin: 20px; /* Centraliza o container */
-
-  padding: 20px; /* Adiciona um espaçamento interno */
+  width: 50%;
+  height: 90vh;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
 }
 
 #cadastro-container {
@@ -21,38 +19,40 @@
 }
 
 #logo {
-  width: 120px; /* Um pouco menor para um visual mais leve */
-  height: auto; /* Mantém a proporção da imagem */
-  display: block; /* Centraliza o logo */
-  margin: 0 auto 20px auto; /* Margem inferior para dar espaçamento */
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
 }
 
 #subtitle {
   font-size: 16px;
-  color: #333; /* Um cinza escuro para legibilidade */
-  text-align: center; /* Centraliza o texto */
-  padding: 0 20px; /* Controla o espaçamento lateral */
+  color: #333;
+  text-align: center;
+  padding: 0 20px;
 }
+
 #line {
   width: 580px;
   height: 1px;
   color: #b0419e;
-  /* margin-left: 100px; */
 }
+
 #componentes form {
-  margin: 0 !important; 
+  margin: 0 !important;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 #email, #senha, #nome {
-  margin-left: 0 !important; 
+  margin-left: 0 !important;
   width: 450px;
-  /* height: 30px; */
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
+
 #email, ::placeholder, #senha, ::placeholder, #nome, ::placeholder {
   font-size: 14px;
   font-weight: lighter;
@@ -66,6 +66,25 @@
   padding: 0;
   text-align: center;
   margin-top: 35px;
-  /* margin-left: 235px; */
   font-weight: 500;
+}
+
+#password-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 25px;
+}
+
+#senha {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+img {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
 }
