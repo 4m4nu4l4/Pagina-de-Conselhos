@@ -87,6 +87,7 @@ class UserController {
       throw new Error("Email e password são obrigatórios.");
     }
     const userValue = await user.findOne({ where: { email } });
+    console.log(userValue)
     if (!userValue) {
       throw new Error("[1] Usuário e password inválidos.");
     }
@@ -94,7 +95,7 @@ class UserController {
     if (!passwordValida) {
       throw new Error("[2] Usuário e password inválidos.");
     }
-    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 120 * 120 });
+    return jwt.sign({ id: userValue.id, role: userValue.permissao }, SECRET_KEY, { expiresIn: 120 * 120 });
   }
 
   async blockUser(id) {

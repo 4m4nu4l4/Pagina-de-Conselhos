@@ -3,11 +3,11 @@ import { AuthContext } from "../auth/Context"
 import { Navigate, Outlet } from "react-router-dom"
 
 const PrivateRoute = () => {
-    const token = useContext(AuthContext) // pegar o token
+    const token = useContext(AuthContext) 
     if (token === null) {
-        return <Navigate to='/login' /> // verificar se é nulo
+        return <Navigate to='/login' /> 
     }
-    return <Outlet /> // redirecionamento se não for nulo
+    return <Outlet />
 }
 
 export default PrivateRoute

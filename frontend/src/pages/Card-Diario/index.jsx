@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./styles.css";
 import translate from 'translate';
 import wish from "../../assets/imgs/wish.png";
-import img01 from "../../assets/random-img/card-inicial/verde.jpg"
-import img02 from "../../assets/random-img/card-inicial/green.jpg"
-import img03 from "../../assets/random-img/card-inicial/arvore.jpg"
-import img04 from "../../assets/random-img/card-inicial/aguia.jpg"
-// import img05 from "../../assets/random-img/card-inicial/arvore.jpg"
-import img05 from "../../assets/random-img/card-inicial/balloons.jpg"
-import img06 from "../../assets/random-img/card-inicial/hands.jpg"
-import img07 from "../../assets/random-img/card-inicial/lake.jpg"
-import img08 from "../../assets/random-img/card-inicial/sunset.jpg"
-import img09 from "../../assets/random-img/card-inicial/woman.jpg"
+import img01 from "../../assets/random-img/card-inicial/verde.jpg";
+import img02 from "../../assets/random-img/card-inicial/green.jpg";
+import img03 from "../../assets/random-img/card-inicial/arvore.jpg";
+import img04 from "../../assets/random-img/card-inicial/aguia.jpg";
+import img05 from "../../assets/random-img/card-inicial/balloons.jpg";
+import img06 from "../../assets/random-img/card-inicial/hands.jpg";
+import img07 from "../../assets/random-img/card-inicial/lake.jpg";
+import img08 from "../../assets/random-img/card-inicial/sunset.jpg";
+import img09 from "../../assets/random-img/card-inicial/woman.jpg";
+import { toast } from "react-toastify"; // Importando toast para notificações
+import { getOneAdvice } from "../../api/advice"; // Importando a função para buscar conselho
 
 const random_img = [
   img01,
@@ -23,7 +24,7 @@ const random_img = [
   img07,
   img08,
   img09
-]
+];
 
 export default function CardDiario() {
   const [conselho, setConselho] = useState("");
@@ -41,23 +42,24 @@ export default function CardDiario() {
       setImagensAtuais(imagensAleatorias);
     };
     selecionarImagens();
+
     const fetchConselho = async () => {
       try {
-        const response = await fetch("https://api.adviceslip.com/advice");
-        const data = await response.json();
-        
-        // Verifique se o campo 'slip' existe antes de acessar 'advice'
-        if (data.slip && data.slip.advice) {
-          const traduzido = await translate(data.slip.advice, 'pt');
+        const data = await getOneAdvice(); // Chamando a função para buscar o conselho
+        console.log('Dados recebidos: ', data);
+        if (data && data.advice) {
+          const traduzido = await translate(data.advice, 'pt'); // Traduzindo o conselho
           setConselho(traduzido);
         } else {
           throw new Error("Formato inesperado de resposta da API");
         }
       } catch (error) {
         console.error("Erro ao buscar o conselho:", error);
+        toast.dismiss();
+        toast.error("Erro ao carregar o conselho diário. Tente novamente!"); // Notificação de erro
       }
     };
-    
+
     fetchConselho();    
     
     const data = new Date();
@@ -72,13 +74,12 @@ export default function CardDiario() {
   
   return (
     <div className="introducao">
-      
       <b>
         Bem-vindo(a)! Todos os dias, você encontrará aqui uma mensagem especial
         para inspirar e motivar o seu dia. Aproveite a mensagem de hoje:
       </b>
-      <div className="card"> 
-      <img src={wish} className="card-image" alt="wish"/> 
+      <div className="cardDiario"> 
+        {/* <img src={wish} className="card-image" alt="wish"/>  */}
         <strong>
           <p className="data">{dataAtual}</p>
         </strong>

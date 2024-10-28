@@ -12,6 +12,15 @@ const isValidToken = (token) => {
     }
 }
 
+const getUserId = (token) => {
+    try {
+        const decoded = jwtDecode(token);
+        return { userId: decoded.id, role: decoded.role };
+    } catch (error) {
+        return { userId: null, role: null };
+    }
+};
+
 const getRole = (token) => {
     try {
         const decode = jwtDecode(token)
@@ -25,8 +34,9 @@ const getRole = (token) => {
 export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
-    const [ token, setToken ]   = useState(null)
-    const [ role, setRole ] = useState(null)
+    const [ token, setToken ]   = useState(null);
+    const [ role, setRole ] = useState(null);
+    const [userId, setUserId] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -34,8 +44,11 @@ export const AuthProvider = ({children}) => {
         if (storedToken && isValidToken(storedToken)) {
           setToken(storedToken);
           setRole(getRole(storedToken));
+          const { userId } = getUserId(storedToken);
+          setUserId(userId);
         } else {
           setToken(null);
+          setUserId(null);
           setRole(null);
           localStorage.removeItem('token');
         }
@@ -44,11 +57,14 @@ export const AuthProvider = ({children}) => {
 
     const login = (newToken) => {
         setToken(newToken)
-        setRole(getRole) // função para pegar a role do token 
+        const { userId } = getUserId(newToken);
+        setUserId(userId);
+        setRole(getRole(newToken)) // função para pegar a role do token 
         localStorage.setItem('token', newToken)
     }
     const logout = () => {
         setToken(null)
+        setUserId(null);
         setRole(null) 
         localStorage.removeItem('token')
     }
@@ -57,7 +73,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{ token, login, logout, role }}>
+        <AuthContext.Provider value={{ token, login, logout, role, userId }}>
         {children}
         </AuthContext.Provider>
     )

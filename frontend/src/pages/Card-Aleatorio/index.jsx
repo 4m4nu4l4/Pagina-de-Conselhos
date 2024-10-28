@@ -1,40 +1,53 @@
-import React, { useState, useEffect } from "react";
 import "./styles.css";
-import translate from 'translate';
-import carrinho from "../../assets/imgs/carrinho.png"
+import React, { useState, useEffect } from "react";
+import carrinho from "../../assets/imgs/carrinho.png";
+import { toast } from "react-toastify";
+import { getOneAdvice } from "../../api/advice";
 
 export default function CardAleatorio() {
-  const [frase, setFrase] = useState("");
+  const [advice, setAdvice] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const buscarFrase = async () => {
+  const fetchOneAdvice = async () => {
+    setLoading(true);
     try {
-      const response = await fetch("https://api.adviceslip.com/advice"); 
-      const data = await response.json();
-      // setFrase(data.slip.advice); 
-      if (data.slip && data.slip.advice) {
-        const traduzido = await translate(data.slip.advice, 'pt');
-        setFrase(traduzido);
+      const data = await getOneAdvice();
+      console.log('Dados recebidos: ', data)
+      if (data && data.advice) {
+        setAdvice(data.advice);
+        toast.dismiss();
+        toast.success('Conselho aleatório carregado com sucesso!');
       } else {
-        throw new Error("Formato inesperado de resposta da API");
+        throw new Error('Estrutura de dados inesperada');
       }
     } catch (error) {
-      console.error("Erro ao buscar a frase", error);
+      console.error("Erro na requisição:", error.message);
+      toast.dismiss();
+      toast.error("Erro ao carregar os conselho aleatório. Tente novamente!");
+    } finally {
+      setLoading(false);
     }
   };
-  
+
   useEffect(() => {
-    buscarFrase();
+    fetchOneAdvice();
   }, []);
 
   return (
     <div id="display-aleatorio">
       <div id="img">
-        <img src={carrinho} alt="" />
+        <img src={carrinho} alt="Carrinho de compras" />
       </div>
-      <div className="card">
+      <div id="card">
         <h1>Frase Aleatória</h1>
-        <p>{frase}</p>
-        <button onClick={buscarFrase}>Gerar Nova Frase</button>
+        {loading ? (
+          <p>Carregando...</p>
+        ) : (
+          <p>{advice}</p>
+        )}
+        <button onClick={fetchOneAdvice} disabled={loading}>
+          {loading ? "Carregando..." : "Gerar Nova Frase"}
+        </button>
       </div>
     </div>
   );

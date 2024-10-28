@@ -1,4 +1,6 @@
 const adviceModel = require("../model/advice");
+const User = require("../model/user");
+const { Op } = require('sequelize'); 
 
 const mockAdviceList = [
     { slip: { id: 1, advice: "Stay curious, keep learning.", userId: "null" } },
@@ -74,7 +76,7 @@ class AdviceController {
     
     async createAdvice(advice, userId) {
         try {
-            const newAdvice = await adviceModel.create({ advice, userId });
+            const newAdvice = await adviceModel.create({ advice: advice, userId: userId });
             return newAdvice;
         } catch (error) {
             throw new Error('Erro ao criar o conselho: ' + error.message);
@@ -92,12 +94,49 @@ class AdviceController {
 
     async getAllAdvices() {
         try {
-            const allAdvices = await adviceModel.findAll();
+            const allAdvices = await adviceModel.findAll({
+                where: { userId: { [Op.ne]: null } }, // Apenas conselhos com userId preenchido
+                include: [{
+                    model: User,
+                    attributes: ['nome'], // Inclui o nome do usuário
+                }],
+            });
             return allAdvices;
         } catch (error) {
             throw new Error('Erro ao listar os conselhos: ' + error.message);
         }
     }
+
+    async getMonthAdvice() {
+        try {
+            const allMonthAdvices = await adviceModel.findAll({ 
+                attributes: ['id', 'advice'],
+                limit: 7 
+            });
+            console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
+            return allMonthAdvices;
+        } catch (error) {
+            throw new Error('Erro ao listar os conselhos: ' + error.message);
+        }
+    }    
+
+    async getOneAdvice() {
+        try {
+            // Busca apenas um conselho com os atributos `id` e `advice`
+            const oneAdvice = await adviceModel.findOne();
+            
+            console.log("Conselho retornado:", oneAdvice); // Para depuração
+    
+            if (oneAdvice) {
+                return oneAdvice.get({ plain: true }); // Retorna `dataValues` diretamente, se existir
+            } else {
+                throw new Error('Nenhum dado encontrado');
+            }
+        } catch (error) {
+            console.error('Erro ao listar os conselhos:', error);
+            throw new Error('Erro ao listar os conselhos: ' + error.message);
+        }
+    }    
 
     async updateAdvice(id, advice) {
         try {
