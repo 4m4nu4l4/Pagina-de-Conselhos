@@ -33,6 +33,7 @@ strong {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #f0f0f0;
   position: relative;
+  background: radial-gradient(circle, #bcf2fa, #ba7aaf);
 }
 .card-image {
   position: absolute;

@@ -23,7 +23,7 @@ export const findContext = async (id) => {
     return response.data
 }
 export const findUsers = async () => {
-    const response = await api.get("/api/v1/user/")
+    const response = await api.get("/api/v1/user/findUser")
     return response.data;
 };
 export const loginUser = async (email, password) => {

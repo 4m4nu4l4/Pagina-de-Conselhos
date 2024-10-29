@@ -1,6 +1,7 @@
 import "./styles.css";
 import React, { useState, useEffect } from "react";
 import carrinho from "../../assets/imgs/carrinho.png";
+import translate from 'translate';
 import { toast } from "react-toastify";
 import { getOneAdvice } from "../../api/advice";
 
@@ -14,7 +15,8 @@ export default function CardAleatorio() {
       const data = await getOneAdvice();
       console.log('Dados recebidos: ', data)
       if (data && data.advice) {
-        setAdvice(data.advice);
+        const traduzido = await translate(data.advice, 'pt');
+        setAdvice(traduzido); 
         toast.dismiss();
         toast.success('Conselho aleatório carregado com sucesso!');
       } else {

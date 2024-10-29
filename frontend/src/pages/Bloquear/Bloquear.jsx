@@ -64,6 +64,7 @@ export default function Bloquear() {
         e.preventDefault();
         try {
             const response = await updateUser(editingUser.id, updatedData);
+            console.log(response)
             toast.success("Usuário atualizado com sucesso.");
         } catch (error) {
             if (error.response && error.response.status === 403) {
@@ -80,6 +81,7 @@ export default function Bloquear() {
 
             try {
                 const data = await findUsers();
+                console.log(data)
                 setUsers(data);
             } catch (error) {
                 console.error("Erro ao buscar usuários:", error.response?.data || error.message);
@@ -98,7 +100,6 @@ export default function Bloquear() {
                     Esta página é exclusiva para administradores do sistema de conselhos - Wish Daily. Gerencie usuários aqui.
                 </p>
 
-                {/* Lista de usuários */}
                 <ul id="userList">
                     {users.length > 0 ? (
                         users.map((user) => (
@@ -119,8 +120,6 @@ export default function Bloquear() {
                         <li className="no-users">Nenhum usuário encontrado.</li>
                     )}
                 </ul>
-
-                {/* Formulário de edição */}
                 {editingUser && (
                     <form id="form" onSubmit={handleUpdateSubmit}>
                         <p>Editar Usuário</p>

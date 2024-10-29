@@ -76,6 +76,7 @@ class UserController {
   }
 
   async find() {
+    console.log('oie')
     return user.findAll();
   }
 

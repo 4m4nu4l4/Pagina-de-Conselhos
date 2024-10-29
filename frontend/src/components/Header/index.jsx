@@ -62,7 +62,7 @@ export default function Header() {
               className="menu-link"
               style={{ textDecoration: "none" }}
             >
-              <p id="cadastrar-regra">Mensal</p>
+              <p id="cadastrar-regra">Semanal</p>
             </Link>
           )}
 
