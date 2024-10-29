@@ -11,20 +11,10 @@ import img06 from "../../assets/random-img/card-inicial/hands.jpg";
 import img07 from "../../assets/random-img/card-inicial/lake.jpg";
 import img08 from "../../assets/random-img/card-inicial/sunset.jpg";
 import img09 from "../../assets/random-img/card-inicial/woman.jpg";
-import { toast } from "react-toastify"; // Importando toast para notificações
-import { getOneAdvice } from "../../api/advice"; // Importando a função para buscar conselho
+import { toast } from "react-toastify";
+import { getOneAdvice } from "../../api/advice";
 
-const random_img = [
-  img01,
-  img02, 
-  img03,
-  img04,
-  img05,
-  img06,
-  img07,
-  img08,
-  img09
-];
+const random_img = [img01, img02, img03, img04, img05, img06, img07, img08, img09];
 
 export default function CardDiario() {
   const [conselho, setConselho] = useState("");
@@ -33,7 +23,7 @@ export default function CardDiario() {
   
   useEffect(() => {
     const selecionarImagens = () => {
-      const imagensAleatorias = Array(4) 
+      const imagensAleatorias = Array(4)
         .fill()
         .map(() => {
           const indice = Math.floor(Math.random() * random_img.length);
@@ -41,27 +31,30 @@ export default function CardDiario() {
         });
       setImagensAtuais(imagensAleatorias);
     };
+    
     selecionarImagens();
 
     const fetchConselho = async () => {
       try {
-        const data = await getOneAdvice(); // Chamando a função para buscar o conselho
+        console.log("bom")
+        const data = await getOneAdvice(); // aqui que ele faz a requisição
         console.log('Dados recebidos: ', data);
+
         if (data && data.advice) {
-          const traduzido = await translate(data.advice, 'pt'); // Traduzindo o conselho
-          setConselho(traduzido);
+          const traduzido = await translate(data.advice, 'pt');
+          setConselho(traduzido); 
         } else {
           throw new Error("Formato inesperado de resposta da API");
         }
       } catch (error) {
         console.error("Erro ao buscar o conselho:", error);
         toast.dismiss();
-        toast.error("Erro ao carregar o conselho diário. Tente novamente!"); // Notificação de erro
+        toast.error("Erro ao carregar o conselho diário. Tente novamente!");
       }
     };
 
     fetchConselho();    
-    
+
     const data = new Date();
     const dataFormatada = data.toLocaleDateString("pt-BR", {
       weekday: "long",
@@ -79,7 +72,6 @@ export default function CardDiario() {
         para inspirar e motivar o seu dia. Aproveite a mensagem de hoje:
       </b>
       <div className="cardDiario"> 
-        {/* <img src={wish} className="card-image" alt="wish"/>  */}
         <strong>
           <p className="data">{dataAtual}</p>
         </strong>
