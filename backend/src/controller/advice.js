@@ -138,6 +138,12 @@ class AdviceController {
             
             console.log("Conselho retornado:", oneAdvice); // Para depuração
     
+            if(oneAdvice.length <= 0){
+                mockAdviceList.map(it => {
+                    this.createAdvice(it.slip.advice, 1)
+                })
+            }
+
             if (oneAdvice) {
                 return oneAdvice.get({ plain: true }); // Retorna `dataValues` diretamente, se existir
             } else {

@@ -16,7 +16,6 @@ export default function CardMensal() {
         throw new Error("Erro ao buscar conselhos");
       }
       setAdvices(data.slice(0, 7));
-      console.log(advices)
       toast.dismiss();
       toast.success("Conselhos carregados com sucesso!");
     } catch (error) {
@@ -27,27 +26,29 @@ export default function CardMensal() {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getAllMonthAdvice();
   }, []);
+
   return (
     <div id="container">
       <p id="title">
-        Com 30 dias à sua frente, você tem 30 novas oportunidades de se tornar a melhor versão de si mesmo. Descubra o que a Wish Daily preparou para você neste mês!
+        Com 7 dias à sua frente, você tem 7 novas oportunidades de se tornar a melhor versão de si mesmo. Descubra o que a Wish Daily preparou para você neste mês!
       </p>
       <div id="cards-container">
-      {loading ? (
-            <p>Carregando conselhos...</p>
+        {loading ? (
+          <p>Carregando conselhos...</p>
         ) : advices.length > 0 ? (
-            advices.map((conselho, index) => (
-                <div className="card" key={index}>
-                    <img src={wish} className="card-image" alt="Ilustração de desejos" loading="lazy" />
-                    <p className="title-notes">Dia {index + 1}</p>
-                    <p>{conselho}</p>
-                </div>
-            ))
+          advices.map((conselho, index) => (
+            <div className="card" key={conselho.id}> {/* Usando conselho.id como chave */}
+              <img src={wish} className="card-image" alt="Ilustração de desejos" loading="lazy" />
+              <p className="title-notes">Dia {index + 1}</p>
+              <p>{conselho.advice}</p> {/* Acessando a propriedade 'advice' */}
+            </div>
+          ))
         ) : (
-            <p>Estamos preparando conselhos incríveis para você! Aguarde um momento...</p>
+          <p>Estamos preparando conselhos incríveis para você! Aguarde um momento...</p>
         )}
       </div>
     </div>

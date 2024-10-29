@@ -12,7 +12,7 @@ export const createUser = async (user) => {
     return response.data // pega o endpoint e envia uma req com o objeto de usuários
 }
 export const updateUser = async (id, user) => {
-    const response = await api.put(`/api/v1/user/{id}`, user)
+    const response = await api.put(`/api/v1/user/${id}`, user)
     return response.data
 }
 export const deleteUser = async (id) => {
@@ -23,11 +23,19 @@ export const findContext = async (id) => {
     return response.data
 }
 export const findUsers = async () => {
-    const response = await api.get("/api/v1/user/")
+    const response = await api.get("/api/v1/user/findUser")
     return response.data;
 };
 export const loginUser = async (email, password) => {
     const body = { email, password }
     const response = await api.post('/api/v1/login', body)
+    return response.data
+};
+export const blockUser = async (id) => {
+    const response = await api.put(`api/v1/user/${id}/block`)
+    return response.data
+}
+export const unblock = async (id) => {
+    const response = await api.put(`api/v1/user/${id}/unblock`)
     return response.data
 }

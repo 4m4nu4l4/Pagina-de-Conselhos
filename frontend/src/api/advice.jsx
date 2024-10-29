@@ -1,29 +1,8 @@
 // import advice from '../../../backend/src/model/advice'
 import api from './api'
-export const createADvice = async (token, adviceData) => {
-    if (!token) {
-        throw new Error("Token não fornecido");
-    }
-
-    try {
-        const response = await fetch('http://localhost:3000/api/v1/advice', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify(adviceData),
-        });
-        if (!response.ok) {
-            const responseBody = await response.text();
-            throw new Error(`Erro ao criar conselho: ${response.status} - ${responseBody}`);
-        }
-        const responseBody = await response.json();
-        return responseBody;
-
-    } catch (error) {
-        throw new Error(`Erro na requisição: ${error.message}`);
-    }
+export const createADvice = async (adviceData) => {
+    const response = await api.post(`/api/v1/advice`, adviceData )
+    return response.data
 };
 
 export const updateAdvice = async (id, advice) => {

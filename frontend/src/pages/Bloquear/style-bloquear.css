@@ -42,6 +42,10 @@
 .user-item:hover {
     background-color: #ced4da; 
 }
+.user-item.blocked {
+    background-color: rgba(255, 0, 0, 0.1); /* Altere para a cor que você desejar */
+    color: #ff0000; /* Altere o texto, se necessário */
+}
 .user-name {
     font-weight: bold;
     color: #212529; 
@@ -67,4 +71,47 @@
     height: auto; 
     margin-left: 20px; 
     margin-top: 40px; 
+}
+.bloquear {
+    width: 150px;
+    /* height: 80px; */
+    padding: 5px;
+    text-align: center;
+    background-color: #b0419e;
+}
+#bloquear {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+}
+#form {
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 10px;
+}
+#formAtualizar {
+    display: grid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+    margin-top: 15px;
+}
+#formButton {
+    width: 150px;
+    /* height: 80px; */
+    padding: 5px;
+    text-align: center;
+    background-color: #b0419e;
+}
+#labelEmail {
+    margin-left: 15px;
+}
+.input {
+    margin-left: 15px;
+    padding: 4px;
+    border: none;
+    border-radius: 5px;
+    width: 200px;
 }

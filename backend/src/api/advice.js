@@ -15,7 +15,7 @@ class AdviceApi {
     async createAdvice(req, res) {
         try {
             const { advice } = req.body;
-            const userId = req.user.id;
+            const userId = req.session.id;
             const newAdvice = await AdviceController.createAdvice(advice, userId);
             return res.status(201).json(newAdvice);
         } catch (error) {
