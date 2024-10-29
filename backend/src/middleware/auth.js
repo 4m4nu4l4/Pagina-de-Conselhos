@@ -16,9 +16,10 @@ function authMiddleware(roles = []) {
       if (roles.length && !roles.includes(userLogged.permissao)) {
         return res.status(403).json({ mensagem: "Sem permissão" });
       }
-      req.session.user = userLogged;
+      req.session = userLogged;
       next();
     } catch (err) {
+      console.log(err)
       return res.status(401).json({ mensagem: "Token inválido" });
     }
   };

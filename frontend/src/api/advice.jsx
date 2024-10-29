@@ -57,20 +57,14 @@ export const getAllAdvice = async (token) => {
 
 
 export const getMonthAdvice = async () => {
-    const response = await api.get(`/api/v1/advice/month`)
+    console.log("oiaa")
+    const response = await api.get(`/api/v1/advice/get/month`)
+    console.log("oiaa",response)
     return response.data
 }
 
-export const getOneAdvice = async (token) => {
-    const response = await api.get('/api/v1/advice/one', {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-
-    if (response.status !== 200) { 
-        throw new Error('Erro ao buscar conselho');
-    }
-
+export const getOneAdvice = async () => {
+    const response = await api.get('/api/v1/advice/get/one');
+    console.log(response)
     return response.data; 
 };

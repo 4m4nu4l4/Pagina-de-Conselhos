@@ -101,6 +101,11 @@ class AdviceController {
                     attributes: ['nome'], // Inclui o nome do usuário
                 }],
             });
+            if(allAdvices.length <= 0){
+                mockAdviceList.map(it => {
+                    this.createAdvice(it.slip.advice, it.slip.userId)
+                })
+            }
             return allAdvices;
         } catch (error) {
             throw new Error('Erro ao listar os conselhos: ' + error.message);
@@ -114,6 +119,12 @@ class AdviceController {
                 limit: 7 
             });
             console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
+
+            if(allMonthAdvices.length <= 0){
+                mockAdviceList.map(it => {
+                    this.createAdvice(it.slip.advice, 1)
+                })
+            }
             return allMonthAdvices;
         } catch (error) {
             throw new Error('Erro ao listar os conselhos: ' + error.message);
