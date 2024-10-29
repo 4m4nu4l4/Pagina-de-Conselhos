@@ -51,7 +51,7 @@ class UserController {
     return userValue;
   }
 
-  async update(id, nome, email, password) {
+  async update(id, nome, email) {
     const oldUser = await user.findByPk(id);
     if (email) {
       const sameEmail = await user.findOne({ where: { email } });
@@ -61,9 +61,6 @@ class UserController {
     }
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
-    oldUser.password = password
-      ? await bcrypt.hash(String(password), SALT_VALUE)
-      : oldUser.password;
     oldUser.save();
     return oldUser;
   }
@@ -104,7 +101,8 @@ class UserController {
       if (!userToBlock) {
         throw new Error('Usuário não encontrado.');
       }
-      userToBlock.isBlocked = true;
+      // userToBlock.isBlocked = true;
+      userToBlock.bloqueado = 1
       await userToBlock.save();
       return { message: 'Usuário bloqueado com sucesso.' };
     } catch (error) {
@@ -118,7 +116,7 @@ class UserController {
       if (!userToUnblock) {
         throw new Error('Usuário não encontrado.');
       }
-      userToUnblock.isBlocked = false;
+      userToUnblock.bloqueado = 0;
       await userToUnblock.save();
       return { message: 'Usuário desbloqueado com sucesso.' };
     } catch (error) {

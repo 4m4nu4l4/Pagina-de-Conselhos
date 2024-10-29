@@ -22,6 +22,9 @@ class UserModel {
                 type: Sequelize.STRING,
                 allowNull: false
             },
+            bloqueado: {
+                type: Sequelize.INTEGER,
+            },
             permissao: {
                 type: Sequelize.STRING,
                 validate: {
