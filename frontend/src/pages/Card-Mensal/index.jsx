@@ -34,7 +34,7 @@ export default function CardMensal() {
   return (
     <div id="container">
       <p id="title">
-        Com 30 dias à sua frente, você tem 7 novas oportunidades de se tornar a melhor versão de si mesmo. Descubra o que a Wish Daily preparou para você neste mês!
+        Com 7 dias à sua frente, você tem 7 novas oportunidades de se tornar a melhor versão de si mesmo. Descubra o que a Wish Daily preparou para você neste mês!
       </p>
       <div id="cards-container">
         {loading ? (
