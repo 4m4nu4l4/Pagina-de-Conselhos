@@ -6,9 +6,16 @@
   padding: 20px;
   max-width: 600px;
   text-align: center;
+  
 }
 
 .introducao {
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  height: 78vh;
   font-family: "Lora", serif;
   text-align: center;
   font-size: 1.2em;
@@ -20,6 +27,29 @@
 .data {
 color: #5D4037;
 }
+
+.cardDiario {
+  background: radial-gradient(circle, #bcf2fa, #ba7aaf);
+  border-radius: 15px;
+  padding: 30px;
+  max-width: 100%;
+  width: 800px;
+  /* height: 50px; */
+  margin: 35px auto;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+#card:hover {
+  transform: translateY(-10px);
+}
+
 .card-image {
   z-index: 10;
   position: absolute;

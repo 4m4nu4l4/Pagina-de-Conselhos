@@ -51,7 +51,7 @@ class UserController {
     return userValue;
   }
 
-  async update(id, nome, email, password) {
+  async update(id, nome, email) {
     const oldUser = await user.findByPk(id);
     if (email) {
       const sameEmail = await user.findOne({ where: { email } });
@@ -61,9 +61,6 @@ class UserController {
     }
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
-    oldUser.password = password
-      ? await bcrypt.hash(String(password), SALT_VALUE)
-      : oldUser.password;
     oldUser.save();
     return oldUser;
   }
@@ -79,6 +76,7 @@ class UserController {
   }
 
   async find() {
+    console.log('oie')
     return user.findAll();
   }
 
@@ -87,6 +85,7 @@ class UserController {
       throw new Error("Email e password são obrigatórios.");
     }
     const userValue = await user.findOne({ where: { email } });
+    console.log(userValue)
     if (!userValue) {
       throw new Error("[1] Usuário e password inválidos.");
     }
@@ -94,7 +93,7 @@ class UserController {
     if (!passwordValida) {
       throw new Error("[2] Usuário e password inválidos.");
     }
-    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 120 * 120 });
+    return jwt.sign({ id: userValue.id, role: userValue.permissao }, SECRET_KEY, { expiresIn: 120 * 120 });
   }
 
   async blockUser(id) {
@@ -103,7 +102,8 @@ class UserController {
       if (!userToBlock) {
         throw new Error('Usuário não encontrado.');
       }
-      userToBlock.isBlocked = true;
+      // userToBlock.isBlocked = true;
+      userToBlock.bloqueado = 1
       await userToBlock.save();
       return { message: 'Usuário bloqueado com sucesso.' };
     } catch (error) {
@@ -117,7 +117,7 @@ class UserController {
       if (!userToUnblock) {
         throw new Error('Usuário não encontrado.');
       }
-      userToUnblock.isBlocked = false;
+      userToUnblock.bloqueado = 0;
       await userToUnblock.save();
       return { message: 'Usuário desbloqueado com sucesso.' };
     } catch (error) {

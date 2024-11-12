@@ -15,10 +15,10 @@ class UserApi {
 
     async updateUser(req, res) {
         const { id } = req.params
-        const { nome, email, password } = req.body
+        const { nome, email } = req.body
 
         try {
-            const user = await UserController.update(Number(id), nome, email, password)
+            const user = await UserController.update(Number(id), nome, email)
             return res.status(200).send(user)
         } catch (e) {
             console.log(e)
@@ -38,7 +38,7 @@ class UserApi {
         }
     }
 
-    async findUsers(req, res) {
+    async find(req, res) {
         try {
             const users = await UserController.find()
             return res.status(200).send(users)
@@ -64,8 +64,8 @@ class UserApi {
 
     async findContext(req, res) {
         try {
-            console.log("ID da sessão: ", req?.session?.id);
-            const user = await UserController.findUser(req?.session?.id || 0);
+            console.log("ID da sessão: ", req?.session?.user.id);
+            const user = await UserController.findUser(req?.session?.user.id || 0);
             return res.status(200).send(user);
         } catch (e) {
             console.log(e)
