@@ -148,7 +148,7 @@ export default function Bloquear() {
 
                 {showAdminForm && (
                     <div id="formAdmin">
-                        <form onSubmit={handleSubmitAdmin}>
+                        <form>
                             <p className="campos">Informe o nome do usuário Admin</p>
                             <input
                                 type="text"
@@ -176,7 +176,7 @@ export default function Bloquear() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Digite a senha do usuário Admin"
                             />
-                            <button id="cadastroAdmin" onclick="location.reload()">Cadastrar</button>
+                            <button id="cadastroAdmin" onSubmit={handleSubmitAdmin}>Cadastrar</button>
                         </form>
                     </div>
                 )}
