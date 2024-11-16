@@ -89,6 +89,9 @@ class UserController {
     if (!userValue) {
       throw new Error("[1] Usuário e password inválidos.");
     }
+    if (userValue.bloqueado === 1) {
+      throw new Error("[3] Usuáro bloqueado não pode realizar o login.");
+    }
     const passwordValida = bcrypt.compare(String(password), userValue.password);
     if (!passwordValida) {
       throw new Error("[2] Usuário e password inválidos.");
