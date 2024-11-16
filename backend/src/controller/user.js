@@ -40,6 +40,24 @@ class UserController {
     }
   }
 
+  async createAdmin(nome, email, password) {
+    if (!nome || !email || !password) {
+      throw new Error("Os campos são obrigatório!");
+    }
+    if (!validando(email)) {
+      throw new Error("O e-mail deve ser do senac");
+    } else {
+      const cypherSenha = await bcrypt.hash(String(password), SALT_VALUE);
+      const userValue = await user.create({
+        nome,
+        email,
+        password: cypherSenha,
+        permissao: "admin"
+      });
+      return userValue;
+    }
+  }
+
   async findUser(id) {
     if (id === undefined) {
       throw new Error("Id é obrigatório.");

@@ -39,3 +39,7 @@ export const unblock = async (id) => {
     const response = await api.put(`api/v1/user/${id}/unblock`)
     return response.data
 }
+export const createAdmin = async (adminUser) => {
+    const response = await api.post("api/v1/user/createAdmin", adminUser)
+    return response.data
+}

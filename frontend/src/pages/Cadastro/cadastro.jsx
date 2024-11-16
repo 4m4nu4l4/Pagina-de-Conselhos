@@ -40,15 +40,15 @@ export default function Cadastro() {
       if (error.status === 403) {
         toast.dark("Sem permissão.");
       } else if (error.status === 401 || error.status === 404) {
-          toast.error('Email ou senha inválidos, tente novamente!');
+        toast.error('Email ou senha inválidos, tente novamente!');
       } else if (!email || !senha) {
-          toast.error("Todos os campos devem ser preenchidos!");
+        toast.error("Todos os campos devem ser preenchidos!");
       } else if (!validando(email)) {
-          toast.info("O email deve ser do Senac.");
+        toast.info("O email deve ser do Senac.");
       } else if (!validando_senha(senha)) {
-          toast.warning("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, símbolos e um número.");
+        toast.warning("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, símbolos e um número.");
       } else {
-          toast.dark('Erro inesperado, tente novamente mais tarde!');
+        toast.dark('Erro inesperado, tente novamente mais tarde!');
       }
     }
   };
@@ -90,9 +90,9 @@ export default function Cadastro() {
               placeholder="Digite o seu e-mail"
             />
 
-            
-              <p className="campos">Crie uma senha</p>
-              <div id="password-container">
+
+            <p className="campos">Crie uma senha</p>
+            <div id="password-container">
               <input
                 type={show ? "text" : "password"}
                 name=""
@@ -102,9 +102,9 @@ export default function Cadastro() {
                 id="senha"
                 placeholder="digite a senha"
               />
-              <img src={show? open : close} onClick={toggleVisibility} style={{cursor: 'pointer'}} alt="" />
+              <img src={show ? open : close} onClick={toggleVisibility} style={{ cursor: 'pointer' }} alt="" />
             </div>
-            
+
             <button id="button-cadastro" type="submit">
               Cadastre-se
             </button>

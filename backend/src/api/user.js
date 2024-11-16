@@ -13,6 +13,18 @@ class UserApi {
         }
     }
 
+    async createAdmin(req, res) {
+        const {nome, email, password} = req.body
+
+        try {
+            const adminUser = await UserController.createAdmin( nome, email, password )
+            return res.status(201).send(adminUser)
+        } catch (e) {
+            console.log(e)
+            res.status(400).send({ error: e.message })
+        }
+    }
+
     async updateUser(req, res) {
         const { id } = req.params
         const { nome, email } = req.body
