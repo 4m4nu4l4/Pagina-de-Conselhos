@@ -109,7 +109,7 @@ export default function Cadastro() {
               Cadastre-se
             </button>
             <p id="login-link">
-              Se você já está cadastrado, não se preocupe!Você pode acessar sua
+              Se você já está cadastrado, não se preocupe! Você pode acessar sua
               conta{" "}
               <Link to="/login" style={{ color: "#0081B8" }}>
                 clicando aqui.

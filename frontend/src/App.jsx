@@ -19,8 +19,8 @@ import Bloquear from './pages/Bloquear/Bloquear'
 
 function App() {
   const location = useLocation();
-  const ocultarElementos = location.pathname === '/login' || location.pathname === '/cadastro';
-  const isLoginOrCadastro = location.pathname === '/login' || location.pathname === '/cadastro';
+  const ocultarElementos = location.pathname === '/login' || location.pathname === '/';
+  const isLoginOrCadastro = location.pathname === '/login' || location.pathname === '/';
   return (
     <AuthProvider>
       <div className={isLoginOrCadastro ? 'login-background' : 'default-background'}>
@@ -28,7 +28,7 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/" element={<Cadastro />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/categoria" element={<CardCategoria/>}></Route>
                 <Route path="/diario" element={<CardDiario/>}></Route>

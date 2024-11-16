@@ -96,7 +96,7 @@ export default function Login() {
           {error && <p id="error-text">{error}</p>} 
           <p id="cadastro-link">
             Ainda não tem uma conta?{" "}
-            <Link to="/cadastro" style={{ color: "#0081B8", fontFamily: "Jost" }}>
+            <Link to="/" style={{ color: "#0081B8" }}>
               Cadastre-se agora.
             </Link>
           </p>
