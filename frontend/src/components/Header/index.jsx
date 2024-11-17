@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../auth/Context";
 import { useNavigate } from 'react-router-dom'; 
 import logoutIcon from "../../assets/svg/logout.svg"
+import { toast } from "react-toastify";
 
 export default function Header() {
   const { token, role, logout } = useContext(AuthContext);
@@ -15,6 +16,7 @@ export default function Header() {
       await logout();
       navigate('/login'); 
     } catch (e) {
+      toast.warning('Erro ao desconectar usuário!')
       console.log('Erro ao desconectar usuário -> ', e);
     }
   };
