@@ -31,18 +31,20 @@ export default function Conselho() {
     
     const handleButtonClick = async () => {
         const addText = document.getElementById("add-notes-input").value.trim();
+        console.log(addText);
         if (addText !== "") {
             try {
                 if (!userId) {
                     throw new Error("Usuário não encontrado ou não logado.");
                 }
+                console.log({ advice: addText, userId });
 
-                const newAdvice = await createADvice(token, { 
+                const adviceData = await createADvice({ 
                     advice: addText, 
-                    userId: userId 
+                    // userId: userId 
                 }); 
 
-                setNotesList((prevNotes) => [...prevNotes, newAdvice]);
+                setNotesList((prevNotes) => [...prevNotes, adviceData]);
                 document.getElementById("add-notes-input").value = "";
                 toast.success("Conselho publicado com sucesso!");
             } catch (error) {

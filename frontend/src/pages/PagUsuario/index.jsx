@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from '../../auth/Context';
+import { findContext, updateUser } from "../../api/user";
 
-const EditProfile = () => {
+const PagUsuario = () => {
+  const {userId} = useContext(AuthContext);
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -13,24 +16,13 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        setLoading(true);
-        const response = await fetch("/api/users/me", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await findContext();
 
-        if (!response.ok) {
-          throw new Error("Erro ao carregar dados do usuário");
-        }
-
-        const data = await response.json();
+        const data = await response;
         setUserData(data);
       } catch (err) {
         setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
 
     fetchUserData();
@@ -44,20 +36,9 @@ const EditProfile = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("/api/users/me", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        throw new Error("Erro ao atualizar os dados");
-      }
-
-      setSuccess("Dados atualizados com sucesso!");
+      const response = await updateUser(userId, userData);
+    
+     setSuccess("Dados atualizados com sucesso!");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -125,4 +106,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default PagUsuario;
