@@ -27,7 +27,6 @@ export default function Cadastro() {
     e.preventDefault();
     try {
       const responseApi = await createUser({ nome, email, password });
-      console.log(responseApi);
       if (responseApi.id) {
         toast.success("Cadastro realizado com sucesso!");
         navigate("/login");
@@ -36,7 +35,6 @@ export default function Cadastro() {
         toast.error("Erro ao realizar o cadastro, tente novamente.");
       }
     } catch (error) {
-      console.log(error);
       if (error.status === 403) {
         toast.dark("Sem permissão.");
       } else if (error.status === 401 || error.status === 404) {
@@ -70,7 +68,7 @@ export default function Cadastro() {
         <div id="line"></div>
         <div id="componentes">
           <form className="signup-form" onSubmit={handleSubmit}>
-            <p className="campos">Informe o seu nome</p>
+            <p className="camposCadastro">Informe o seu nome</p>
             <input
               type="text"
               id="nome"
@@ -80,7 +78,7 @@ export default function Cadastro() {
               placeholder="Digite o seu nome"
             />
 
-            <p className="campos">Informe o seu e-mail</p>
+            <p className="camposCadastro">Informe o seu e-mail</p>
             <input
               type="email"
               id="email"
@@ -91,7 +89,7 @@ export default function Cadastro() {
             />
 
 
-            <p className="campos">Crie uma senha</p>
+            <p className="camposCadastro">Crie uma senha</p>
             <div id="password-container">
               <input
                 type={show ? "text" : "password"}

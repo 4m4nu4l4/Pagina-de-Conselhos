@@ -68,7 +68,7 @@ export default function Login() {
         </div>
         <div id="line"></div>
         <div id="componentes">
-          <p className="campos">Informe o seu e-mail</p>
+          <p className="camposLogin">Informe o seu e-mail</p>
           <input
             type="text"
             name=""
@@ -77,7 +77,7 @@ export default function Login() {
             id="email"
             placeholder="digite o e-mail"
           />
-          <p className="campos">Informe a sua senha</p>
+          <p className="camposLogin">Informe a sua senha</p>
           <div id="password-container">
             <input
               type={show ? "text" : "password"}

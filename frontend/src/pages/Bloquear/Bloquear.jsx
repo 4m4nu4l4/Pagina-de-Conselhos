@@ -19,7 +19,7 @@ export default function Bloquear() {
         try {
             const response = await blockUser(id);
             if (response.message) {
-                console.log('Usuário Bloqueado!');
+                toast.success('Usuário bloqueado com sucesso!')
                 setUsers(prevUsers =>
                     prevUsers.map(user =>
                         user.id === id ? { ...user, bloqueado: true } : user
@@ -41,7 +41,7 @@ export default function Bloquear() {
         try {
             const response = await unblock(id);
             if (response.message) {
-                console.log('Usuário Desbloqueado!');
+                toast.success('Usuário desbloqueado com sucesso!')
                 setUsers(prevUsers =>
                     prevUsers.map(user =>
                         user.id === id ? { ...user, bloqueado: false } : user
@@ -68,7 +68,6 @@ export default function Bloquear() {
         e.preventDefault();
         try {
             const response = await updateUser(editingUser.id, updatedData);
-            console.log(response)
             toast.success("Usuário atualizado com sucesso.");
         } catch (error) {
             if (error.response && error.response.status === 403) {
@@ -91,16 +90,14 @@ export default function Bloquear() {
         e.preventDefault();
         try {
             const responseApi = await createAdmin({ nome, email, password });
-            console.log(responseApi);
             if (responseApi.id) {
                 toast.success("Cadastro realizado com sucesso!");
-                // navigate("/login");
+                location.reload();
             } else {
                 setError("Ocorreu um erro inesperado, tente novamente.");
                 toast.error("Erro ao realizar o cadastro, tente novamente.");
             }
         } catch (error) {
-            console.log(error);
             if (error.status === 403) {
                 toast.dark("Sem permissão.");
             } else if (error.status === 401 || error.status === 404) {
@@ -123,11 +120,9 @@ export default function Bloquear() {
 
             try {
                 const data = await findUsers();
-                console.log(data)
                 setUsers(data);
             } catch (error) {
-                console.error("Erro ao buscar usuários:", error.response?.data || error.message);
-                alert("Não foi possível carregar os usuários. Verifique a conexão ou entre em contato com o suporte.");
+                toast.dark("Não foi possível carregar os usuários. Verifique a conexão ou entre em contato com o suporte.");
             }
         };
 
@@ -148,7 +143,7 @@ export default function Bloquear() {
 
                 {showAdminForm && (
                     <div id="formAdmin">
-                        <form>
+                        <form onSubmit={handleSubmitAdmin}>
                             <p className="campos">Informe o nome do usuário Admin</p>
                             <input
                                 type="text"
@@ -176,7 +171,7 @@ export default function Bloquear() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Digite a senha do usuário Admin"
                             />
-                            <button id="cadastroAdmin" onSubmit={handleSubmitAdmin}>Cadastrar</button>
+                            <button id="cadastroAdmin" type="submit">Cadastrar</button>
                         </form>
                     </div>
                 )}

@@ -3,7 +3,7 @@ import './App.css'
 import Header from './components/Header'
 import { Route, Routes, useLocation } from "react-router-dom"
 import CardDiario from './pages/Card-Diario'
-import CardCategoria from './pages/Card-Categoria'
+// import CardCategoria from './pages/Card-Categoria'
 import CardAleatorio from './pages/Card-Aleatorio'
 import CardMensal from './pages/Card-Mensal'
 import Conselho from './pages/Conselho'
@@ -31,6 +31,7 @@ function App() {
             <Route path="/login" element={<Login />} />
               <Route path="/" element={<Cadastro />} />
               <Route element={<PrivateRoute />}>
+                {/* <Route path="/categoria" element={<CardCategoria/>}></Route> */}
                 <Route path="/categoria" element={<CardCategoria/>}/>
                 <Route path="/diario" element={<CardDiario/>}/>
                 <Route path="/aleatorio" element={<CardAleatorio/>}/>

@@ -13,7 +13,6 @@ export default function CardAleatorio() {
     setLoading(true);
     try {
       const data = await getOneAdvice();
-      console.log('Dados recebidos: ', data)
       if (data && data.advice) {
         const traduzido = await translate(data.advice, 'pt');
         setAdvice(traduzido); 
@@ -23,7 +22,6 @@ export default function CardAleatorio() {
         throw new Error('Estrutura de dados inesperada');
       }
     } catch (error) {
-      console.error("Erro na requisição:", error.message);
       toast.dismiss();
       toast.error("Erro ao carregar os conselho aleatório. Tente novamente!");
     } finally {
