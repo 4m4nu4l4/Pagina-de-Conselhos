@@ -92,7 +92,7 @@ export default function Bloquear() {
             const responseApi = await createAdmin({ nome, email, password });
             if (responseApi.id) {
                 toast.success("Cadastro realizado com sucesso!");
-                // navigate("/login");
+                location.reload();
             } else {
                 setError("Ocorreu um erro inesperado, tente novamente.");
                 toast.error("Erro ao realizar o cadastro, tente novamente.");
@@ -143,7 +143,7 @@ export default function Bloquear() {
 
                 {showAdminForm && (
                     <div id="formAdmin">
-                        <form>
+                        <form onSubmit={handleSubmitAdmin}>
                             <p className="campos">Informe o nome do usuário Admin</p>
                             <input
                                 type="text"
@@ -171,7 +171,7 @@ export default function Bloquear() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Digite a senha do usuário Admin"
                             />
-                            <button id="cadastroAdmin" onSubmit={handleSubmitAdmin}>Cadastrar</button>
+                            <button id="cadastroAdmin" type="submit">Cadastrar</button>
                         </form>
                     </div>
                 )}
