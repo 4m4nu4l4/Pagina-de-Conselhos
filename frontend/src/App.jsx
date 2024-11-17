@@ -16,6 +16,7 @@ import PrivateRoute from './routes/PrivateRoute'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Bloquear from './pages/Bloquear/Bloquear'
+import PagUsuario from './pages/PagUsuario'
 
 function App() {
   const location = useLocation();
@@ -31,12 +32,14 @@ function App() {
               <Route path="/" element={<Cadastro />} />
               <Route element={<PrivateRoute />}>
                 {/* <Route path="/categoria" element={<CardCategoria/>}></Route> */}
-                <Route path="/diario" element={<CardDiario/>}></Route>
-                <Route path="/aleatorio" element={<CardAleatorio/>}></Route>
-                <Route path="/mensal" element={<CardMensal/>}></Route>
-                <Route path="/conselho" element={<Conselho/>}></Route>
-                <Route path='/bloquear' element={<Bloquear/>}></Route>
+                <Route path="/categoria" element={<CardCategoria/>}/>
+                <Route path="/diario" element={<CardDiario/>}/>
+                <Route path="/aleatorio" element={<CardAleatorio/>}/>
+                <Route path="/mensal" element={<CardMensal/>}/>
+                <Route path="/conselho" element={<Conselho/>}/>
+                <Route path='/bloquear' element={<Bloquear/>}/>
                 <Route path="/sobre" element={<Sobre />} />
+                <Route path="/perfil" element={<PagUsuario/>} />
               </Route>
           </Routes>
         </div>
