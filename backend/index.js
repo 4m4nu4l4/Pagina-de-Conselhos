@@ -48,7 +48,7 @@ app.listen(3000, () => {
     console.log("Conexão com o banco de dados estabelecida com sucesso.");
     
     // Sincronize os modelos com o banco de dados (apenas para teste)
-    await database.db.sync({ force: false }); // Isso recria as tabelas
+    await database.db.sync({ force: true }); // Isso recria as tabelas
     console.log("Modelos sincronizados com sucesso.");
   } catch (error) {
     console.error("Erro ao conectar ao banco de dados:", error);
