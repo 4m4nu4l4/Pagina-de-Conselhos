@@ -16,10 +16,10 @@ export const updateUser = async (id, user) => {
     return response.data
 }
 export const deleteUser = async (id) => {
-    return api.delete(`/api/v1/user/{id}`)
+    return api.delete(`/api/v1/user/${id}`)
 }
-export const findContext = async (id) => {
-    const response = await api.get(`/api/v1/user/{id}`)
+export const findContext = async () => {
+    const response = await api.get(`/api/v1/user/context`)
     return response.data
 }
 export const findUsers = async () => {

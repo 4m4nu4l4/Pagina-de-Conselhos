@@ -63,6 +63,7 @@ class UserController {
       throw new Error("Id é obrigatório.");
     }
     const userValue = await user.findByPk(id);
+    
     if (!userValue) {
       throw new Error("Usuário não encontrado.");
     }
@@ -70,7 +71,9 @@ class UserController {
   }
 
   async update(id, nome, email) {
-    const oldUser = await user.findByPk(id);
+    console.log(id, nome, email)
+    const oldUser = await this.findUser(id);
+    console.log(oldUser)
     if (email) {
       const sameEmail = await user.findOne({ where: { email } });
       if (sameEmail && sameEmail.id !== id) {
@@ -79,6 +82,7 @@ class UserController {
     }
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
+    oldUser.password = oldUser.password;
     oldUser.save();
     return oldUser;
   }

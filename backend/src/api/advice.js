@@ -16,7 +16,9 @@ class AdviceApi {
         try {
             const { advice } = req.body;
             const userId = req.session.id;
+            console.log(userId,req.session);
             const newAdvice = await AdviceController.createAdvice(advice, userId);
+            console.log(newAdvice);
             return res.status(201).json(newAdvice);
         } catch (error) {
             console.error("Erro ao criar conselho:", error.message);
