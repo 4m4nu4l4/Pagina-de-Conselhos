@@ -32,7 +32,7 @@ function App() {
               <Route path="/" element={<Cadastro />} />
               <Route element={<PrivateRoute />}>
                 {/* <Route path="/categoria" element={<CardCategoria/>}></Route> */}
-                <Route path="/categoria" element={<CardCategoria/>}/>
+                {/* <Route path="/categoria" element={<CardCategoria/>}/> */}
                 <Route path="/diario" element={<CardDiario/>}/>
                 <Route path="/aleatorio" element={<CardAleatorio/>}/>
                 <Route path="/mensal" element={<CardMensal/>}/>
