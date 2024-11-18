@@ -1,36 +1,36 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getAllAdvice, createADvice, updateAdvice, deleteAdvice } from "../../api/advice"; // !!!!!!!!!!!!
-import { AuthContext } from "../../auth/Context"; 
-import { toast } from "react-toastify"; 
-import "./styles.css"; 
-import notes from "../../assets/svg/notes.svg"; 
+import { getAllAdvice, createADvice, updateAdvice, deleteAdvice } from "../../api/advice";
+import { AuthContext } from "../../auth/Context";
+import { toast } from "react-toastify";
+import "../Conselho/styles.css";
+import notes from "../../assets/svg/notes.svg";
 
 export default function Conselho() {
     const [showForm, setShowForm] = useState(false);
     const [notesList, setNotesList] = useState([]);
-    const [editingAdvice, setEditingAdvice] = useState(null); // !!!!!!!!!!!!
-    const [editingText, setEditingText] = useState(""); // !!!!!!!!!!!!
-    const { token, userId } = useContext(AuthContext); 
+    const [editingAdvice, setEditingAdvice] = useState(null);
+    const [editingText, setEditingText] = useState("");
+    const { token, userId } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAdvices = async () => {
             try {
                 if (!token) throw new Error("Token não disponível.");
-                const response = await getAllAdvice(token); 
-                setNotesList(response); 
+                const response = await getAllAdvice(token);
+                setNotesList(response);
             } catch (error) {
                 console.error("Erro ao buscar conselhos:", error);
                 toast.error("Erro ao buscar conselhos.");
             }
         };
 
-        fetchAdvices(); 
+        fetchAdvices();
     }, [token]);
 
     const toggleForm = () => {
-        setShowForm(!showForm); 
+        setShowForm(!showForm);
     };
-    
+
     const handleButtonClick = async () => {
         const addText = document.getElementById("add-notes-input").value.trim();
         if (addText !== "") {
@@ -39,9 +39,9 @@ export default function Conselho() {
                     throw new Error("Usuário não encontrado ou não logado.");
                 }
 
-                const adviceData = await createADvice({ 
-                    advice: addText, 
-                }); 
+                const adviceData = await createADvice({
+                    advice: addText,
+                });
 
                 setNotesList((prevNotes) => [...prevNotes, adviceData]);
                 document.getElementById("add-notes-input").value = "";
@@ -55,22 +55,21 @@ export default function Conselho() {
         }
     };
 
-    // !!!!!!!!!!!! Editar um conselho
     const handleEditClick = (note) => {
-        setEditingAdvice(note.id); 
-        setEditingText(note.advice); 
+        setEditingAdvice(note.id);
+        setEditingText(note.advice);
     };
 
     const handleEditSave = async () => {
         try {
-            const updatedAdvice = await updateAdvice(editingAdvice, editingText, token); 
+            const updatedAdvice = await updateAdvice(editingAdvice, editingText, token);
             setNotesList((prevNotes) =>
                 prevNotes.map((note) =>
                     note.id === editingAdvice ? updatedAdvice : note
                 )
             );
-            setEditingAdvice(null); 
-            setEditingText(""); 
+            setEditingAdvice(null);
+            setEditingText("");
             toast.success("Conselho atualizado com sucesso!");
         } catch (error) {
             console.error("Erro ao atualizar conselho:", error);
@@ -78,10 +77,9 @@ export default function Conselho() {
         }
     };
 
-    // !!!!!!!!!!!! Deletar um conselho
     const handleDeleteClick = async (id) => {
         try {
-            await deleteAdvice(id, token); 
+            await deleteAdvice(id, token);
             setNotesList((prevNotes) => prevNotes.filter((note) => note.id !== id));
             toast.success("Conselho deletado com sucesso!");
         } catch (error) {
@@ -114,21 +112,27 @@ export default function Conselho() {
             <div id="list-notes">
                 {notesList.map((note) => (
                     <div key={note.id} className="note-item">
-                        {editingAdvice === note.id ? ( // !!!!!!!!!!!!
-                            <div> 
+                        {editingAdvice === note.id ? (
+                            <div>
                                 <input
                                     type="text"
                                     value={editingText}
                                     onChange={(e) => setEditingText(e.target.value)}
                                 />
-                                <button onClick={handleEditSave}>Salvar</button>
-                                <button onClick={() => setEditingAdvice(null)}>Cancelar</button>
+                                <button className="save-button" onClick={handleEditSave}>Salvar</button>
+                                <button className="cancel-button" onClick={() => setEditingAdvice(null)}>Cancelar</button>
                             </div>
                         ) : (
                             <>
                                 <p>{note.advice}</p>
-                                <button onClick={() => handleEditClick(note)}>Editar</button> {/* !!!!!!!!!!!! */}
-                                <button onClick={() => handleDeleteClick(note.id)}>Deletar</button> {/* !!!!!!!!!!!! */}
+                                <div className="note-actions">
+                                    <button className="edit-button" onClick={() => handleEditClick(note)}>
+                                        Editar
+                                    </button>
+                                    <button className="delete-button" onClick={() => handleDeleteClick(note.id)}>
+                                        Deletar
+                                    </button>
+                                </div>
                             </>
                         )}
                     </div>
