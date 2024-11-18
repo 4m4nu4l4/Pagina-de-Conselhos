@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getAllAdvice, createADvice } from "../../api/advice"; 
+import { getAllAdvice, createADvice, updateAdvice, deleteAdvice } from "../../api/advice"; // !!!!!!!!!!!!
 import { AuthContext } from "../../auth/Context"; 
 import { toast } from "react-toastify"; 
 import "./styles.css"; 
@@ -8,6 +8,8 @@ import notes from "../../assets/svg/notes.svg";
 export default function Conselho() {
     const [showForm, setShowForm] = useState(false);
     const [notesList, setNotesList] = useState([]);
+    const [editingAdvice, setEditingAdvice] = useState(null); // !!!!!!!!!!!!
+    const [editingText, setEditingText] = useState(""); // !!!!!!!!!!!!
     const { token, userId } = useContext(AuthContext); 
 
     useEffect(() => {
@@ -31,17 +33,14 @@ export default function Conselho() {
     
     const handleButtonClick = async () => {
         const addText = document.getElementById("add-notes-input").value.trim();
-        console.log(addText);
         if (addText !== "") {
             try {
                 if (!userId) {
                     throw new Error("Usuário não encontrado ou não logado.");
                 }
-                console.log({ advice: addText, userId });
 
                 const adviceData = await createADvice({ 
                     advice: addText, 
-                    // userId: userId 
                 }); 
 
                 setNotesList((prevNotes) => [...prevNotes, adviceData]);
@@ -53,6 +52,41 @@ export default function Conselho() {
             }
         } else {
             toast.error("Por favor, insira um conselho.");
+        }
+    };
+
+    // !!!!!!!!!!!! Editar um conselho
+    const handleEditClick = (note) => {
+        setEditingAdvice(note.id); 
+        setEditingText(note.advice); 
+    };
+
+    const handleEditSave = async () => {
+        try {
+            const updatedAdvice = await updateAdvice(editingAdvice, editingText, token); 
+            setNotesList((prevNotes) =>
+                prevNotes.map((note) =>
+                    note.id === editingAdvice ? updatedAdvice : note
+                )
+            );
+            setEditingAdvice(null); 
+            setEditingText(""); 
+            toast.success("Conselho atualizado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao atualizar conselho:", error);
+            toast.error("Erro ao atualizar conselho.");
+        }
+    };
+
+    // !!!!!!!!!!!! Deletar um conselho
+    const handleDeleteClick = async (id) => {
+        try {
+            await deleteAdvice(id, token); 
+            setNotesList((prevNotes) => prevNotes.filter((note) => note.id !== id));
+            toast.success("Conselho deletado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao deletar conselho:", error);
+            toast.error("Erro ao deletar conselho.");
         }
     };
 
@@ -80,7 +114,23 @@ export default function Conselho() {
             <div id="list-notes">
                 {notesList.map((note) => (
                     <div key={note.id} className="note-item">
-                        {note.advice}
+                        {editingAdvice === note.id ? ( // !!!!!!!!!!!!
+                            <div> 
+                                <input
+                                    type="text"
+                                    value={editingText}
+                                    onChange={(e) => setEditingText(e.target.value)}
+                                />
+                                <button onClick={handleEditSave}>Salvar</button>
+                                <button onClick={() => setEditingAdvice(null)}>Cancelar</button>
+                            </div>
+                        ) : (
+                            <>
+                                <p>{note.advice}</p>
+                                <button onClick={() => handleEditClick(note)}>Editar</button> {/* !!!!!!!!!!!! */}
+                                <button onClick={() => handleDeleteClick(note.id)}>Deletar</button> {/* !!!!!!!!!!!! */}
+                            </>
+                        )}
                     </div>
                 ))}
             </div>
