@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from '../../auth/Context';
 import { findContext, updateUser } from "../../api/user";
+import '../PagUsuario/styles.css';
+
 
 const PagUsuario = () => {
   const {userId} = useContext(AuthContext);
@@ -57,7 +59,7 @@ const PagUsuario = () => {
 
   return (
     <div className="edit-profile-container">
-      <h1>Edit Profile</h1>
+      <h1>Edite seu perfil aqui</h1>
 
       {loading && <p>Carregando...</p>}
       {error && <p className="error">{error}</p>}
@@ -65,7 +67,7 @@ const PagUsuario = () => {
 
       <form onSubmit={handleUpdate}>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Nome:</label>
           <input
             type="text"
             id="username"
@@ -88,7 +90,7 @@ const PagUsuario = () => {
           />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label htmlFor="bio">Bio:</label>
           <textarea
             id="bio"
@@ -96,7 +98,7 @@ const PagUsuario = () => {
             value={userData.bio}
             onChange={handleChange}
           />
-        </div>
+        </div> */}
 
         <button type="submit" disabled={loading}>
           {loading ? "Atualizando..." : "Salvar Alterações"}
