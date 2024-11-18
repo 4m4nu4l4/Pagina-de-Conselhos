@@ -76,7 +76,7 @@ class AdviceController {
     
     async createAdvice(advice, userId) {
         try {
-            const newAdvice = await adviceModel.create({ advice: advice, userId: userId });
+            const newAdvice = await adviceModel.create({ advice: advice, userId: 1 });
             console.log(newAdvice);
             return newAdvice;
         } catch (error) {

@@ -1,48 +1,47 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getAllAdvice, createADvice } from "../../api/advice"; 
-import { AuthContext } from "../../auth/Context"; 
-import { toast } from "react-toastify"; 
-import "./styles.css"; 
-import notes from "../../assets/svg/notes.svg"; 
+import { getAllAdvice, createADvice, updateAdvice, deleteAdvice } from "../../api/advice";
+import { AuthContext } from "../../auth/Context";
+import { toast } from "react-toastify";
+import "../Conselho/styles.css";
+import notes from "../../assets/svg/notes.svg";
 
 export default function Conselho() {
     const [showForm, setShowForm] = useState(false);
     const [notesList, setNotesList] = useState([]);
-    const { token, userId } = useContext(AuthContext); 
+    const [editingAdvice, setEditingAdvice] = useState(null);
+    const [editingText, setEditingText] = useState("");
+    const { token, userId } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchAdvices = async () => {
             try {
                 if (!token) throw new Error("Token não disponível.");
-                const response = await getAllAdvice(token); 
-                setNotesList(response); 
+                const response = await getAllAdvice(token);
+                setNotesList(response);
             } catch (error) {
                 console.error("Erro ao buscar conselhos:", error);
                 toast.error("Erro ao buscar conselhos.");
             }
         };
 
-        fetchAdvices(); 
+        fetchAdvices();
     }, [token]);
 
     const toggleForm = () => {
-        setShowForm(!showForm); 
+        setShowForm(!showForm);
     };
-    
+
     const handleButtonClick = async () => {
         const addText = document.getElementById("add-notes-input").value.trim();
-        console.log(addText);
         if (addText !== "") {
             try {
                 if (!userId) {
                     throw new Error("Usuário não encontrado ou não logado.");
                 }
-                console.log({ advice: addText, userId });
 
-                const adviceData = await createADvice({ 
-                    advice: addText, 
-                    // userId: userId 
-                }); 
+                const adviceData = await createADvice({
+                    advice: addText,
+                });
 
                 setNotesList((prevNotes) => [...prevNotes, adviceData]);
                 document.getElementById("add-notes-input").value = "";
@@ -53,6 +52,39 @@ export default function Conselho() {
             }
         } else {
             toast.error("Por favor, insira um conselho.");
+        }
+    };
+
+    const handleEditClick = (note) => {
+        setEditingAdvice(note.id);
+        setEditingText(note.advice);
+    };
+
+    const handleEditSave = async () => {
+        try {
+            const updatedAdvice = await updateAdvice(editingAdvice, editingText, token);
+            setNotesList((prevNotes) =>
+                prevNotes.map((note) =>
+                    note.id === editingAdvice ? updatedAdvice : note
+                )
+            );
+            setEditingAdvice(null);
+            setEditingText("");
+            toast.success("Conselho atualizado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao atualizar conselho:", error);
+            toast.error("Erro ao atualizar conselho.");
+        }
+    };
+
+    const handleDeleteClick = async (id) => {
+        try {
+            await deleteAdvice(id, token);
+            setNotesList((prevNotes) => prevNotes.filter((note) => note.id !== id));
+            toast.success("Conselho deletado com sucesso!");
+        } catch (error) {
+            console.error("Erro ao deletar conselho:", error);
+            toast.error("Erro ao deletar conselho.");
         }
     };
 
@@ -80,7 +112,29 @@ export default function Conselho() {
             <div id="list-notes">
                 {notesList.map((note) => (
                     <div key={note.id} className="note-item">
-                        {note.advice}
+                        {editingAdvice === note.id ? (
+                            <div>
+                                <input
+                                    type="text"
+                                    value={editingText}
+                                    onChange={(e) => setEditingText(e.target.value)}
+                                />
+                                <button className="save-button" onClick={handleEditSave}>Salvar</button>
+                                <button className="cancel-button" onClick={() => setEditingAdvice(null)}>Cancelar</button>
+                            </div>
+                        ) : (
+                            <>
+                                <p>{note.advice}</p>
+                                <div className="note-actions">
+                                    <button className="edit-button" onClick={() => handleEditClick(note)}>
+                                        Editar
+                                    </button>
+                                    <button className="delete-button" onClick={() => handleDeleteClick(note.id)}>
+                                        Deletar
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 ))}
             </div>
