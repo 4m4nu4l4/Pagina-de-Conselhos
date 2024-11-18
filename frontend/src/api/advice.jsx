@@ -10,7 +10,7 @@ export const createADvice = async (adviceData) => {
 // !!!!!!!!!!!! Função atualizada para corrigir o método HTTP e aceitar o token de autenticação
 export const updateAdvice = async (id, advice, token) => {
     try {
-        const response = await api.patch(
+        const response = await api.put(
             `/api/v1/advice/${id}`, // Método PATCH para atualizar
             { advice }, // Dados do conselho
             {

@@ -61,6 +61,9 @@ const PagUsuario = () => {
     <div className="edit-profile-container">
       <h1>Edite seu perfil aqui</h1>
 
+      <p style={{textAlign: 'center'}}>Esta tela é responsável pela edição das informações do usuário</p>
+      <p style={{textAlign: 'center', color: 'red'}}>Você poderá editar informações, como: nome do usuário e o e-mail utilizado dentro do sistema!</p>
+
       {loading && <p>Carregando...</p>}
       {error && <p className="error">{error}</p>}
       {success && <p className="success">{success}</p>}
