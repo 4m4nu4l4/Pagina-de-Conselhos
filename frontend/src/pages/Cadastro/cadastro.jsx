@@ -106,7 +106,7 @@ export default function Cadastro() {
             <button id="button-cadastro" type="submit">
               Cadastre-se
             </button>
-            <p id="login-link">
+            <p id="login-link" style={{marginTop: '5px'}}>
               Se você já está cadastrado, não se preocupe! Você pode acessar sua
               conta{" "}
               <Link to="/login" style={{ color: "#0081B8" }}>
