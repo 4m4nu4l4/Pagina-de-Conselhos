@@ -64,11 +64,11 @@
   cursor: pointer;
 }
 
-/* Botões individuais */
 .edit-button {
-  background-color: #3498db;
+  background-color: #82bee6;
+  width: 80px;
   color: #fff;
-  padding: 5px 10px;
+  padding: 5px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -81,9 +81,11 @@
 }
 
 .delete-button {
-  background-color: #e74c3c;
+  background-color: #e1978e;
+  width: 80px;
   color: #fff;
-  padding: 5px 10px;
+  padding: 5px;
+  margin-left: 5px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -97,8 +99,10 @@
 
 .save-button {
   background-color: #2ecc71;
+  width: 80px;
+  margin-top: 8px;
   color: #fff;
-  padding: 5px 10px;
+  padding: 5px;
   font-size: 14px;
   border: none;
   border-radius: 5px;
@@ -112,8 +116,11 @@
 
 .cancel-button {
   background-color: #95a5a6;
+  width: 80px;
+  margin-left: 5px;
+  margin-top: 8px;
   color: #fff;
-  padding: 5px 10px;
+  padding: 5px;
   font-size: 14px;
   border: none;
   border-radius: 5px;

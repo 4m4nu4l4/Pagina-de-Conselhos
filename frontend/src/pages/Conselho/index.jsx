@@ -118,6 +118,7 @@ export default function Conselho() {
                                     type="text"
                                     value={editingText}
                                     onChange={(e) => setEditingText(e.target.value)}
+                                    style={{marginTop: '15px'}}
                                 />
                                 <button className="save-button" onClick={handleEditSave}>Salvar</button>
                                 <button className="cancel-button" onClick={() => setEditingAdvice(null)}>Cancelar</button>
