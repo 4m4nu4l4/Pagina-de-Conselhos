@@ -1,5 +1,3 @@
-Aqui está o README atualizado com a informação sobre o primeiro acesso ao sistema:
-
 ---
 
 # Página de Conselhos 💡
