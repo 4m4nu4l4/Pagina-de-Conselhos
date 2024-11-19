@@ -103,7 +103,7 @@ const PagUsuario = () => {
           />
         </div> */}
 
-        <button type="submit" disabled={loading}>
+        <button id="buttonPag" type="submit" disabled={loading}>
           {loading ? "Atualizando..." : "Salvar Alterações"}
         </button>
       </form>

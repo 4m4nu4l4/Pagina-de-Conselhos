@@ -40,7 +40,7 @@
   transform: translateY(-10px);
 }
 
-button {
+#buttonAleatorio {
   background-color: #5D4037;
   color: #fff;
   border: none;
@@ -51,7 +51,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+#buttonAleatorio:hover {
   background-color: #bc7aaf;
 }
 
@@ -60,26 +60,28 @@ p {
   color: #333;
   margin: 20px 0;
 }
+
 #display-aleatorio {
   display: grid;
-  grid-template-columns: 1fr 2fr; 
-  gap: 10px; 
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
   /* padding: 20px; */
   box-sizing: border-box;
   /* margin-top: 0px; */
 }
+
 #img {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 100%; 
+  max-width: 100%;
   max-height: 100%;
 }
-#img img {
-  width: 100%; 
-  height: auto; 
-  max-width: 350px; 
-}
 
+#img img {
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+}
