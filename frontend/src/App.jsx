@@ -53,7 +53,7 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          style={{ width: '50%' }}
+          style={{ width: '50%', textAlign: 'center' }}
         />
         {!ocultarElementos && <Footer />}
       </div>

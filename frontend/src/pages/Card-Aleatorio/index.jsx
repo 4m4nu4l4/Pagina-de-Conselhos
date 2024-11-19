@@ -45,7 +45,7 @@ export default function CardAleatorio() {
         ) : (
           <p>{advice}</p>
         )}
-        <button onClick={fetchOneAdvice} disabled={loading}>
+        <button id="buttonAleatorio" onClick={fetchOneAdvice} disabled={loading}>
           {loading ? "Carregando..." : "Gerar Nova Frase"}
         </button>
       </div>
