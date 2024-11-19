@@ -9,7 +9,7 @@ app.post("/api/v1/user", UserApi.createUser);
 // função para criar usuário e enviar para o backend (depois precisa fazer conforme o nível do usuário)
 export const createUser = async (user) => {
     const response = await api.post('/api/v1/user', user)
-    return response.data // pega o endpoint e envia uma req com o objeto de usuários
+    return response.data 
 }
 export const updateUser = async (id, user) => {
     const response = await api.put(`/api/v1/user/${id}`, user)

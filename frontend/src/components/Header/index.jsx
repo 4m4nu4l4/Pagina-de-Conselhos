@@ -2,7 +2,7 @@ import "./styles.css";
 import { Link, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../auth/Context";
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import logoutIcon from "../../assets/svg/logout.svg"
 import { toast } from "react-toastify";
 import profileIcon from "../../assets/imgs/user.png";
@@ -99,16 +99,6 @@ export default function Header() {
             </Link>
           )}
 
-          {token && (
-            <Link
-              to="/perfil"
-              className="menu-link"
-              style={{ textDecoration: "none" }}
-            >
-            <img src={profileIcon}/>
-            </Link>
-          )}
-
           {token && role === "admin" && (
             <Link
               to="/bloquear"
@@ -116,6 +106,16 @@ export default function Header() {
               style={{ textDecoration: "none" }}
             >
               <p id="cadastrar-regra">Gestão de Usuários</p>
+            </Link>
+          )}
+
+          {token && (
+            <Link
+              to="/perfil"
+              className="menu-link"
+              style={{ textDecoration: "none" }}
+            >
+              <img src={profileIcon} />
             </Link>
           )}
 

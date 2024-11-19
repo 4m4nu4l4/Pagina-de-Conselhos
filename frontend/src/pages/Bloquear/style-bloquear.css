@@ -88,11 +88,16 @@
 }
 
 .bloquear {
-    width: 150px;
-    /* height: 80px; */
-    padding: 5px;
-    text-align: center;
     background-color: #b0419e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #bloquear {
@@ -118,15 +123,17 @@
 }
 
 #formButton {
-    width: 150px;
-    /* height: 80px; */
-    padding: 5px;
-    text-align: center;
     background-color: #b0419e;
-}
-
-#labelEmail {
-    margin-left: 15px;
+    color: #fff;
+    width: 300px;
+    border: none;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .input {
@@ -178,25 +185,25 @@
     border-color: #495057;
 }
 
-#formAdmin button {
+#adminButton, #cadastroAdmin {
     background-color: #b0419e;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 10px;
     border-radius: 10px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 500;
     text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#formAdmin button:hover {
+#adminButton:hover {
     background-color: #851c73;
     transform: scale(1.05);
 }
 
-#formAdmin button:active {
+#adminButton:active {
     transform: scale(0.98);
 }
 
