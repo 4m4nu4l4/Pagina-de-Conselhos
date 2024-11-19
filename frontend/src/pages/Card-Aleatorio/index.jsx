@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import carrinho from "../../assets/imgs/carrinho.png";
 import translate from 'translate';
 import { toast } from "react-toastify";
-import { getOneAdvice } from "../../api/advice";
+import { getChangeAdvice } from "../../api/advice";
 
 export default function CardAleatorio() {
   const [advice, setAdvice] = useState("");
@@ -12,7 +12,7 @@ export default function CardAleatorio() {
   const fetchOneAdvice = async () => {
     setLoading(true);
     try {
-      const data = await getOneAdvice();
+      const data = await getChangeAdvice();
       if (data && data.advice) {
         const traduzido = await translate(data.advice, 'pt');
         setAdvice(traduzido); 

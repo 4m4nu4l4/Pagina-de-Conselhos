@@ -199,10 +199,11 @@ export default function Bloquear() {
                 {editingUser && (
                     <form id="form" onSubmit={handleUpdateSubmit}>
                         <p>Editar Usuário</p>
+                        <p style={{fontSize: 'small', color: 'red'}}>Lembre-se que é necessário alterar o nome e o e-mail do usuário</p>
                         <label>
                             Nome:
                             <input
-                                className="input"
+                                className="inputBloquear"
                                 type="text"
                                 value={updatedData.nome}
                                 onChange={(e) => setUpdatedData({ ...updatedData, nome: e.target.value })}
@@ -212,7 +213,7 @@ export default function Bloquear() {
                         <label id="labelEmail">
                             Email:
                             <input
-                                className="input"
+                                className="inputBloquear"
                                 type="email"
                                 value={updatedData.email}
                                 onChange={(e) => setUpdatedData({ ...updatedData, email: e.target.value })}

@@ -70,6 +70,17 @@ class AdviceApi {
         }
     }
 
+    async getChangeAdvice(req, res) {
+        try {
+            console.log ("batata");
+            const changeAdvice = await AdviceController.getChangeAdvice();
+            return res.status(200).json(changeAdvice);
+        } catch (error) {
+            console.error("Erro ao buscar um conselho:", error.message);
+            return res.status(400).json({ error: error.message });
+        }
+    }
+
     
     async updateAdvice(req, res) {
         try {

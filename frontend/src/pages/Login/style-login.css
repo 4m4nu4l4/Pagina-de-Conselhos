@@ -72,8 +72,10 @@
     width: 340px;
     height: 40px;
     padding: 0;
+    border: none;
+    border-radius: 10px;
     text-align: center;
-    margin-top: 35px;
+    margin-top: 10px;
     font-weight: 500;
 }
 

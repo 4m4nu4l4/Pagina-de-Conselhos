@@ -6,12 +6,10 @@ const UserRouter = require("./src/routes/user");
 const AdviceApi = require("./src/api/advice");
 const AdviceRouter = require('./src/routes/advice');
 const authMiddleware = require("./src/middleware/auth");
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// const {session}
 
 const app = express();
 app.use(express.json());
-app.use(cors({credentials: true})); //podemos informar métodos, urls que deveram ser aceitos
+app.use(cors({credentials: true}));
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "OK" });
@@ -44,11 +42,10 @@ app.listen(3000, () => {
 
 (async () => {
   try {
-    await database.db.authenticate(); // Teste a conexão
+    await database.db.authenticate(); 
     console.log("Conexão com o banco de dados estabelecida com sucesso.");
     
-    // Sincronize os modelos com o banco de dados (apenas para teste)
-    await database.db.sync({ force: false }); // Isso recria as tabelas
+    await database.db.sync({ force: false }); 
     console.log("Modelos sincronizados com sucesso.");
   } catch (error) {
     console.error("Erro ao conectar ao banco de dados:", error);

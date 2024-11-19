@@ -11,18 +11,18 @@ export const createADvice = async (adviceData) => {
 export const updateAdvice = async (id, advice, token) => {
     try {
         const response = await api.put(
-            `/api/v1/advice/${id}`, // Método PATCH para atualizar
-            { advice }, // Dados do conselho
+            `/api/v1/advice/${id}`, 
+            { advice }, 
             {
                 headers: {
-                    Authorization: `Bearer ${token}`, // Token de autenticação
+                    Authorization: `Bearer ${token}`, 
                 },
             }
         );
-        return response.data; // Retorna os dados atualizados
+        return response.data; 
     } catch (error) {
-        console.error("Erro ao atualizar conselho:", error); // Log do erro para depuração
-        throw error; // Repassa o erro para o chamador
+        console.error("Erro ao atualizar conselho:", error); 
+        throw error; 
     }
 };
 
@@ -59,6 +59,12 @@ export const getMonthAdvice = async () => {
 
 export const getOneAdvice = async () => {
     const response = await api.get('/api/v1/advice/get/one');
+    console.log(response);
+    return response.data;
+};
+
+export const getChangeAdvice = async () => {
+    const response = await api.get('/api/v1/advice/get/change');
     console.log(response);
     return response.data;
 };

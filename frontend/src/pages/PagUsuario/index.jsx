@@ -5,9 +5,9 @@ import '../PagUsuario/styles.css';
 
 
 const PagUsuario = () => {
-  const {userId} = useContext(AuthContext);
+  const { userId } = useContext(AuthContext);
   const [userData, setUserData] = useState({
-    username: "",
+    nome: "",
     email: "",
   });
   const [loading, setLoading] = useState(false);
@@ -21,10 +21,11 @@ const PagUsuario = () => {
         const response = await findContext();
 
         const data = await response;
-        setUserData(data);
+
+        setUserData(data)
       } catch (err) {
         setError(err.message);
-      } 
+      }
     };
 
     fetchUserData();
@@ -39,8 +40,8 @@ const PagUsuario = () => {
     try {
       setLoading(true);
       const response = await updateUser(userId, userData);
-    
-     setSuccess("Dados atualizados com sucesso!");
+
+      setSuccess("Dados atualizados com sucesso!");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -61,8 +62,11 @@ const PagUsuario = () => {
     <div className="edit-profile-container">
       <h1>Edite seu perfil aqui</h1>
 
-      <p style={{textAlign: 'center'}}>Esta tela é responsável pela edição das informações do usuário</p>
-      <p style={{textAlign: 'center', color: 'red'}}>Você poderá editar informações, como: nome do usuário e o e-mail utilizado dentro do sistema!</p>
+      <p style={{ textAlign: 'center' }}>Esta tela é responsável pela edição das informações do usuário</p>
+      <p style={{ textAlign: 'center', color: 'red' }}>Você poderá editar informações, como: nome do usuário e o e-mail utilizado dentro do sistema!</p>
+
+      <p style={{fontWeight: '600'}}>Nome do usuário: {userData.nome}</p>
+      <p style={{fontWeight: '500'}}>E-mail do usuário: {userData.email}</p>
 
       {loading && <p>Carregando...</p>}
       {error && <p className="error">{error}</p>}
@@ -75,7 +79,7 @@ const PagUsuario = () => {
             type="text"
             id="username"
             name="username"
-            value={userData.username}
+            value={userData.nome}
             onChange={handleChange}
             required
           />
@@ -92,16 +96,6 @@ const PagUsuario = () => {
             required
           />
         </div>
-
-        {/* <div className="form-group">
-          <label htmlFor="bio">Bio:</label>
-          <textarea
-            id="bio"
-            name="bio"
-            value={userData.bio}
-            onChange={handleChange}
-          />
-        </div> */}
 
         <button id="buttonPag" type="submit" disabled={loading}>
           {loading ? "Atualizando..." : "Salvar Alterações"}
