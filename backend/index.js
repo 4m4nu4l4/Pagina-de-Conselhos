@@ -29,8 +29,8 @@ app.post("/api/v1/user", UserApi.createUser);
 
 app.use("/api/v1/user", authMiddleware, UserRouter);
 
-const User = require('../backend/src/model/user'); 
-const Advice = require('../backend/src/model/advice'); 
+const User = require('./src/model/user'); 
+const Advice = require('./src/model/advice'); 
 
 // Defina as associações
 User.hasMany(Advice, { foreignKey: 'userId' });
