@@ -1,5 +1,5 @@
 import "./style-cadastro.css";
-import wish from "../../assets/imgs/WishDaily.png";
+import wish from "../../assets/imgs/wishDaily.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../api/user";
