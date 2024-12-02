@@ -62,7 +62,7 @@ export default function Conselho() {
 
     const handleEditSave = async () => {
         try {
-            const updatedAdvice = await updateAdvice(editingAdvice, editingText, token);
+            const updatedAdvice = await updateAdvice(editingAdvice, editingText);
             setNotesList((prevNotes) =>
                 prevNotes.map((note) =>
                     note.id === editingAdvice ? updatedAdvice : note
@@ -79,7 +79,7 @@ export default function Conselho() {
 
     const handleDeleteClick = async (id) => {
         try {
-            await deleteAdvice(id, token);
+            await deleteAdvice(id);
             setNotesList((prevNotes) => prevNotes.filter((note) => note.id !== id));
             toast.success("Conselho deletado com sucesso!");
         } catch (error) {

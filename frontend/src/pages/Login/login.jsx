@@ -1,5 +1,5 @@
 import "./style-login.css";
-import wish from "../../assets/imgs/WishDaily.png";
+import wish from "../../assets/imgs/wishDaily.png";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../auth/Context";

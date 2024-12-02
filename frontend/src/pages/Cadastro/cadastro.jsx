@@ -1,5 +1,5 @@
 import "./style-cadastro.css";
-import wish from "../../assets/imgs/WishDaily.png";
+import wish from "../../assets/imgs/wishDaily.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../api/user";
@@ -43,8 +43,6 @@ export default function Cadastro() {
         toast.error("Todos os campos devem ser preenchidos!");
       } else if (!validando(email)) {
         toast.info("O email deve ser do Senac.");
-      } else if (!validando_senha(senha)) {
-        toast.warning("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, símbolos e um número.");
       } else {
         toast.dark('Erro inesperado, tente novamente mais tarde!');
       }
