@@ -41,10 +41,10 @@ export default function CardMensal() {
           <p>Carregando conselhos...</p>
         ) : advices.length > 0 ? (
           advices.map((conselho, index) => (
-            <div className="card" key={conselho.id}> {/* Usando conselho.id como chave */}
+            <div className="card" key={conselho.id}> 
               <img src={wish} className="card-image" alt="Ilustração de desejos" loading="lazy" />
               <p className="title-notes">Dia {index + 1}</p>
-              <p>{conselho.advice}</p> {/* Acessando a propriedade 'advice' */}
+              <p>{conselho.advice}</p> 
             </div>
           ))
         ) : (

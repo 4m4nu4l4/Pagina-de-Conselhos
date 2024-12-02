@@ -40,11 +40,30 @@ class UserController {
     }
   }
 
+  async createAdmin(nome, email, password) {
+    if (!nome || !email || !password) {
+      throw new Error("Os campos são obrigatório!");
+    }
+    if (!validando(email)) {
+      throw new Error("O e-mail deve ser do senac");
+    } else {
+      const cypherSenha = await bcrypt.hash(String(password), SALT_VALUE);
+      const userValue = await user.create({
+        nome,
+        email,
+        password: cypherSenha,
+        permissao: "admin"
+      });
+      return userValue;
+    }
+  }
+
   async findUser(id) {
     if (id === undefined) {
       throw new Error("Id é obrigatório.");
     }
     const userValue = await user.findByPk(id);
+    
     if (!userValue) {
       throw new Error("Usuário não encontrado.");
     }
@@ -52,7 +71,9 @@ class UserController {
   }
 
   async update(id, nome, email) {
-    const oldUser = await user.findByPk(id);
+    console.log(id, nome, email)
+    const oldUser = await this.findUser(id);
+    console.log(oldUser)
     if (email) {
       const sameEmail = await user.findOne({ where: { email } });
       if (sameEmail && sameEmail.id !== id) {
@@ -61,6 +82,7 @@ class UserController {
     }
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
+    oldUser.password = oldUser.password;
     oldUser.save();
     return oldUser;
   }
@@ -88,6 +110,9 @@ class UserController {
     console.log(userValue)
     if (!userValue) {
       throw new Error("[1] Usuário e password inválidos.");
+    }
+    if (userValue.bloqueado === 1) {
+      throw new Error("[3] Usuáro bloqueado não pode realizar o login.");
     }
     const passwordValida = bcrypt.compare(String(password), userValue.password);
     if (!passwordValida) {

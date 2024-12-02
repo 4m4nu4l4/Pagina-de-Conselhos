@@ -9,17 +9,17 @@ app.post("/api/v1/user", UserApi.createUser);
 // função para criar usuário e enviar para o backend (depois precisa fazer conforme o nível do usuário)
 export const createUser = async (user) => {
     const response = await api.post('/api/v1/user', user)
-    return response.data // pega o endpoint e envia uma req com o objeto de usuários
+    return response.data 
 }
 export const updateUser = async (id, user) => {
     const response = await api.put(`/api/v1/user/${id}`, user)
     return response.data
 }
 export const deleteUser = async (id) => {
-    return api.delete(`/api/v1/user/{id}`)
+    return api.delete(`/api/v1/user/${id}`)
 }
-export const findContext = async (id) => {
-    const response = await api.get(`/api/v1/user/{id}`)
+export const findContext = async () => {
+    const response = await api.get(`/api/v1/user/context`)
     return response.data
 }
 export const findUsers = async () => {
@@ -37,5 +37,9 @@ export const blockUser = async (id) => {
 }
 export const unblock = async (id) => {
     const response = await api.put(`api/v1/user/${id}/unblock`)
+    return response.data
+}
+export const createAdmin = async (adminUser) => {
+    const response = await api.post("api/v1/user/createAdmin", adminUser)
     return response.data
 }

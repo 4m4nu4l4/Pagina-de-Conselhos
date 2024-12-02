@@ -1,7 +1,7 @@
 #cadastro {
   background-color: #FBFBFB;
   width: 50%;
-  height: 90vh;
+  height: 100vh;
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   margin: 20px;
@@ -65,8 +65,11 @@
   height: 40px;
   padding: 0;
   text-align: center;
-  margin-top: 35px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-radius: 10px;
   font-weight: 500;
+  border: none;
 }
 
 #password-container {

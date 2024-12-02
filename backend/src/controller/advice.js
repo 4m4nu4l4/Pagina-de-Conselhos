@@ -76,7 +76,8 @@ class AdviceController {
     
     async createAdvice(advice, userId) {
         try {
-            const newAdvice = await adviceModel.create({ advice: advice, userId: userId });
+            const newAdvice = await adviceModel.create({ advice: advice, userId: 1 });
+            console.log(newAdvice);
             return newAdvice;
         } catch (error) {
             throw new Error('Erro ao criar o conselho: ' + error.message);
@@ -95,10 +96,10 @@ class AdviceController {
     async getAllAdvices() {
         try {
             const allAdvices = await adviceModel.findAll({
-                where: { userId: { [Op.ne]: null } }, // Apenas conselhos com userId preenchido
+                where: { userId: { [Op.ne]: null } }, 
                 include: [{
                     model: User,
-                    attributes: ['nome'], // Inclui o nome do usuário
+                    attributes: ['nome'], 
                 }],
             });
             if(allAdvices.length <= 0){
@@ -118,7 +119,7 @@ class AdviceController {
                 attributes: ['id', 'advice'],
                 limit: 7 
             });
-            console.log("Conselhos retornados:", allMonthAdvices); // Verifique a saída aqui
+            console.log("Conselhos retornados:", allMonthAdvices); 
 
             if(allMonthAdvices.length <= 0){
                 mockAdviceList.map(it => {
@@ -133,10 +134,9 @@ class AdviceController {
 
     async getOneAdvice() {
         try {
-            // Busca apenas um conselho com os atributos `id` e `advice`
             const oneAdvice = await adviceModel.findOne();
             
-            console.log("Conselho retornado:", oneAdvice); // Para depuração
+            console.log("Conselho retornado:", oneAdvice); 
     
             if(oneAdvice.length <= 0){
                 mockAdviceList.map(it => {
@@ -145,7 +145,7 @@ class AdviceController {
             }
 
             if (oneAdvice) {
-                return oneAdvice.get({ plain: true }); // Retorna `dataValues` diretamente, se existir
+                return oneAdvice.get({ plain: true }); 
             } else {
                 throw new Error('Nenhum dado encontrado');
             }
@@ -154,6 +154,30 @@ class AdviceController {
             throw new Error('Erro ao listar os conselhos: ' + error.message);
         }
     }    
+
+    async getChangeAdvice() {
+        try {
+            const changeAdvice = await adviceModel.findAll();
+            
+            console.log("Conselho retornado:", changeAdvice); 
+    
+            if(changeAdvice.length <= 0){
+                mockAdviceList.map(it => {
+                    this.createAdvice(it.slip.advice, 1)
+                })
+            }
+
+            const randomIndex = Math.floor(Math.random() * changeAdvice.length);
+            const randomAdvice = changeAdvice[randomIndex];
+
+            console.log("Conselho aleatório retornado:", randomAdvice);
+
+            return randomAdvice;
+        } catch (error) {
+            // console.error('Erro ao listar os conselhos:', error);
+            throw new Error('Erro ao listar os conselhos: ' + error.message);
+        }
+    } 
 
     async updateAdvice(id, advice) {
         try {

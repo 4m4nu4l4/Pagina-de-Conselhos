@@ -6,7 +6,6 @@
   padding: 20px;
   max-width: 600px;
   text-align: center;
-  
 }
 
 .introducao {
@@ -24,8 +23,9 @@
   margin-left: 10px;
   line-height: 1.6;
 }
+
 .data {
-color: #5D4037;
+  color: #5D4037;
 }
 
 .cardDiario {
@@ -58,6 +58,7 @@ color: #5D4037;
   width: 20px;
   height: auto;
 }
+
 #display-imgs {
   display: flex;
   justify-content: center;

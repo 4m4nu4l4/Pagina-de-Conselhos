@@ -1,15 +1,19 @@
 const jwt = require("jsonwebtoken");
 const user = require('../controller/user');
+
 function authMiddleware(roles = []) {
   return async (req, res, next) => {
+
     const token = req.headers["authorization"];
-    // console.log(token);
+    console.log(token);
     if (!token) {
       return res.status(400).json({ mensagem: "Token não fornecido" });
     }
     try {
       const decoded = jwt.verify(token, "exemplo");
-      const userLogged = await user.findUser(decoded.id);
+      console.log(decoded);
+      const userIdValue = await decoded.id;
+      const userLogged = await user.findUser(userIdValue);
       if (!userLogged) {
         return res.status(404).json({ mensagem: "Usuário não encontrado" });
       }

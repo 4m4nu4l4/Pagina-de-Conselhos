@@ -1,0 +1,109 @@
+.edit-profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 1rem;
+  color: #495057;
+  margin-bottom: 5px;
+}
+
+input,
+textarea,
+#buttonPag {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #495057;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* textarea {
+  resize: none;
+  height: 100px;
+} */
+
+input,
+textarea {
+  width: calc(100% - 24px); /* Compensa o padding */
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"],
+input[type="email"] {
+  width: 100%; /* Garante que ambos ocupem a mesma largura */
+  box-sizing: border-box; /* Inclui o padding e borda no tamanho total */
+}
+
+#buttonPag {
+  background-color: #b0419e;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 12px 20px;
+}
+
+#buttonPag:hover {
+  background-color: #851c73;
+  transform: scale(1.05);
+}
+
+#buttonPag:active {
+  transform: scale(0.98);
+}
+
+#buttonPag:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error,
+.success {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.error {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.success {
+  background-color: rgba(40, 167, 69, 0.1);
+}

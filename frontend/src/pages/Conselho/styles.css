@@ -8,6 +8,7 @@
   background-color: #f9f9f9;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 #button-add {
   background-color: #c78abd;
   color: #fff;
@@ -20,25 +21,30 @@
   align-items: center;
   justify-content: center;
 }
+
 #button-add img {
   margin-left: 10px;
   width: 20px;
   height: 20px;
 }
+
 #hidden {
   display: block;
   text-align: left;
 }
+
 #title-conselho {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
+
 #line-addAdvice {
   height: 1px;
   background-color: #c78abd;
   margin-bottom: 20px;
 }
+
 #add-notes-input {
   width: calc(100% - 22px);
   padding: 10px;
@@ -47,6 +53,7 @@
   border-radius: 5px;
   font-size: 16px;
 }
+
 #add-notes-button {
   background-color: #c78abd;
   color: #fff;
@@ -56,27 +63,71 @@
   border-radius: 5px;
   cursor: pointer;
 }
-#list-notes {
-  margin-top: 20px;
-}
-#list-notes p {
-  background-color: #f1f1f1;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#list-notes .buttons {
-  display: flex;
-  gap: 10px;
-}
-#list-notes button {
-  background-color: #aa4999;
-  color: #ffff;
-  padding: 5px 10px;
+
+.edit-button {
+  background-color: #82bee6;
+  width: 80px;
+  color: #fff;
+  padding: 5px;
+  font-size: 14px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #2980b9;
+}
+
+.delete-button {
+  background-color: #e1978e;
+  width: 80px;
+  color: #fff;
+  padding: 5px;
+  margin-left: 5px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+.save-button {
+  background-color: #2ecc71;
+  width: 80px;
+  margin-top: 8px;
+  color: #fff;
+  padding: 5px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #27ae60;
+}
+
+.cancel-button {
+  background-color: #95a5a6;
+  width: 80px;
+  margin-left: 5px;
+  margin-top: 8px;
+  color: #fff;
+  padding: 5px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #7f8c8d;
 }

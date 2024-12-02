@@ -36,9 +36,7 @@ export default function CardDiario() {
 
     const fetchConselho = async () => {
       try {
-        console.log("bom")
         const data = await getOneAdvice(); // aqui que ele faz a requisição
-        console.log('Dados recebidos: ', data);
 
         if (data && data.advice) {
           const traduzido = await translate(data.advice, 'pt');
