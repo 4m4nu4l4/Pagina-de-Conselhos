@@ -9,21 +9,8 @@ export const createADvice = async (adviceData) => {
 
 // !!!!!!!!!!!! Função atualizada para corrigir o método HTTP e aceitar o token de autenticação
 export const updateAdvice = async (id, advice, token) => {
-    try {
-        const response = await api.put(
-            `/api/v1/advice/${id}`, 
-            { advice }, 
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`, 
-                },
-            }
-        );
-        return response.data; 
-    } catch (error) {
-        console.error("Erro ao atualizar conselho:", error); 
-        throw error; 
-    }
+    const response = await api.put(`/api/v1/advice/change/${id}`, advice);
+    return response.data;
 };
 
 export const deleteAdvice = async (id) => {
