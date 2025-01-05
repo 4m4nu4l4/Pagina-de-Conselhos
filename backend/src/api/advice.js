@@ -16,7 +16,9 @@ class AdviceApi {
         try {
             const { advice } = req.body;
             const userId = req.session.id;
+            console.log(userId,req.session);
             const newAdvice = await AdviceController.createAdvice(advice, userId);
+            console.log(newAdvice);
             return res.status(201).json(newAdvice);
         } catch (error) {
             console.error("Erro ao criar conselho:", error.message);
@@ -62,6 +64,17 @@ class AdviceApi {
             console.log ("batata");
             const oneAdvice = await AdviceController.getOneAdvice();
             return res.status(200).json(oneAdvice);
+        } catch (error) {
+            console.error("Erro ao buscar um conselho:", error.message);
+            return res.status(400).json({ error: error.message });
+        }
+    }
+
+    async getChangeAdvice(req, res) {
+        try {
+            console.log ("batata");
+            const changeAdvice = await AdviceController.getChangeAdvice();
+            return res.status(200).json(changeAdvice);
         } catch (error) {
             console.error("Erro ao buscar um conselho:", error.message);
             return res.status(400).json({ error: error.message });

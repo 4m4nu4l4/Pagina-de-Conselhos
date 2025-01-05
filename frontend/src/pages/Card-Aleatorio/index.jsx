@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import carrinho from "../../assets/imgs/carrinho.png";
 import translate from 'translate';
 import { toast } from "react-toastify";
-import { getOneAdvice } from "../../api/advice";
+import { getChangeAdvice } from "../../api/advice";
 
 export default function CardAleatorio() {
   const [advice, setAdvice] = useState("");
@@ -12,8 +12,7 @@ export default function CardAleatorio() {
   const fetchOneAdvice = async () => {
     setLoading(true);
     try {
-      const data = await getOneAdvice();
-      console.log('Dados recebidos: ', data)
+      const data = await getChangeAdvice();
       if (data && data.advice) {
         const traduzido = await translate(data.advice, 'pt');
         setAdvice(traduzido); 
@@ -23,7 +22,6 @@ export default function CardAleatorio() {
         throw new Error('Estrutura de dados inesperada');
       }
     } catch (error) {
-      console.error("Erro na requisição:", error.message);
       toast.dismiss();
       toast.error("Erro ao carregar os conselho aleatório. Tente novamente!");
     } finally {
@@ -47,7 +45,7 @@ export default function CardAleatorio() {
         ) : (
           <p>{advice}</p>
         )}
-        <button onClick={fetchOneAdvice} disabled={loading}>
+        <button id="buttonAleatorio" onClick={fetchOneAdvice} disabled={loading}>
           {loading ? "Carregando..." : "Gerar Nova Frase"}
         </button>
       </div>

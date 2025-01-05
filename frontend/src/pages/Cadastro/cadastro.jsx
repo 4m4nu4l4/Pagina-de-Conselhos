@@ -1,5 +1,5 @@
 import "./style-cadastro.css";
-import wish from "../../assets/imgs/WishDaily.png";
+import wish from "../../assets/imgs/wishDaily.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../api/user";
@@ -27,7 +27,6 @@ export default function Cadastro() {
     e.preventDefault();
     try {
       const responseApi = await createUser({ nome, email, password });
-      console.log(responseApi);
       if (responseApi.id) {
         toast.success("Cadastro realizado com sucesso!");
         navigate("/login");
@@ -36,19 +35,16 @@ export default function Cadastro() {
         toast.error("Erro ao realizar o cadastro, tente novamente.");
       }
     } catch (error) {
-      console.log(error);
       if (error.status === 403) {
         toast.dark("Sem permissão.");
       } else if (error.status === 401 || error.status === 404) {
-          toast.error('Email ou senha inválidos, tente novamente!');
+        toast.error('Email ou senha inválidos, tente novamente!');
       } else if (!email || !senha) {
-          toast.error("Todos os campos devem ser preenchidos!");
+        toast.error("Todos os campos devem ser preenchidos!");
       } else if (!validando(email)) {
-          toast.info("O email deve ser do Senac.");
-      } else if (!validando_senha(senha)) {
-          toast.warning("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula, símbolos e um número.");
+        toast.info("O email deve ser do Senac.");
       } else {
-          toast.dark('Erro inesperado, tente novamente mais tarde!');
+        toast.dark('Erro inesperado, tente novamente mais tarde!');
       }
     }
   };
@@ -70,7 +66,7 @@ export default function Cadastro() {
         <div id="line"></div>
         <div id="componentes">
           <form className="signup-form" onSubmit={handleSubmit}>
-            <p className="campos">Informe o seu nome</p>
+            <p className="camposCadastro">Informe o seu nome</p>
             <input
               type="text"
               id="nome"
@@ -80,7 +76,7 @@ export default function Cadastro() {
               placeholder="Digite o seu nome"
             />
 
-            <p className="campos">Informe o seu e-mail</p>
+            <p className="camposCadastro">Informe o seu e-mail</p>
             <input
               type="email"
               id="email"
@@ -90,9 +86,9 @@ export default function Cadastro() {
               placeholder="Digite o seu e-mail"
             />
 
-            
-              <p className="campos">Crie uma senha</p>
-              <div id="password-container">
+
+            <p className="camposCadastro">Crie uma senha</p>
+            <div id="password-container">
               <input
                 type={show ? "text" : "password"}
                 name=""
@@ -102,14 +98,14 @@ export default function Cadastro() {
                 id="senha"
                 placeholder="digite a senha"
               />
-              <img src={show? open : close} onClick={toggleVisibility} style={{cursor: 'pointer'}} alt="" />
+              <img src={show ? open : close} onClick={toggleVisibility} style={{ cursor: 'pointer' }} alt="" />
             </div>
-            
+
             <button id="button-cadastro" type="submit">
               Cadastre-se
             </button>
-            <p id="login-link">
-              Se você já está cadastrado, não se preocupe!Você pode acessar sua
+            <p id="login-link" style={{marginTop: '5px'}}>
+              Se você já está cadastrado, não se preocupe! Você pode acessar sua
               conta{" "}
               <Link to="/login" style={{ color: "#0081B8" }}>
                 clicando aqui.

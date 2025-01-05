@@ -5,7 +5,7 @@ class UserApi {
         const { nome, email, password } = req.body
 
         try {
-            const user = await UserController.createUser( nome, email, password)
+            const user = await UserController.createUser(nome, email, password)
             return res.status(201).send(user)
         } catch (e) {
             console.log(e)
@@ -13,16 +13,29 @@ class UserApi {
         }
     }
 
-    async updateUser(req, res) {
-        const { id } = req.params
-        const { nome, email } = req.body
+    async createAdmin(req, res) {
+        const { nome, email, password } = req.body
 
         try {
-            const user = await UserController.update(Number(id), nome, email)
+            const adminUser = await UserController.createAdmin(nome, email, password)
+            return res.status(201).send(adminUser)
+        } catch (e) {
+            console.log(e)
+            res.status(400).send({ error: e.message })
+        }
+    }
+
+    async updateUser(req, res) {
+        const id = req.session.id
+        const { nome, email } = req.body
+        console.log(id, nome, email)
+
+        try {
+            const user = await UserController.update(id, nome, email)
             return res.status(200).send(user)
         } catch (e) {
             console.log(e)
-            return res.status(400).send({ error: `Erro ao alterar usuário ${e.message}`})
+            return res.status(400).send({ error: `Erro ao alterar usuário ${e.message}` })
         }
     }
 
@@ -44,7 +57,7 @@ class UserApi {
             return res.status(200).send(users)
         } catch (e) {
             console.log(e)
-            return res.status(400).send({ error: `Erro ao listar usuário ${e.message}`})
+            return res.status(400).send({ error: `Erro ao listar usuário ${e.message}` })
         }
     }
 
@@ -64,8 +77,7 @@ class UserApi {
 
     async findContext(req, res) {
         try {
-            console.log("ID da sessão: ", req?.session?.user.id);
-            const user = await UserController.findUser(req?.session?.user.id || 0);
+            const user = await UserController.findUser(req.session.id);
             return res.status(200).send(user);
         } catch (e) {
             console.log(e)

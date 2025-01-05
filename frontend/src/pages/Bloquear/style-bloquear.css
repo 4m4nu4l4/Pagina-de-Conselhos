@@ -1,94 +1,117 @@
 #containerBloquear {
     display: flex;
-    justify-content: space-between; 
-    align-items: flex-start; 
+    justify-content: space-between;
+    align-items: flex-start;
     padding: 40px;
     border-radius: 10px;
     /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
-    max-width: 900px; 
+    max-width: 900px;
     margin: 40px auto;
 }
+
 #infoContainer {
-    flex: 2; 
-    padding-right: 20px; 
+    flex: 2;
+    padding-right: 20px;
     /* background-color: #f8f9fa;  */
 }
+
 #title {
     font-size: 2rem;
-    color: #343a40; 
+    color: #343a40;
     margin-bottom: 10px;
 }
+
 #subtitle {
     font-size: 1rem;
-    color: #6c757d; 
+    color: #6c757d;
     margin-bottom: 30px;
     padding: 0 20px;
 }
+
 #userList {
-    list-style-type: none; 
-    padding: 0; 
-    width: 100%; 
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
 }
+
 .user-item {
-    background-color: #e9ecef; 
+    background-color: #e9ecef;
     padding: 15px;
     margin: 10px 0;
-    border-radius: 8px; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: background-color 0.3s, transform 0.2s;
 }
+
 .user-item:hover {
-    background-color: #ced4da; 
+    background-color: #ced4da;
 }
+
 .user-item.blocked {
-    background-color: rgba(255, 0, 0, 0.1); /* Altere para a cor que você desejar */
-    color: #ff0000; /* Altere o texto, se necessário */
+    background-color: rgba(255, 0, 0, 0.1);
+    /* Altere para a cor que você desejar */
+    color: #ff0000;
+    /* Altere o texto, se necessário */
 }
+
 .user-name {
     font-weight: bold;
-    color: #212529; 
-    font-size: 1rem; 
+    color: #212529;
+    font-size: 1rem;
 }
+
 .user-email {
-    color: #007bff; 
+    color: #007bff;
     font-weight: normal;
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
 }
+
 .no-users {
-    text-align: center; 
-    font-size: 1rem; 
-    color: #6c757d; 
-}
-#imageContainer {
-    flex: 1; 
-    display: flex;
-    justify-content: center; 
-}
-.users-icon {
-    width: 250px; 
-    height: auto; 
-    margin-left: 20px; 
-    margin-top: 40px; 
-}
-.bloquear {
-    width: 150px;
-    /* height: 80px; */
-    padding: 5px;
     text-align: center;
-    background-color: #b0419e;
+    font-size: 1rem;
+    color: #6c757d;
 }
+
+#imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.users-icon {
+    width: 250px;
+    height: auto;
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.bloquear {
+    background-color: #b0419e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 #bloquear {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 15px;
 }
+
 #form {
     background-color: #e9ecef;
     padding: 15px;
     border-radius: 10px;
 }
+
 #formAtualizar {
     display: grid;
     display: flex;
@@ -98,20 +121,94 @@
     gap: 5px;
     margin-top: 15px;
 }
+
 #formButton {
-    width: 150px;
-    /* height: 80px; */
-    padding: 5px;
-    text-align: center;
     background-color: #b0419e;
+    color: #fff;
+    width: 300px;
+    border: none;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-#labelEmail {
-    margin-left: 15px;
-}
+
 .input {
     margin-left: 15px;
     padding: 4px;
     border: none;
     border-radius: 5px;
     width: 200px;
+}
+
+#adminButton {
+    background-color: #a80e8f;
+    padding: 4px;
+    width: 180px;
+    text-align: center;
+    /* justify-content: center; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formAdmin {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    font-family: 'Dosis', sans-serif;
+}
+
+#formAdmin form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#formAdmin input {
+    padding: 10px 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Dosis', sans-serif;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#formAdmin input:focus {
+    border-color: #495057;
+}
+
+#adminButton, #cadastroAdmin {
+    background-color: #b0419e;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#adminButton:hover {
+    background-color: #851c73;
+    transform: scale(1.05);
+}
+
+#adminButton:active {
+    transform: scale(0.98);
+}
+
+.campos {
+    font-size: 14px;
+    color: #495057;
+    margin-bottom: -5px;
 }

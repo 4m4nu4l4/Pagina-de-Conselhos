@@ -1,5 +1,5 @@
 import "./style-login.css";
-import wish from "../../assets/imgs/WishDaily.png";
+import wish from "../../assets/imgs/wishDaily.png";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../auth/Context";
@@ -68,7 +68,7 @@ export default function Login() {
         </div>
         <div id="line"></div>
         <div id="componentes">
-          <p className="campos">Informe o seu e-mail</p>
+          <p className="camposLogin">Informe o seu e-mail</p>
           <input
             type="text"
             name=""
@@ -77,7 +77,7 @@ export default function Login() {
             id="email"
             placeholder="digite o e-mail"
           />
-          <p className="campos">Informe a sua senha</p>
+          <p className="camposLogin">Informe a sua senha</p>
           <div id="password-container">
             <input
               type={show ? "text" : "password"}
@@ -96,7 +96,7 @@ export default function Login() {
           {error && <p id="error-text">{error}</p>} 
           <p id="cadastro-link">
             Ainda não tem uma conta?{" "}
-            <Link to="/cadastro" style={{ color: "#0081B8", fontFamily: "Jost" }}>
+            <Link to="/" style={{ color: "#0081B8" }}>
               Cadastre-se agora.
             </Link>
           </p>
