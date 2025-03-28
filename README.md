@@ -4,6 +4,8 @@
 
 Este projeto consiste em uma aplicação web que oferece conselhos aleatórios aos usuários de forma simples e rápida. Desenvolvida com React no frontend e Node.js no backend, segue o padrão de arquitetura MVC (Model-View-Controller) para uma melhor organização e manutenção do código.
 
+Acesse o aplicação na web, [clique aqui!](https://paginaconselho.onrender.com)
+
 ## 📋 Descrição
 
 A Página de Conselhos é uma aplicação de conselhos online que consome a API Advice Slip, exibindo um conselho novo a cada solicitação. O objetivo é fornecer um espaço de apoio e orientação com a possibilidade de gerenciar conselhos e perfis. Para acessar a aplicação, é necessário realizar cadastro e login, garantindo maior controle sobre os recursos oferecidos.
